@@ -1,0 +1,164 @@
+iframe {
+    display: block;
+    border-style: none;
+}
+
+.section {
+    max-width: 70em;
+    margin: auto;
+    padding-top: 2rem;
+    padding-bottom: 0.1rem;
+}
+
+.page-title {
+    text-align: center;
+    font-size: 2rem;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    max-width: 70em;
+    font-weight: bold;
+}
+
+h1.page-title {
+    padding-bottom: 0em;
+    margin-bottom: 0.1em;
+}
+
+h2.page-title {
+    padding-top: 0em;
+    font-size: 1.9rem;
+    font-weight: normal;
+    padding-bottom: 0.5em;
+}
+
+.rainbow {
+    background: linear-gradient(to right, #8B00FF, #FF0000, #FF7F00, #e3e383, #00FF00, #0000FF, #4B0082, #8B00FF);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transition: all 0s ease-in-out;
+}
+
+
+.authors {
+    text-align: center;
+    margin: auto;
+    max-width: 50em;
+}
+
+.authors a {
+    display: inline-block;
+    font-size: 18px;
+    padding: 2px;
+    padding-left: 10px;
+}
+
+.affiliations {
+    text-align: center;
+    max-width: 50em;
+    margin: auto;
+    font-size: 15px;
+    padding-top: 0.1em;
+}
+
+.links {
+    text-align: center;
+    padding-top: 1em;
+}
+
+.links a {
+    display: inline-block;
+    font-weight: bold;
+    padding: 0px 20px 0px 20px;
+}
+
+.links i {
+    font-size: 20px;
+}
+
+
+.section-title {
+    font-size: 1.5em;
+    font-weight: normal;
+    padding-top: 0.4em;
+    border-bottom: 2px solid rgb(211, 211, 211);
+    margin-bottom: 0.5em;
+}
+
+.subsection-title {
+    font-size: 1.3rem;
+    font-weight: normal;
+    padding-bottom: 0.2em;
+}
+
+.figure {
+    margin: auto;
+    text-align: center;
+    max-width: 50em;
+    padding-top: 1em;
+    padding-bottom: 1em;
+}
+
+.caption {
+    margin: auto;
+    text-align: left;
+    max-width: 50em;
+    padding-top: 0.1em;
+    padding-bottom: 1em;
+    color: #949393;
+}
+
+.caption-a {
+    margin: auto;
+    text-align: left;
+    max-width: 61em;
+    padding-top: 0.1em;
+    padding-bottom: 1em;
+    color: #949393;
+}
+
+.caption-b {
+    margin: auto;
+    text-align: left;
+    max-width: 68em;
+    padding-top: 0.1em;
+    padding-bottom: 1em;
+    color: #949393;
+}
+
+.table-of-contents {
+    background-color: #f2f2f2;
+    max-width: 70em;
+    margin-top: 1em;
+    padding: 10px;
+}
+
+.table-of-contents a {
+    font-weight: bold;
+    background-color: transparent;
+    text-decoration: none;
+}
+
+.table-of-contents h2 {
+    font-size: 1rem;
+    font-weight: bold;
+    padding-top: 0.2em;
+    padding-bottom: 0.2em;
+}
+
+.citation {
+    margin: 1em;
+}
+
+.section p {
+    padding-bottom: 0.4em;
+}
+
+.question {
+    font-weight: bold;
+}
+
+.nowrap {
+    white-space: nowrap;
+}
