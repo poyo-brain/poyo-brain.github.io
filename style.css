@@ -237,14 +237,20 @@ h2.page-title {
 }
 
 .block {
-    background-color: #ffffff;
-    border: 1px solid #c3c1c1;
-    border-radius: 10px;
+    background-color: #f7f6f6;
+    /* border: 1px solid #c3c1c1; */
+    border-radius: 3px;
     padding: 20px;
     display: flex;         /* Use Flexbox */
     justify-content: space-between; /* Space content and icon apart */
     align-items: flex-start;   /* Align content and icon to the top */
     margin: 0px !important;
+}
+
+.block-header {
+    background-color: #ffffff;
+    display: flex;         /* Use Flexbox */
+    justify-content: space-between; /* Space content and icon apart */
 }
 
 .block i {
@@ -255,7 +261,7 @@ h2.page-title {
 }
 
 .block p {
-    color: #777;
+    /* color: #777; */
     flex: 1; /* This ensures the text takes up as much space as available */
 }
 
