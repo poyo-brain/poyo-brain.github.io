@@ -76,7 +76,7 @@
             <li> Contents </li>
             <li><a href="#introduction">Introduction</a></li>
             <li><a href="#context">Context</a></li>
-            <li><a href="#spiketrains">Spike Trains</a></li>
+            <li><a href="#spiking">Spiking neural activity</a></li>
             <li><a href="#heterogeneity">Data Heterogeneity</a></li>
             <li><a href="#tokenization">Spike tokenization</a></li>
             <!-- Add more sections as needed -->
@@ -136,7 +136,7 @@
             <p>
                 We introduce POYO-1 [...].
             </p>
-<!-- 
+            <!-- 
             <div class="table-of-contents">
                 <h2>Table of Contents</h2>
                 <ul>
@@ -155,33 +155,150 @@
                 Spiking neural activity
             </h3>
             <p>
-                lipsum dolor sit amet, consectetur adipiscing elit. Nullam nec dui quis nisi aliquet ultrices. Donec
-                vitae nisl euismod, aliquam nunc quis, aliquam nunc. Donec vitae nisl euismod, aliquam nunc quis,
-                aliquam nunc. Donec vitae nisl euismod, aliquam nunc quis, aliquam nunc. Donec vitae nisl euismod,
-                aliquam nunc quis, aliquam nunc. Donec vitae nisl euismod, aliquam nunc quis, aliquam nunc. Donec
-                vitae nisl euismod, aliquam nunc quis, aliquam nunc. Donec vitae nisl euismod, aliquam nunc quis,
-                aliquam nunc. Donec vitae nisl euismod, aliquam nunc quis, aliquam nunc. Donec vitae nisl euismod,
-                aliquam nunc quis, aliquam nunc. Donec vitae nisl euismod, aliquam nunc quis, aliquam nunc. Donec
+                Neurons communicate asynchronously using electrical impulses called spikes. The timing and
+                frequency of spikes encode signals that convey information about the external world and coordinate
+                the internal dialogue within the brain.
             </p>
 
         </section>
 
-        <section class="section" id="spiketrains">
+        <section class="section" id="spiking">
             <h3 class="section-title">
-                <a href=""> </a>Spike Trains
+                <a href=""> </a>Spiking neural activity
             </h3>
+
             <h3 class="subsection-title">
-                Spiking neural activity
+                Action Potentials
             </h3>
             <p>
-                lipsum dolor sit amet, consectetur adipiscing elit. Nullam nec dui quis nisi aliquet ultrices. Donec
-                vitae nisl euismod, aliquam nunc quis, aliquam nunc. Donec vitae nisl euismod, aliquam nunc quis,
-                aliquam nunc. Donec vitae nisl euismod, aliquam nunc quis, aliquam nunc. Donec vitae nisl euismod,
-                aliquam nunc quis, aliquam nunc. Donec vitae nisl euismod, aliquam nunc quis, aliquam nunc. Donec
-                vitae nisl euismod, aliquam nunc quis, aliquam nunc. Donec vitae nisl euismod, aliquam nunc quis,
-                aliquam nunc. Donec vitae nisl euismod, aliquam nunc quis, aliquam nunc. Donec vitae nisl euismod,
-                aliquam nunc quis, aliquam nunc. Donec vitae nisl euismod, aliquam nunc quis, aliquam nunc. Donec
+                Neural spikes, also known as action potentials, are brief electrical signals that travel along the axon
+                of a neuron. They are the primary means by which information is transmitted within the nervous system.
+                When a neuron receives sufficient input from other neurons, it generates a spike, which can then
+                influence downstream neurons.
             </p>
+
+            <div class="figure">
+                <img src="assets/neuron_firing.gif" alt="spiketrain" width="500" height="300">
+                <div class="caption">
+                    <p> Spike train representation of a neuron's output signal. (Placeholder) </p>
+                </div>
+            </div>
+
+            <h3 class="subsection-title">
+                EPhys Recording
+            </h3>
+            <p>
+                We can record the spiking activity of a population of neurons by placing electrodes near the neurons,
+                and measuring the voltage changes that occur when a neuron fires. We commonly refer to these types of
+                recordings as extracellular electrophysiology recordings.
+            </p>
+
+            <p> A device is implented in the brain, and will typically have multiple electrodes.
+                An electrode doesn't just pick up the activity of a single neuron. Instead, it detects the electrical
+                activity from
+                multiple neurons that are in proximity to the electrode tip.
+                <!-- each neuron has its own unique spiking
+                pattern and amplitude based on its type, location, and distance from the electrode. When multiple
+                neurons fire action potentials, the electrode picks up a combination of these spikes, which can often
+                overlap in time. -->
+
+                This situation is analogous to the "cocktail party problem" in auditory processing. The cocktail party
+                problem refers to the challenge of focusing on a single conversation in a noisy environment, such as a
+                party, where multiple people are talking at the same time. Similarly, in neural recordings, the
+                challenge is to distinguish and isolate the spiking activity of an individual neuron from the "noise" of
+                other nearby neurons.
+
+                To address this, researchers use spike sorting techniques. Spike sorting involves analyzing the recorded
+                signals to identify and group spikes that likely originated from the same neuron. This is done based on
+                features such as spike shape, amplitude, and timing.
+            </p>
+
+            <div class="figure">
+                <img src="assets/electrode.png" alt="spiketrain" width="500" height="300">
+                <div class="caption">
+                    <p> An electrode can pick up on the electrical activity of neighboring neurons. (Placeholder) </p>
+                </div>
+            </div>
+
+            <p>
+                [Explain difference between spike sorting and threshold crossing]
+            </p>
+
+            <p>
+                This produces a spike train, which is a sequence of discrete events that represent the times at which
+                each neuron fired.
+            </p>
+
+
+            <h3 class="subsection-title">
+                Challenges
+            </h3>
+            <p>
+                Recording from the exact same neurons across multiple days using extracellular electrodes presents
+                several challenges. can shift the relative position of neurons with respect to
+                the electrode. This means that an electrode that was capturing the activity of a particular neuron one
+                day might be slightly off-target the next day.
+                <!-- <li> Physical Movement: The brain is a soft tissue, and even minor movements (e.g., due to breathing,
+                minor head adjustments, or tissue swelling) can shift the relative position of neurons with respect to
+                the electrode. This means that an electrode that was capturing the activity of a particular neuron one
+                day might be slightly off-target the next day.</li>
+
+                <li> Electrode Drift: Over time, the electrode itself can shift within the tissue. This can be due to
+                various reasons, including the natural healing processes of the tissue around the implanted electrode,
+                or mechanical factors related to the electrode's design.</li>
+
+                <li> Tissue Response: The insertion and presence of an electrode can cause a tissue response. This
+                might include inflammation, gliosis (formation of a scar-like tissue around the electrode), or neuronal
+                death around the insertion site. Over time, these changes can alter the local neural environment,
+                affecting which neurons are in proximity to the electrode.</li>
+
+                <li> Neuronal Variability: Even if you were recording from the same neuron, its activity might
+                naturally vary from day to day due to changes in the animal's state, experiences, or other factors. This
+                variability can sometimes make it seem as though you're recording from different neurons, even if you
+                aren't.</li>
+
+                <li> Signal Quality: The quality of recordings can change over time. Factors like electrode
+                degradation, changes in impedance, or accumulation of biological material on the electrode surface can
+                alter the signal-to-noise ratio, potentially masking spikes from certain neurons.</li>
+
+                Because of these challenges, while it's possible to record from the same general region of the brain
+                across multiple days, it's difficult to guarantee that you're recording from the exact same neurons.
+                Researchers often use statistical methods and other techniques to assess the stability of their
+                recordings and to determine whether they are likely recording from the same or different neuronal
+                populations across sessions.</li> -->
+            </p>
+
+            <div class="blocks-container">
+                <div class="block">
+                    <i class="fa-solid fa-triangle-exclamation" style="color: #f6de2f;"></i>
+                    <p><b>Physical Movement</b>: The brain is a soft tissue that moves e.g., due to breathing,
+                        minor head adjustments, or tissue swelling. </p>
+                </div>
+
+                <div class="block">
+                    <i class="fa-solid fa-triangle-exclamation" style="color: #f6de2f;"></i>
+                    <p><b>Electrode Drift</b>: Over time, the electrode itself can shift within the tissue, typically
+                        due to the natural healing of the tissue around the implanted electrode.</p>
+                </div>
+                <div class="block">
+                    <i class="fa-solid fa-triangle-exclamation" style="color: #f6de2f;"></i>
+                    <p><b>Tissue Response</b>: The insertion and presence of an electrode can cause a tissue response.
+                        This might include inflammation, gliosis, or neuronal death around the insertion site.</p>
+                </div>
+                <div class="block">
+                    <i class="fa-solid fa-triangle-exclamation" style="color: #f6de2f;"></i>
+                    <p><b>Neuronal Variability</b>: Even if you were recording from the same neuron, its activity might
+                        naturally vary from day to day due to changes in the animal's state, experiences, or other
+                        factors.</p>
+                </div>
+                <div class="block">
+                    <i class="fa-solid fa-triangle-exclamation" style="color: #f6de2f;"></i>
+                    <p><b>Signal Quality</b>: Electrode degradation, changes in impedance, or accumulation of biological material on the electrode
+                        surface can alter the signal-to-noise ratio.</p>
+                </div>
+            </div>
+
+
 
         </section>
 

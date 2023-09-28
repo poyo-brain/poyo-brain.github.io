@@ -49,9 +49,9 @@ body {
 }
 
 .title-section {
-    white-space: nowrap;
+    /* white-space: nowrap; */
     /* Prevent the title from wrapping */
-    overflow: hidden;
+    /* overflow: warp; */
     grid-column: 1 / span 2;
     /* Title section spans both columns */
     grid-row: 1;
@@ -168,8 +168,8 @@ h2.page-title {
 
 .caption {
     margin: auto;
-    text-align: left;
-    max-width: 50em;
+    text-align: center;
+    max-width: 40em;
     padding-top: 0.1em;
     padding-bottom: 1em;
     color: #949393;
@@ -228,3 +228,38 @@ h2.page-title {
 .nowrap {
     white-space: nowrap;
 }
+
+.blocks-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* This will create a 3-column grid */
+    gap: 20px; /* Adjust as needed for spacing between blocks */
+    margin: 20px 0; /* Vertical spacing around the blocks container */
+}
+
+.block {
+    background-color: #ffffff;
+    border: 1px solid #c3c1c1;
+    border-radius: 10px;
+    padding: 20px;
+    display: flex;         /* Use Flexbox */
+    justify-content: space-between; /* Space content and icon apart */
+    align-items: flex-start;   /* Align content and icon to the top */
+    margin: 0px !important;
+}
+
+.block i {
+    font-size: 25px;
+    margin-left: 0px;  /* Spacing to the left of the icon */
+    margin-right: 10px;  /* Spacing to the left of the icon */
+    align-self: top;  /* This will vertically center the icon when the text isn't too long */
+}
+
+.block p {
+    color: #777;
+    flex: 1; /* This ensures the text takes up as much space as available */
+}
+
+.indented {
+    padding-left: 5%;  /* Adds a left padding of 10% */
+}
+
