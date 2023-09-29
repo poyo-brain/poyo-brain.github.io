@@ -346,16 +346,6 @@ h2.page-title {
     transform: translateY(-50%);
 }
 
-.webgl
-{
-    /* position: fixed;
-    top: 0;
-    left: 0; */
-    outline: none;
-    width: 100px;
-    height: 100px;
-}
-
 .arch-left-bracket {
     position: absolute;
     opacity: 50%;
