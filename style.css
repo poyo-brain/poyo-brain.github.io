@@ -347,3 +347,13 @@ h2.page-title {
     width: 280px;
     transform: translateY(-50%);
 }
+
+.webgl
+{
+    /* position: fixed;
+    top: 0;
+    left: 0; */
+    outline: none;
+    width: 100px;
+    height: 100px;
+}
