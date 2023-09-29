@@ -79,6 +79,7 @@
             <li><a href="#spiking">Spiking neural activity</a></li>
             <li><a href="#heterogeneity">Data Heterogeneity</a></li>
             <li><a href="#tokenization">Spike tokenization</a></li>
+            <li><a href="#architecture">Architecture</a></li>
             <!-- Add more sections as needed -->
         </ul>
     </aside>
@@ -361,6 +362,80 @@
                 aliquam nunc. Donec vitae nisl euismod, aliquam nunc quis, aliquam nunc. Donec vitae nisl euismod,
                 aliquam nunc quis, aliquam nunc. Donec vitae nisl euismod, aliquam nunc quis, aliquam nunc. Donec
             </p>
+
+        </section>
+
+
+        <section class="section" id="architecture">
+            <h3 class="section-title">
+                <a href=""> </a>Architecture
+            </h3>
+            <p>
+                With our tokenization techniques, the problem of Neural Decoding
+                boils down to learning a model that converts a sequence of spike
+                tokens to a sequence of hand-velocities. 
+            </p>
+            <p>
+                Our approach utilizes the Transformer architecture, recognized for
+                its excellence in handling sequence-to-sequence transformations.
+                Given the potentially large number of spikes in a single
+                experimental trial, we've adopted DeepMind's PerceiverIO
+                architecture <a>[Jeagle et al.]</a> instead of the standard transformer
+                <a>[Vaswani et al.]</a>. To inject token timestamps into the attention
+                blocks, we use Rotary Position Embeddings <a>[Su et. al.]</a>, which is a
+                compute efficient way to ensure our model is invariant to
+                absolute-time shifts.
+            </p>
+
+            <div id="arch-diag-box">
+                <img src="assets/architecture.png" alt="architecture-diagram">
+                <div class="arch-diag-text" id="left-1"> 
+                    <h2>1. Querying the Spike Train</h2>
+                    <p>We compress the variable-length sequence of spike-tokens
+                    into 256 latent tokens using Cross-Attention, which is
+                    queried by learned <i>Latent Embeddings</i>.
+                    </p> 
+                </div>
+                <div class="arch-diag-text" id="left-2"> 
+                    <h2>2. Attention in the Latent Space</h2>
+                    <p>The compressed latents are processed by multiple
+                    Self-Attention blocks. Since we're only working with 256
+                    tokens, this is very quick. 
+                    </p>
+                </div>
+                <div class="arch-diag-text" id="left-3"> 
+                    <h2>3. Querying the Latent Space</h2>
+                    <p>A sequence of output-query tokens, one for each behavior
+                    sample available in the trial, query the processed latents
+                    using Cross-Attention.
+                    </p>
+                </div>
+                <div class="arch-diag-text" id="right-1"> 
+                    <h2>Latent Embeddings</h2>
+                    <p>Eight copies of 32 distinct learned embeddings. Each set
+                    of 32 is assigned a timestamp. These eight sets
+                    collectively span a one-second timespan, which is our
+                    selected maximum trial length.
+                    </p>
+                </div>
+                <div class="arch-diag-text" id="right-2"> 
+                    <h2>Spike Train Input</h2>
+                    <p>Need to add some text here.
+                    </p>
+                </div>
+                <div class="arch-diag-text" id="right-3"> 
+                    <h2>Behavior Queries</h2>
+                    <p>Learned session embeddings allow our model to train on
+                    data from multiple sessions, days, and labs simultaneously.
+                    <br/>
+                    <br/>
+                    The lack of any structural restrictions on query timestamps
+                    us to simultaneously work with datasets from multiple labs
+                    using different sampling rates.
+                    </p>
+                </div>
+            </div>
+
 
         </section>
 

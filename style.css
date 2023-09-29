@@ -270,3 +270,80 @@ h2.page-title {
     padding-left: 5%;  /* Adds a left padding of 10% */
 }
 
+/* Architecture */
+:root {
+    --arch-diag-height: 700px;
+}
+
+#arch-diag-box {
+    margin-top: 40px;
+    position: relative;
+    width: 100%;
+    height: var(--arch-diag-height);
+    font-size: 15px;
+    padding: 0px;
+}
+
+#arch-diag-box img {
+    position: relative; 
+    display: inline-block;
+    width: 385px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.arch-diag-text {
+    position: absolute;
+    display: inline-block;
+    text-align: justify;
+    line-height: 20px;
+}
+
+.arch-diag-text h2 {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    margin-top: 0em;
+}
+
+#arch-diag-box #left-1 {
+    left: 5px;
+    top: 120px;
+    width: 300px;
+    transform: translateY(-50%);
+}
+
+#arch-diag-box #left-2 {
+    left: 5px;
+    top: 345px;
+    width: 300px;
+    transform: translateY(-50%);
+}
+
+#arch-diag-box #left-3 {
+    left: 5px;
+    top: 515px;
+    width: 300px;
+    transform: translateY(-50%);
+}
+
+#arch-diag-box #right-1 {
+    right: 20px;
+    top: 55px;
+    width: 450px;
+    transform: translateY(-50%);
+}
+
+#arch-diag-box #right-2 {
+    right: 20px;
+    top: 180px;
+    width: 280px;
+    transform: translateY(-50%);
+}
+
+#arch-diag-box #right-3 {
+    right: 20px;
+    top: 520px;
+    width: 280px;
+    transform: translateY(-50%);
+}
