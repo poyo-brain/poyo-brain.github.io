@@ -394,13 +394,16 @@
             </p>
 
             <div id="arch-diag-box">
-                <img src="assets/architecture.png" alt="architecture-diagram">
+                <img src="assets/architecture.svg" alt="architecture-diagram">
                 <div class="arch-diag-text" id="left-1"> 
                     <h2>1. Querying the Spike Train</h2>
                     <p>We compress the variable-length sequence of spike-tokens
                     into 256 latent tokens using Cross-Attention, which is
                     queried by learned <i>Latent Embeddings</i>.
                     </p> 
+                    <div class="arch-left-bracket">
+                        <img src="assets/left-bracket.svg" style="width:30px;height:250px">
+                    </div>
                 </div>
                 <div class="arch-diag-text" id="left-2"> 
                     <h2>2. Attention in the Latent Space</h2>
@@ -408,6 +411,9 @@
                     Self-Attention blocks. Since we're only working with 256
                     tokens, this is very quick. 
                     </p>
+                    <div class="arch-left-bracket">
+                        <img src="assets/left-bracket.svg" style="width:30px;height:150px">
+                    </div>
                 </div>
                 <div class="arch-diag-text" id="left-3"> 
                     <h2>3. Querying the Latent Space</h2>
@@ -415,6 +421,9 @@
                     sample available in the trial, query the processed latents
                     using Cross-Attention.
                     </p>
+                    <div class="arch-left-bracket">
+                        <img src="assets/left-bracket.svg" style="width:30px;height:270px">
+                    </div>
                 </div>
                 <div class="arch-diag-text" id="right-1"> 
                     <h2>Latent Embeddings</h2>
@@ -423,11 +432,17 @@
                     collectively span a duration of one-second, which is our
                     selected maximum trial length.
                     </p>
+                    <div class="arch-right-bracket">
+                        <img src="assets/right-bracket.svg" style="width:30px;height:118px">
+                    </div>
                 </div>
                 <div class="arch-diag-text" id="right-2"> 
                     <h2>Spike Train Input</h2>
                     <p>Need to add some text here.
                     </p>
+                    <div class="arch-right-bracket">
+                        <img src="assets/right-bracket.svg" style="width:30px;height:118px">
+                    </div>
                 </div>
                 <div class="arch-diag-text" id="right-3"> 
                     <h2>Behavior Queries</h2>
@@ -439,6 +454,9 @@
                     allows us to train with datasets using different sampling
                     rates.
                     </p>
+                    <div class="arch-right-bracket">
+                        <img src="assets/right-bracket.svg" style="width:30px;height:130px">
+                    </div>
                 </div>
             </div>
 
@@ -476,6 +494,8 @@
         <div style="font-size: 1em;">NerDS Lab</div>
     </div>
 </footer> -->
+
+</div>
 
 </body>
 
