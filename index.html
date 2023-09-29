@@ -48,8 +48,8 @@
         </div>
         <div class="header authors">
             <a href="https://www.mehai.dev">Mehdi Azabou</a><sup>1</sup>
-            <a href=""> Vinam Arora</a><sup>1</sup>
-            <a href=""> Venkataramana Ganesh</a><sup>1</sup>
+            <a href="https://www.linkedin.com/in/vinam-arora/">Vinam Arora</a><sup>1</sup>
+            <a href="">Venkataramana Ganesh</a><sup>1</sup>
             <a href="">Ximeng Mao</a><sup>2</sup>
             <a href="">Santosh Nachimuthu</a><sup>1</sup>
             <a href="">Michael Mendelson</a><sup>1</sup>
@@ -83,6 +83,8 @@
             <li><a href="#heterogeneity">Data Heterogeneity</a></li>
             <li><a href="#tokenization">Spike tokenization</a></li>
             <li><a href="#architecture">Architecture</a></li>
+            <li><a href="#pretraining">Pretraining</a></li>
+            <li><a href="#finetuning">Finetuning</a></li>
             <!-- Add more sections as needed -->
         </ul>
     </aside>
@@ -386,63 +388,96 @@
                 its excellence in handling sequence-to-sequence transformations.
                 Given the potentially large number of spikes in a single
                 experimental trial, we've adopted DeepMind's PerceiverIO
-                architecture <a>[Jeagle et al.]</a> instead of the standard transformer
-                <a>[Vaswani et al.]</a>. To inject token timestamps into the attention
-                blocks, we use Rotary Position Embeddings <a>[Su et. al.]</a>, which is a
-                compute efficient way to ensure our model is invariant to
-                absolute-time shifts.
+                architecture <a href="https://www.deepmind.com/open-source/perceiver-io">
+                [Jeagle et al.]</a> instead of the standard transformer
+                <a href="https://arxiv.org/abs/1706.03762">[Vaswani et al.]</a>. 
+                To inject token timestamps into the attention
+                blocks, we use Rotary Position Embeddings 
+                <a href="https://arxiv.org/abs/2104.09864">[Su et. al.]</a>, 
+                which is a compute efficient way to ensure our model is
+                invariant to absolute-time shifts.
             </p>
 
             <div id="arch-diag-box">
-                <img src="assets/architecture.png" alt="architecture-diagram">
+                <img src="assets/architecture.svg" alt="architecture-diagram">
                 <div class="arch-diag-text" id="left-1"> 
                     <h2>1. Querying the Spike Train</h2>
                     <p>We compress the variable-length sequence of spike-tokens
-                    into 256 latent tokens using Cross-Attention, which is
-                    queried by learned <i>Latent Embeddings</i>.
+                    into 256 latent tokens using a Cross-Attention transformer,
+                    which is queried by learned <i>Latent Embeddings</i>.
                     </p> 
+                    <div class="arch-left-bracket">
+                        <img src="assets/left-bracket.svg" style="width:30px;height:250px">
+                    </div>
                 </div>
                 <div class="arch-diag-text" id="left-2"> 
                     <h2>2. Attention in the Latent Space</h2>
                     <p>The compressed latents are processed by multiple
-                    Self-Attention blocks. Since we're only working with 256
+                    Self-Attention transformer blocks. Since we're only working with 256
                     tokens, this is very quick. 
                     </p>
+                    <div class="arch-left-bracket">
+                        <img src="assets/left-bracket.svg" style="width:30px;height:150px">
+                    </div>
                 </div>
                 <div class="arch-diag-text" id="left-3"> 
                     <h2>3. Querying the Latent Space</h2>
                     <p>A sequence of output-query tokens, one for each behavior
                     sample available in the trial, query the processed latents
-                    using Cross-Attention.
+                    using a Cross-Attention transformer.
                     </p>
+                    <div class="arch-left-bracket">
+                        <img src="assets/left-bracket.svg" style="width:30px;height:270px">
+                    </div>
                 </div>
                 <div class="arch-diag-text" id="right-1"> 
                     <h2>Latent Embeddings</h2>
                     <p>Eight copies of 32 distinct learned embeddings. Each set
-                    of 32 is assigned a timestamp. These eight sets
-                    collectively span a one-second timespan, which is our
+                    of 32 is assigned a single timestamp, and these eight sets
+                    collectively span a duration of one-second, which is our
                     selected maximum trial length.
                     </p>
+                    <div class="arch-right-bracket">
+                        <img src="assets/right-bracket.svg" style="width:30px;height:118px">
+                    </div>
                 </div>
                 <div class="arch-diag-text" id="right-2"> 
                     <h2>Spike Train Input</h2>
-                    <p>Need to add some text here.
+                    <p>See <a href="#tokenization">Spike Tokenization</a>
                     </p>
+                    <div class="arch-right-bracket">
+                        <img src="assets/right-bracket.svg" style="width:30px;height:118px">
+                    </div>
                 </div>
                 <div class="arch-diag-text" id="right-3"> 
                     <h2>Behavior Queries</h2>
                     <p>Learned session embeddings allow our model to train on
-                    data from multiple sessions, days, and labs simultaneously.
+                    data from multiple sessions, days, and labs, simultaneously.
                     <br/>
                     <br/>
                     The lack of any structural restrictions on query timestamps
-                    us to simultaneously work with datasets from multiple labs
-                    using different sampling rates.
+                    allows us to train with datasets using different sampling
+                    rates.
                     </p>
+                    <div class="arch-right-bracket">
+                        <img src="assets/right-bracket.svg" style="width:30px;height:130px">
+                    </div>
                 </div>
             </div>
 
+        </section>
 
+        <section class="section" id="pretraining">
+            <h3 class="section-title">
+                <a href=""> </a>Pretraining
+            </h3>
+        </section>
+
+
+        <section class="section" id="finetuning">
+            <h3 class="section-title">
+                <a href=""> </a>Finetuning
+            </h3>
         </section>
 
 
@@ -464,6 +499,8 @@
         <div style="font-size: 1em;">NerDS Lab</div>
     </div>
 </footer> -->
+
+</div>
 
 </body>
 
