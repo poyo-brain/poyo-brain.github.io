@@ -289,7 +289,7 @@ h2.page-title {
 #arch-diag-box img {
     position: relative; 
     display: inline-block;
-    width: 385px;
+    width: 300px;
     left: 50%;
     transform: translateX(-50%);
 }
@@ -309,31 +309,27 @@ h2.page-title {
 }
 
 #arch-diag-box #left-1 {
-    left: 5px;
     top: 120px;
-    width: 300px;
-    transform: translateY(-50%);
+    width: 280px;
+    transform: translateY(-50%) translateX(-285px);
 }
 
 #arch-diag-box #left-2 {
-    left: 5px;
     top: 345px;
-    width: 300px;
-    transform: translateY(-50%);
+    width: 280px;
+    transform: translateY(-50%) translateX(-285px);
 }
 
 #arch-diag-box #left-3 {
-    left: 5px;
-    top: 515px;
-    width: 300px;
-    transform: translateY(-50%);
+    top: 585px;
+    width: 280px;
+    transform: translateY(-50%) translateX(-285px);
 }
 
 #arch-diag-box #right-1 {
-    right: 20px;
-    top: 55px;
+    top: 52px;
     width: 450px;
-    transform: translateY(-50%);
+    transform: translateY(-50%) translateX(230px);
 }
 
 #arch-diag-box #right-2 {
@@ -348,4 +344,20 @@ h2.page-title {
     top: 520px;
     width: 280px;
     transform: translateY(-50%);
+}
+
+.arch-left-bracket {
+    position: absolute;
+    opacity: 50%;
+    right: 0px;
+    top: 50%;
+    transform: translateX(42px) translateY(-50%);
+}
+
+.arch-right-bracket {
+    position: absolute;
+    opacity: 50%;
+    left: 0px;
+    top: 50%;
+    transform: translateX(-42px) translateY(-50%);
 }
