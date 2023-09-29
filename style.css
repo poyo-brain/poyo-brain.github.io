@@ -245,7 +245,8 @@ h2.page-title {
     justify-content: space-between; /* Space content and icon apart */
     align-items: flex-start;   /* Align content and icon to the top */
     margin: 0px !important;
-}
+
+    }
 
 .block-header {
     background-color: #ffffff;
