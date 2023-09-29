@@ -101,14 +101,10 @@ function initParticles() {
     const positions = new Float32Array(count * 3)
     const colors = new Float32Array(count * 3)
     for(let i = 0; i < count; i++) {
-        positions[i * 3] = (particlePositions.cursor_x[i] - 3) / 5;
-        positions[i * 3 + 1] = (particlePositions.cursor_y[i] + 33) /5;
-        positions[i * 3 + 2] = - 15. - ((particlePositions.cursor_t[i]) - lastTime) / 20;
-        
-        // random colors
-        // colors[i * 3] = Math.random();
-        // colors[i * 3 + 1] = Math.random();
-        // colors[i * 3 + 2] = Math.random();
+        positions[i * 3] = (particlePositions.cursor_x[i] - 0) / 5;
+        positions[i * 3 + 1] = (particlePositions.cursor_y[i] + 30) /5;
+        positions[i * 3 + 2] = - 45. / 900 * lastTime - ((particlePositions.cursor_t[i]) - lastTime) / 20;
+
         colors[i * 3] = 1;
         colors[i * 3 + 1] =1;
         colors[i * 3 + 2] = 1;
@@ -225,8 +221,6 @@ const sizes = {
     width:  400, // canvas.clientWidth,
     height: 400, //canvas.clientHeight
 }
-// camera.aspect = canvas.clientWidth / canvas.clientHeight;
-
 
 window.addEventListener('resize', () =>
 {
@@ -282,14 +276,14 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 const clock = new THREE.Clock()
 
 let currentZThreshold = -5;  // Starting threshold. Adjust this value as needed.
-
+const speed = 0.002;
 const tick = () => {
 
     const elapsedTime = clock.getElapsedTime();
 
     // Increase the threshold
-    particlesMaterial.uniforms.uZThreshold.value -=0.01;  // Adjust the 0.01 value to control the speed of revealing
-    particles.position.z += 0.01;
+    particlesMaterial.uniforms.uZThreshold.value -=speed;  // Adjust the 0.01 value to control the speed of revealing
+    particles.position.z += speed;
 
     // Update controls
     controls.update()
