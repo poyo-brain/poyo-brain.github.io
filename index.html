@@ -397,8 +397,8 @@
                 <div class="arch-diag-text" id="left-1"> 
                     <h2>1. Querying the Spike Train</h2>
                     <p>We compress the variable-length sequence of spike-tokens
-                    into 256 latent tokens using Cross-Attention, which is
-                    queried by learned <i>Latent Embeddings</i>.
+                    into 256 latent tokens using a Cross-Attention transformer,
+                    which is queried by learned <i>Latent Embeddings</i>.
                     </p> 
                     <div class="arch-left-bracket">
                         <img src="assets/left-bracket.svg" style="width:30px;height:250px">
@@ -407,7 +407,7 @@
                 <div class="arch-diag-text" id="left-2"> 
                     <h2>2. Attention in the Latent Space</h2>
                     <p>The compressed latents are processed by multiple
-                    Self-Attention blocks. Since we're only working with 256
+                    Self-Attention transformer blocks. Since we're only working with 256
                     tokens, this is very quick. 
                     </p>
                     <div class="arch-left-bracket">
@@ -418,7 +418,7 @@
                     <h2>3. Querying the Latent Space</h2>
                     <p>A sequence of output-query tokens, one for each behavior
                     sample available in the trial, query the processed latents
-                    using Cross-Attention.
+                    using a Cross-Attention transformer.
                     </p>
                     <div class="arch-left-bracket">
                         <img src="assets/left-bracket.svg" style="width:30px;height:270px">
@@ -437,7 +437,7 @@
                 </div>
                 <div class="arch-diag-text" id="right-2"> 
                     <h2>Spike Train Input</h2>
-                    <p>Need to add some text here.
+                    <p>See <a href="#tokenization">Spike Tokenization</a>
                     </p>
                     <div class="arch-right-bracket">
                         <img src="assets/right-bracket.svg" style="width:30px;height:118px">
