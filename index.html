@@ -381,11 +381,14 @@
                 its excellence in handling sequence-to-sequence transformations.
                 Given the potentially large number of spikes in a single
                 experimental trial, we've adopted DeepMind's PerceiverIO
-                architecture <a>[Jeagle et al.]</a> instead of the standard transformer
-                <a>[Vaswani et al.]</a>. To inject token timestamps into the attention
-                blocks, we use Rotary Position Embeddings <a>[Su et. al.]</a>, which is a
-                compute efficient way to ensure our model is invariant to
-                absolute-time shifts.
+                architecture <a href="https://www.deepmind.com/open-source/perceiver-io">
+                [Jeagle et al.]</a> instead of the standard transformer
+                <a href="https://arxiv.org/abs/1706.03762">[Vaswani et al.]</a>. 
+                To inject token timestamps into the attention
+                blocks, we use Rotary Position Embeddings 
+                <a href="https://arxiv.org/abs/2104.09864">[Su et. al.]</a>, 
+                which is a compute efficient way to ensure our model is
+                invariant to absolute-time shifts.
             </p>
 
             <div id="arch-diag-box">
