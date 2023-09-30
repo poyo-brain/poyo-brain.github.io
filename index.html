@@ -341,9 +341,10 @@
             <p>
                 The datasets we curated for this project vary in many ways:
             </p>
-            <p> 
-                <b>1. Multiple behavioral tasks</b>: The datasets were collected from multiple labs, using different equipment, and with different
-                experimental protocols. All of these neural recordings were collected while the animals performed 
+            <p>
+                <b>1. Multiple behavioral tasks</b>: The datasets were collected from multiple labs, using different
+                equipment, and with different
+                experimental protocols. All of these neural recordings were collected while the animals performed
                 motor tasks that vary in their inherent complexity.
             </p>
 
@@ -369,7 +370,8 @@
                     </label>
                     <span class="switch-text">3D</span>
                     <canvas id="webgl2" class="webgl"></canvas>
-                    <div class="canvas-caption"><b>Random Target task (RT)</b>: The animal makes continuous and self-paced
+                    <div class="canvas-caption"><b>Random Target task (RT)</b>: The animal makes continuous and
+                        self-paced
                         movements with new targets appearing in succession at random locations on the screen.</div>
                 </div>
 
@@ -380,7 +382,8 @@
                     </label>
                     <span class="switch-text">3D</span>
                     <canvas id="webgl3" class="webgl"></canvas>
-                    <div class="canvas-caption"><b>Touchscreen Random Target task (RT)</b>: Instead of using a manipulandum like in the previous experiments, these new datasets use a touch screen.
+                    <div class="canvas-caption"><b>Touchscreen Random Target task (RT)</b>: Instead of using a
+                        manipulandum like in the previous experiments, these new datasets use a touch screen.
                     </div>
                 </div>
 
@@ -391,8 +394,9 @@
                     </label>
                     <span class="switch-text">3D</span>
                     <canvas id="webgl4" class="webgl"></canvas>
-                    <div class="canvas-caption"><b>Maze task</b>: In this task,       
-                        a monkey performing reaches with instructed delays to visually presented targets while avoiding the
+                    <div class="canvas-caption"><b>Maze task</b>: In this task,
+                        a monkey performing reaches with instructed delays to visually presented targets while avoiding
+                        the
                         boundaries of a virtual maze.
                     </div>
                 </div>
@@ -401,12 +405,14 @@
             <!-- <canvas class="webgl"></canvas> -->
             <script type="module" src="./script.js"></script>
 
-            <p> 
-                <b>2. Variability of controllers</b>: While some animals perform the tasks using a manipulandum, others use a touch screen.
+            <p>
+                <b>2. Variability of controllers</b>: While some animals perform the tasks using a manipulandum, others
+                use a touch screen.
             </p>
 
             <p>
-                <b>3. Variablity in sampling rate</b>: The sampling rate at which these behaviors were recorded varies from lab to lab (100Hz to 1kHz).
+                <b>3. Variablity in sampling rate</b>: The sampling rate at which these behaviors were recorded varies
+                from lab to lab (100Hz to 1kHz).
             </p>
         </section>
 
@@ -415,16 +421,34 @@
                 <a href=""> </a>Spike Tokenization
             </h3>
             <h3 class="subsection-title">
-                Spiking neural activity
+                Previous approaches: Binning
             </h3>
+
             <p>
-                lipsum dolor sit amet, consectetur adipiscing elit. Nullam nec dui quis nisi aliquet ultrices. Donec
-                vitae nisl euismod, aliquam nunc quis, aliquam nunc. Donec vitae nisl euismod, aliquam nunc quis,
-                aliquam nunc. Donec vitae nisl euismod, aliquam nunc quis, aliquam nunc. Donec vitae nisl euismod,
-                aliquam nunc quis, aliquam nunc. Donec vitae nisl euismod, aliquam nunc quis, aliquam nunc. Donec
-                vitae nisl euismod, aliquam nunc quis, aliquam nunc. Donec vitae nisl euismod, aliquam nunc quis,
-                aliquam nunc. Donec vitae nisl euismod, aliquam nunc quis, aliquam nunc. Donec vitae nisl euismod,
-                aliquam nunc quis, aliquam nunc. Donec vitae nisl euismod, aliquam nunc quis, aliquam nunc. Donec
+                Because of the irregular nature of neural spiking activity, established approaches usually rely on temporally 
+                binned analyses: time is divided into discrete intervals, and the number of spikes for a unit within 
+                each interval is counted. Binned representations regularize the structure of spiking data and enable 
+                compatibility with existing machine learning frameworks.
+            </p>
+
+            <iframe src="./spike_binning.html" width="900" height="400" scrolling="no"
+                style="overflow:hidden;"></iframe>
+            
+            <p>
+                However, the choice of bin size presents a trade-off: longer windows (> 100ms) simplify the temporal 
+                dimension but sacrifice crucial spike-timing information, while shorter
+                windows (1 ms) maintain individual spikes but result in an extremely sparse data format.
+            </p>
+            
+            <h3 class="subsection-title">
+                Our solution
+            </h3>
+
+            <p>
+                By avoiding the need to aggregate or bin the neural activity, our approach can be more
+                computationally efficient than previous methods while still maintaining high decoding accuracy. Overall,
+                our choice of tokenizing spikes directly offers a promising new approach to neural decoding that
+                combines high temporal resolution with computational efficiency.
             </p>
 
         </section>
