@@ -324,7 +324,8 @@
                 </div>
                 <div class="block">
                     <i class="fa-solid fa-triangle-exclamation" style="color: #f6de2f;"></i>
-                    <p><b>Signal Quality</b>: Electrode degradation, changes in impedance, or accumulation of biological material on the electrode
+                    <p><b>Signal Quality</b>: Electrode degradation, changes in impedance, or accumulation of biological
+                        material on the electrode
                         surface can alter the signal-to-noise ratio.</p>
                 </div>
             </div>
@@ -338,22 +339,75 @@
                 <a href=""> </a>Heterogeneity across Datasets
             </h3>
             <p>
-                Show difference in tasks. CO, RT, Maze 
+                The datasets we curated for this project vary in many ways:
+            </p>
+            <p> 
+                <b>1. Multiple behavioral tasks</b>: The datasets were collected from multiple labs, using different equipment, and with different
+                experimental protocols. All of these neural recordings were collected while the animals performed 
+                motor tasks that vary in their inherent complexity.
             </p>
 
-            <p>
-                Show difference equipement: manipuladum and touch screen
-            </p>
-            <p>
-                Show how each dataset comes with a different sampling rate.
-            </p>
+            <div class="canvas-wrapper">
 
-            <canvas id="webgl1" class="webgl"></canvas>
-            <canvas id="webgl2" class="webgl"></canvas>
+                <div class="canvas-container">
+                    <label class="switch" data-canvas-id="webgl1">
+                        <input type="checkbox" class="toggle-input" checked>
+                        <span class="slider round"></span>
+                    </label>
+                    <span class="switch-text">3D</span>
+                    <canvas id="webgl1" class="webgl"></canvas>
+                    <div class="canvas-caption"><b>Center-Out task (CO)</b>: This task is relatively stereotyped, with
+                        the animal making a reach to one of eight fixed targets after receiving a go cue, and then
+                        returning to the
+                        center.</div>
+                </div>
 
+                <div class="canvas-container">
+                    <label class="switch" data-canvas-id="webgl2">
+                        <input type="checkbox" class="toggle-input" checked>
+                        <span class="slider round"></span>
+                    </label>
+                    <span class="switch-text">3D</span>
+                    <canvas id="webgl2" class="webgl"></canvas>
+                    <div class="canvas-caption"><b>Random Target task (RT)</b>: The animal makes continuous and self-paced
+                        movements with new targets appearing in succession at random locations on the screen.</div>
+                </div>
+
+                <div class="canvas-container">
+                    <label class="switch" data-canvas-id="webgl3">
+                        <input type="checkbox" class="toggle-input" checked>
+                        <span class="slider round"></span>
+                    </label>
+                    <span class="switch-text">3D</span>
+                    <canvas id="webgl3" class="webgl"></canvas>
+                    <div class="canvas-caption"><b>Touchscreen Random Target task (RT)</b>: Instead of using a manipulandum like in the previous experiments, these new datasets use a touch screen.
+                    </div>
+                </div>
+
+                <div class="canvas-container">
+                    <label class="switch" data-canvas-id="webgl4">
+                        <input type="checkbox" class="toggle-input" checked>
+                        <span class="slider round"></span>
+                    </label>
+                    <span class="switch-text">3D</span>
+                    <canvas id="webgl4" class="webgl"></canvas>
+                    <div class="canvas-caption"><b>Maze task</b>: In this task,       
+                        a monkey performing reaches with instructed delays to visually presented targets while avoiding the
+                        boundaries of a virtual maze.
+                    </div>
+                </div>
+
+            </div>
             <!-- <canvas class="webgl"></canvas> -->
             <script type="module" src="./script.js"></script>
 
+            <p> 
+                <b>2. Variability of controllers</b>: While some animals perform the tasks using a manipulandum, others use a touch screen.
+            </p>
+
+            <p>
+                <b>3. Variablity in sampling rate</b>: The sampling rate at which these behaviors were recorded varies from lab to lab (100Hz to 1kHz).
+            </p>
         </section>
 
         <section class="section" id="tokenization">
@@ -383,7 +437,7 @@
             <p>
                 With our tokenization techniques, the problem of Neural Decoding
                 boils down to learning a model that converts a sequence of spike
-                tokens to a sequence of hand-velocities. 
+                tokens to a sequence of hand-velocities.
             </p>
             <p>
                 Our approach utilizes the Transformer architecture, recognized for
@@ -391,59 +445,59 @@
                 Given the potentially large number of spikes in a single
                 experimental trial, we've adopted DeepMind's PerceiverIO
                 architecture <a href="https://www.deepmind.com/open-source/perceiver-io">
-                [Jeagle et al.]</a> instead of the standard transformer
-                <a href="https://arxiv.org/abs/1706.03762">[Vaswani et al.]</a>. 
+                    [Jeagle et al.]</a> instead of the standard transformer
+                <a href="https://arxiv.org/abs/1706.03762">[Vaswani et al.]</a>.
                 To inject token timestamps into the attention
-                blocks, we use Rotary Position Embeddings 
-                <a href="https://arxiv.org/abs/2104.09864">[Su et. al.]</a>, 
+                blocks, we use Rotary Position Embeddings
+                <a href="https://arxiv.org/abs/2104.09864">[Su et. al.]</a>,
                 which is a compute efficient way to ensure our model is
                 invariant to absolute-time shifts.
             </p>
 
             <div id="arch-diag-box">
                 <img src="assets/architecture.svg" alt="architecture-diagram">
-                <div class="arch-diag-text" id="left-1"> 
+                <div class="arch-diag-text" id="left-1">
                     <h2>1. Querying the Spike Train</h2>
                     <p>We compress the variable-length sequence of spike-tokens
-                    into 256 latent tokens using a Cross-Attention transformer,
-                    which is queried by learned <i>Latent Embeddings</i>.
-                    </p> 
+                        into 256 latent tokens using a Cross-Attention transformer,
+                        which is queried by learned <i>Latent Embeddings</i>.
+                    </p>
                     <div class="arch-left-bracket">
                         <img src="assets/left-bracket.svg" style="width:30px;height:250px">
                     </div>
                 </div>
-                <div class="arch-diag-text" id="left-2"> 
+                <div class="arch-diag-text" id="left-2">
                     <h2>2. Attention in the Latent Space</h2>
                     <p>The compressed latents are processed by multiple
-                    Self-Attention transformer blocks. Since we're only working with 256
-                    tokens, this is very quick. 
+                        Self-Attention transformer blocks. Since we're only working with 256
+                        tokens, this is very quick.
                     </p>
                     <div class="arch-left-bracket">
                         <img src="assets/left-bracket.svg" style="width:30px;height:150px">
                     </div>
                 </div>
-                <div class="arch-diag-text" id="left-3"> 
+                <div class="arch-diag-text" id="left-3">
                     <h2>3. Querying the Latent Space</h2>
                     <p>A sequence of output-query tokens, one for each behavior
-                    sample available in the trial, query the processed latents
-                    using a Cross-Attention transformer.
+                        sample available in the trial, query the processed latents
+                        using a Cross-Attention transformer.
                     </p>
                     <div class="arch-left-bracket">
                         <img src="assets/left-bracket.svg" style="width:30px;height:270px">
                     </div>
                 </div>
-                <div class="arch-diag-text" id="right-1"> 
+                <div class="arch-diag-text" id="right-1">
                     <h2>Latent Embeddings</h2>
                     <p>Eight copies of 32 distinct learned embeddings. Each set
-                    of 32 is assigned a single timestamp, and these eight sets
-                    collectively span a duration of one-second, which is our
-                    selected maximum trial length.
+                        of 32 is assigned a single timestamp, and these eight sets
+                        collectively span a duration of one-second, which is our
+                        selected maximum trial length.
                     </p>
                     <div class="arch-right-bracket">
                         <img src="assets/right-bracket.svg" style="width:30px;height:118px">
                     </div>
                 </div>
-                <div class="arch-diag-text" id="right-2"> 
+                <div class="arch-diag-text" id="right-2">
                     <h2>Spike Train Input</h2>
                     <p>See <a href="#tokenization">Spike Tokenization</a>
                     </p>
@@ -451,15 +505,15 @@
                         <img src="assets/right-bracket.svg" style="width:30px;height:118px">
                     </div>
                 </div>
-                <div class="arch-diag-text" id="right-3"> 
+                <div class="arch-diag-text" id="right-3">
                     <h2>Behavior Queries</h2>
                     <p>Learned session embeddings allow our model to train on
-                    data from multiple sessions, days, and labs, simultaneously.
-                    <br/>
-                    <br/>
-                    The lack of any structural restrictions on query timestamps
-                    allows us to train with datasets using different sampling
-                    rates.
+                        data from multiple sessions, days, and labs, simultaneously.
+                        <br />
+                        <br />
+                        The lack of any structural restrictions on query timestamps
+                        allows us to train with datasets using different sampling
+                        rates.
                     </p>
                     <div class="arch-right-bracket">
                         <img src="assets/right-bracket.svg" style="width:30px;height:130px">
@@ -502,7 +556,7 @@
     </div>
 </footer> -->
 
-</div>
+    </div>
 
 </body>
 

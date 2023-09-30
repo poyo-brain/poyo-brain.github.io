@@ -176,8 +176,8 @@ function setupCanvas(canvasId, dataFilePath, color) {
     loader.load('./assets/helvetiker_regular.typeface.json', function (font) {
 
         // 2. Create text geometries and materials
-        const textSize = 0.12;  // Adjust as needed
-        const textThickness = 0.05;  // Adjust as needed
+        const textSize = 0.18;  // Adjust as needed
+        const textThickness = 0.02;  // Adjust as needed
         const textMaterial = new THREE.MeshBasicMaterial({ color: 0x000000 });  // Black color for the text
 
         const xAxisGeometry = new TextGeometry('x', {
@@ -210,7 +210,7 @@ function setupCanvas(canvasId, dataFilePath, color) {
             curveSegments: 12,
         });
         const titleText = new THREE.Mesh(titleGeometry, textMaterial);
-        titleText.position.set(squareSize * 0.13, squareSize / 2 + textSize, 0);  // Positioning above the square
+        titleText.position.set(squareSize * 0.22, squareSize / 2 + textSize, 0);  // Positioning above the square
         titleText.rotation.set(0, Math.PI, 0);
         scene.add(titleText);
 
@@ -221,8 +221,8 @@ function setupCanvas(canvasId, dataFilePath, color) {
      * Sizes
      */
     const sizes = {
-        width: 400, // canvas.clientWidth,
-        height: 400, //canvas.clientHeight
+        width: 300, // canvas.clientWidth,
+        height: 300, //canvas.clientHeight
     }
 
     // window.addEventListener('resize', () =>
@@ -245,10 +245,10 @@ function setupCanvas(canvasId, dataFilePath, color) {
      */
     // Base camera: OrthographicCamera
     const camera = new THREE.OrthographicCamera(
-        - 3 * sizes.width / sizes.height, // left
-        3 * sizes.width / sizes.height, // right
-        3, // top
-        -3, // bottom
+        - 2.7 * sizes.width / sizes.height, // left
+        2.7 * sizes.width / sizes.height, // right
+        2.7, // top
+        -2.7, // bottom
         0.01, // near
         100 // far
     )
@@ -261,6 +261,7 @@ function setupCanvas(canvasId, dataFilePath, color) {
     // Controls
     const controls = new OrbitControls(camera, canvas)
     controls.enableDamping = true
+    controls.enableZoom = false;  // Disable zooming
 
     /**
      * Renderer
@@ -286,7 +287,24 @@ function setupCanvas(canvasId, dataFilePath, color) {
     let animationStartTime = null;
     const animationDuration = 4000;  // 4 seconds in milliseconds
     console.log(camera.position)
-    const targetPosition = new THREE.Vector3(-2, 2, -4);
+    let targetPosition = new THREE.Vector3(-2, 2, -4);
+
+    const toggleSwitch = document.querySelector(`.switch[data-canvas-id="${canvasId}"] .toggle-input`);
+
+    // const button = document.querySelector(`.toggle-button[data-canvas-id="${canvasId}"]`);
+    let is3D = true;  // Start in 2D mode
+
+    toggleSwitch.addEventListener('change', () => {
+        is3D = !is3D;  // Toggle the mode
+
+        if (is3D) {
+            targetPosition = new THREE.Vector3(-2, 2, -4);
+        } else {
+            targetPosition = new THREE.Vector3(0, 0, -4);
+        }
+        console.log(targetPosition);
+        // camera.lookAt(0, 0, 0);  // Adjust as needed based on your scene
+    });
 
     const tick = () => {
 
@@ -326,4 +344,4 @@ function setupCanvas(canvasId, dataFilePath, color) {
 }
 
 setupCanvas('webgl1', './assets/data.json', '#88ebff');
-setupCanvas('webgl2', './assets/data_rt.json', '#ff88cc');
+setupCanvas('webgl2', './assets/data_rt.json', '#4cff00');
