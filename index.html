@@ -97,44 +97,31 @@
                 Introduction
             </h3>
             <p>
-                lipsum dolor sit amet, consectetur adipiscing elit. Nullam nec dui quis nisi aliquet ultrices. Donec
-                vitae nisl euismod, aliquam nunc quis, aliquam nunc. Donec vitae nisl euismod, aliquam nunc quis,
-                aliquam nunc. Donec vitae nisl euismod, aliquam nunc quis, aliquam nunc. Donec vitae nisl euismod,
-                aliquam nunc quis, aliquam nunc. Donec vitae nisl euismod, aliquam nunc quis, aliquam nunc. Donec
-                vitae nisl euismod, aliquam nunc quis, aliquam nunc. Donec vitae nisl euismod, aliquam nunc quis,
-                aliquam nunc. Donec vitae nisl euismod, aliquam nunc quis, aliquam nunc. Donec vitae nisl euismod,
-                aliquam nunc quis, aliquam nunc. Donec vitae nisl euismod, aliquam nunc quis, aliquam nunc. Donec
+                Our ability to use deep learning approaches to decipher neural activity would likely benefit from
+                greater scale, in terms of both the model size and the datasets. However, the integration of many neural
+                recordings into one unified model is challenging, as each recording contains the activity of different
+                neurons from different individual animals.
             </p>
 
             <p>
-                lipsum dolor sit amet, consectetur adipiscing elit. Nullam nec dui quis nisi aliquet ultrices. Donec
-                vitae nisl euismod, aliquam nunc quis, aliquam nunc. Donec vitae nisl euismod, aliquam nunc quis,
-                aliquam nunc. Donec vitae nisl euismod, aliquam nunc quis, aliquam nunc. Donec vitae nisl euismod,
-                aliquam nunc quis, aliquam nunc. Donec vitae nisl euismod, aliquam nunc quis, aliquam nunc. Donec
-                vitae nisl euismod, aliquam nunc quis, aliquam nunc. Donec vitae nisl euismod, aliquam nunc quis,
-                aliquam nunc. Donec vitae nisl euismod, aliquam nunc quis, aliquam nunc. Donec vitae nisl euismod,
-                aliquam nunc quis, aliquam nunc. Donec vitae nisl euismod, aliquam nunc quis, aliquam nunc. Donec
+                In this paper, we introduce a training framework and
+                architecture designed to model the population dynamics of neural activity across diverse, large-scale
+                neural recordings. Our method first tokenizes individual spikes within the dataset to build an efficient
+                representation of neural events that captures the fine temporal structure of neural activity. We then
+                employ cross-attention and a PerceiverIO backbone to further construct a latent tokenization of neural
+                population activities. Utilizing this architecture and training framework, we construct a large- scale
+                multi-session model trained on large datasets from seven nonhuman primates, spanning over 158 different
+                sessions of recording from over 27,373 neural units and over 100 hours of recordings.
             </p>
 
             <p>
-                lipsum dolor sit amet, consectetur adipiscing elit. Nullam nec dui quis nisi aliquet ultrices. Donec
-                vitae nisl euismod, aliquam nunc quis, aliquam nunc. Donec vitae nisl euismod, aliquam nunc quis,
-                aliquam nunc. Donec vitae nisl euismod, aliquam nunc quis, aliquam nunc. Donec vitae nisl euismod,
-                aliquam nunc quis, aliquam nunc. Donec vitae nisl euismod, aliquam nunc quis, aliquam nunc. Donec
-                vitae nisl euismod, aliquam nunc quis, aliquam nunc. Donec vitae nisl euismod, aliquam nunc quis,
-                aliquam nunc. Donec vitae nisl euismod, aliquam nunc quis, aliquam nunc. Donec vitae nisl euismod,
-                aliquam nunc quis, aliquam nunc. Donec vitae nisl euismod, aliquam nunc quis, aliquam nunc. Donec
+                In a number of
+                different tasks, we demonstrate that our pretrained model can be rapidly adapted to new, unseen sessions
+                with unspecified neuron correspondence, enabling few-shot performance with minimal labels. This work
+                presents a powerful new approach for building deep learning tools to analyze neural data and stakes out
+                a clear path to training at scale for neural decoding models.
             </p>
 
-            <p>
-                lipsum dolor sit amet, consectetur adipiscing elit. Nullam nec dui quis nisi aliquet ultrices. Donec
-                vitae nisl euismod, aliquam nunc quis, aliquam nunc. Donec vitae nisl euismod, aliquam nunc quis,
-                aliquam nunc. Donec vitae nisl euismod, aliquam nunc quis, aliquam nunc. Donec vitae nisl euismod,
-                aliquam nunc quis, aliquam nunc. Donec vitae nisl euismod, aliquam nunc quis, aliquam nunc. Donec
-                vitae nisl euismod, aliquam nunc quis, aliquam nunc. Donec vitae nisl euismod, aliquam nunc quis,
-                aliquam nunc. Donec vitae nisl euismod, aliquam nunc quis, aliquam nunc. Donec vitae nisl euismod,
-                aliquam nunc quis, aliquam nunc. Donec vitae nisl euismod, aliquam nunc quis, aliquam nunc. Donec
-            </p>
             <p class="question">
                 &#8594 Can we [ ] ?
             </p>
@@ -157,9 +144,9 @@
             <h3 class="section-title">
                 <a href=""> </a>Context
             </h3>
-            <h3 class="subsection-title">
+            <!-- <h3 class="subsection-title">
                 <i class="fa-regular fa-circle fa-2xs"></i> Spiking neural activity
-            </h3>
+            </h3> -->
             <p>
                 Neurons communicate asynchronously using electrical impulses called spikes. The timing and
                 frequency of spikes encode signals that convey information about the external world and coordinate
@@ -342,7 +329,8 @@
                 The datasets we curated for this project vary in many ways:
             </p>
             <p>
-                <b>1. Multiple behavioral tasks</b>: The datasets were collected from multiple labs, using different
+                <i class="fa-solid fa-arrow-right"></i> <b> Multiple behavioral tasks</b>: The datasets were collected
+                from multiple labs, using different
                 equipment, and with different
                 experimental protocols. All of these neural recordings were collected while the animals performed
                 motor tasks that vary in their inherent complexity.
@@ -406,12 +394,14 @@
             <script type="module" src="./script.js"></script>
 
             <p>
-                <b>2. Variability of controllers</b>: While some animals perform the tasks using a manipulandum, others
+                <i class="fa-solid fa-arrow-right"></i> <b>Variability of controllers</b>: While some animals perform
+                the tasks using a manipulandum, others
                 use a touch screen.
             </p>
 
             <p>
-                <b>3. Variablity in sampling rate</b>: The sampling rate at which these behaviors were recorded varies
+                <i class="fa-solid fa-arrow-right"></i> <b>Variablity in sampling rate</b>: The sampling rate at which
+                these behaviors were recorded varies
                 from lab to lab (100Hz to 1kHz).
             </p>
         </section>
@@ -425,21 +415,22 @@
             </h3>
 
             <p>
-                Because of the irregular nature of neural spiking activity, established approaches usually rely on temporally 
-                binned analyses: time is divided into discrete intervals, and the number of spikes for a unit within 
-                each interval is counted. Binned representations regularize the structure of spiking data and enable 
+                Because of the irregular nature of neural spiking activity, established approaches usually rely on
+                temporally
+                binned analyses: time is divided into discrete intervals, and the number of spikes for a unit within
+                each interval is counted. Binned representations regularize the structure of spiking data and enable
                 compatibility with existing machine learning frameworks.
             </p>
 
             <iframe src="./spike_binning.html" width="900" height="400" scrolling="no"
                 style="overflow:hidden;"></iframe>
-            
+
             <p>
-                However, the choice of bin size presents a trade-off: longer windows (> 100ms) simplify the temporal 
+                However, the choice of bin size presents a trade-off: longer windows (> 100ms) simplify the temporal
                 dimension but sacrifice crucial spike-timing information, while shorter
                 windows (1 ms) maintain individual spikes but result in an extremely sparse data format.
             </p>
-            
+
             <h3 class="subsection-title">
                 Our solution
             </h3>
@@ -449,6 +440,33 @@
                 computationally efficient than previous methods while still maintaining high decoding accuracy. Overall,
                 our choice of tokenizing spikes directly offers a promising new approach to neural decoding that
                 combines high temporal resolution with computational efficiency.
+            </p>
+
+            <p>
+                The neural tokenizer. Based upon these motivations, we propose a novel approach for tokenizing neural
+                population activity where each spike is represented as a token. Each token contains information about
+                the timing of a spike and the unique identity of its unit (the neuron it belongs to). As such, we
+                represent our input as a set of tokens of arbitrary length. This is different from the established
+                approach of temporal binning (counting the number of spikes in fixed temporal windows), which is
+                typically used with neural data. Because we represent the input data as a set of arbitrary size we never
+                define or fix the expected number of units, so the model can ingest arbitrary populations of units, and
+                thus can be trained across many datasets. At the same time, by representing the time of each spike and
+                avoiding representing the times where the neuron doesn’t spike, we avoid the vectors containing mostly
+                zeros, as is common in binned representations of neural activity.
+            </p>
+            
+            <p>
+                To make this precise, we assign each unit a unique identifier and a corresponding D-dimensional
+                learnable embedding. Let Embed(·) denote a lookup table that associates each unit to its unit embedding.
+                Akin to word embeddings that encode semantic meaning and relationship between words, the unit embedding
+                space encodes something about the “speaker’s” identity and role in neural computation. A unit fires a
+                sequence of spikes in a window of time [0, T ]. Each spike i will be represented by a token
+                characterized by (xi, ti), where xi = Embed(spike i′s unit) is the token’s embedding and ti is the spike
+                timestamp. Collectively, and for an arbitrary set of units, we combine all the spikes into a sequence of
+                length M . The population neural activity is represented by [x1 , . . . , xM ] and their corresponding
+                times [t1, . . . , tM ]. While T represents the size of our context window, M will vary depending on the
+                number of units in the population and their firing rates (see Figure 1). Note that all spikes from a
+                specific unit have the same embedding xi, and only differ in their timing.
             </p>
 
         </section>

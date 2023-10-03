@@ -104,9 +104,10 @@ function setupCanvas(canvasId, dataFilePath, color) {
         const colors = new Float32Array(count * 3)
 
         for (let i = 0; i < count; i++) {
-            positions[i * 3] = (particlePositions.cursor_x[i] - 0) / 5;
-            positions[i * 3 + 1] = (particlePositions.cursor_y[i] + 30) / 5;
-            positions[i * 3 + 2] = - 45. / 900 * lastTime - ((particlePositions.cursor_t[i]) - lastTime) / 20;
+            positions[i * 3] = 2 * particlePositions.cursor_x[i] // (particlePositions.cursor_x[i] - 0) / 5;
+            positions[i * 3 + 1] = 2 * particlePositions.cursor_y[i] // (particlePositions.cursor_y[i] + 30) / 5;
+            // positions[i * 3 + 2] =  - 45. / 900 * lastTime - ((particlePositions.cursor_t[i]) - lastTime) / 20;
+            positions[i * 3 + 2] =  - 60 * 5  /20. - ((particlePositions.cursor_t[i]) - 60 * 5) / 20;
 
             colors[i * 3] = 1;
             colors[i * 3 + 1] = 1;
@@ -281,13 +282,18 @@ function setupCanvas(canvasId, dataFilePath, color) {
     
 
     let currentZThreshold = -5;  // Starting threshold. Adjust this value as needed.
-    const speed = 0.002;
+    const speed = 0.001;
 
     // Moving camera
     let animationStartTime = null;
     const animationDuration = 4000;  // 4 seconds in milliseconds
     console.log(camera.position)
     let targetPosition = new THREE.Vector3(-2, 2, -4);
+
+    let targetLeft = -3 * sizes.width / sizes.height;
+    let targetRight = 3 * sizes.width / sizes.height;
+    let targetTop = 3;
+    let targetBottom = -3;
 
     const toggleSwitch = document.querySelector(`.switch[data-canvas-id="${canvasId}"] .toggle-input`);
 
@@ -299,8 +305,16 @@ function setupCanvas(canvasId, dataFilePath, color) {
 
         if (is3D) {
             targetPosition = new THREE.Vector3(-2, 2, -4);
+            targetLeft = -3 * sizes.width / sizes.height;
+            targetRight = 3 * sizes.width / sizes.height;
+            targetTop = 3;
+            targetBottom = -3;
         } else {
             targetPosition = new THREE.Vector3(0, 0, -4);
+            targetLeft = -2.7 * sizes.width / sizes.height;
+            targetRight = 2.7 * sizes.width / sizes.height;
+            targetTop = 2.7;
+            targetBottom = -2.7;
         }
         console.log(targetPosition);
         // camera.lookAt(0, 0, 0);  // Adjust as needed based on your scene
@@ -311,9 +325,11 @@ function setupCanvas(canvasId, dataFilePath, color) {
         const elapsedTime = clock.getElapsedTime();
 
         // Increase the threshold
-        particlesMaterial.uniforms.uZThreshold.value -= speed;  // Adjust the 0.01 value to control the speed of revealing
-        particles.position.z += speed;
-
+        // console.log(particles.position.z);
+        if (particles.position.z < 15) {
+            particlesMaterial.uniforms.uZThreshold.value -= speed;  // Adjust the 0.01 value to control the speed of revealing
+            particles.position.z += speed;
+        }
         // Move the camera
         if (!animationStartTime && elapsedTime > 4) {
             animationStartTime = elapsedTime;
@@ -324,10 +340,21 @@ function setupCanvas(canvasId, dataFilePath, color) {
             const animationProgress = (elapsedTime - animationStartTime) / animationDuration;
             if (animationProgress < 1) {
                 camera.position.lerp(targetPosition, animationProgress);
+                camera.left = THREE.MathUtils.lerp(camera.left, targetLeft, animationProgress);
+                camera.right = THREE.MathUtils.lerp(camera.right, targetRight, animationProgress);
+                camera.top = THREE.MathUtils.lerp(camera.top, targetTop, animationProgress);
+                camera.bottom = THREE.MathUtils.lerp(camera.bottom, targetBottom, animationProgress);
+                camera.updateProjectionMatrix();  // Important! Update the camera's projection after changing its frustum
             } else {
                 camera.position.copy(targetPosition);
+                camera.left = targetLeft;
+                camera.right = targetRight;
+                camera.top = targetTop;
+                camera.bottom = targetBottom;
+                camera.updateProjectionMatrix();
             }
         }
+        
 
         // Update controls
         controls.update()
@@ -343,5 +370,7 @@ function setupCanvas(canvasId, dataFilePath, color) {
 
 }
 
-setupCanvas('webgl1', './assets/data.json', '#88ebff');
-setupCanvas('webgl2', './assets/data_rt.json', '#4cff00');
+setupCanvas('webgl1', './assets/trajectory_co.json', '#88ebff');
+setupCanvas('webgl2', './assets/trajectory_rt.json', '#4cff00');
+setupCanvas('webgl3', './assets/trajectory_touch_rt.json', '#9000ff');
+setupCanvas('webgl4', './assets/trajectory_maze.json', '#ff2f00');
