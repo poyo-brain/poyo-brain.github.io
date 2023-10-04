@@ -454,7 +454,7 @@
                 avoiding representing the times where the neuron doesn’t spike, we avoid the vectors containing mostly
                 zeros, as is common in binned representations of neural activity.
             </p>
-            
+
             <p>
                 To make this precise, we assign each unit a unique identifier and a corresponding D-dimensional
                 learnable embedding. Let Embed(·) denote a lookup table that associates each unit to its unit embedding.
@@ -569,6 +569,18 @@
             <h3 class="section-title">
                 <a href=""> </a>Pretraining
             </h3>
+
+            <select id="data-source">
+                <option value="./assets/sample_1.json">Data Source 1</option>
+                <option value="./assets/sample_2.json">Data Source 2</option>
+                <!-- Add more options as needed -->
+            </select>
+            
+            <canvas class="webgl-decode-sample"></canvas>
+            <button id="playButton">Play</button>
+        
+            <script type="module" src="./decode_sample.js"></script>
+
         </section>
 
 

@@ -268,7 +268,9 @@ function setupCanvas(canvasId, dataFilePath, color) {
      * Renderer
      */
     const renderer = new THREE.WebGLRenderer({
-        canvas: canvas
+        canvas: canvas,
+        antialias: true
+
     })
     renderer.outputColorSpace = THREE.LinearSRGBColorSpace
     renderer.setSize(sizes.width, sizes.height)
