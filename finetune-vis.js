@@ -78,7 +78,7 @@ class HandVelPlot {
             height: parseInt(window.getComputedStyle(this.container).height.slice(0, -2)),
             width: parseInt(window.getComputedStyle(this.container).width.slice(0, -2)),
             x_axis_label: "time (s)",
-            y_axis_label: idx === 0 ? "v_x" : "v_y",
+            // y_axis_label: idx === 0 ? "v_x" : "v_y",
             y_range: [-1, 1]
         })
         this.plot.toolbar.logo = null;
