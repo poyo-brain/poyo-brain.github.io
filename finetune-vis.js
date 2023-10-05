@@ -79,10 +79,16 @@ class HandVelPlot {
         this.plot = Bokeh.Plotting.figure({
             height: parseInt(window.getComputedStyle(this.container).height.slice(0, -2)),
             width: parseInt(window.getComputedStyle(this.container).width.slice(0, -2)),
+            x_axis_label: "time (s)",
+            y_axis_label: idx === 0 ? "v_x" : "v_y",
         })
         this.plot.toolbar.logo = null;
         this.plot.toolbar_location = null;
         Bokeh.Plotting.show(this.plot, '#' + htmlId);
+
+        // Remove grid lines
+        this.plot.xgrid.grid_line_color = null;
+        this.plot.ygrid.grid_line_color = null;
 
         this.num_samples =150; 
         // TODO: Remove this whole num_samples thing
@@ -135,6 +141,8 @@ async function finetune_vis() {
         .then(data => mat4js.read(data))
         .then(data => data.data)
 
+    console.log(data);
+
     const plotHandVel = [
         new HandVelPlot(data, 0, "#F00", "finetune-vis-vx-plot"),
         new HandVelPlot(data, 1, "#00F", "finetune-vis-vy-plot")
@@ -156,6 +164,23 @@ async function finetune_vis() {
     }
 
     const num_steps = data.epochs.length;
+
+
+    // slider
+    // Get slider and value elements
+    const slider = document.getElementById('epoch-slider');
+    // const epochValue = document.getElementById('epoch-value');
+
+    // Set max value of slider dynamically
+    slider.max = num_steps; // Assuming num_steps is defined
+
+    // Add an event listener to the slider
+    slider.addEventListener('input', (event) => {
+        updateStep(parseInt(event.target.value));
+    });
+
+
+    // play button
     let playing = false; // Not playing
     let step = 0;
     function next() {
@@ -163,9 +188,10 @@ async function finetune_vis() {
         if (step >= num_steps) {
             step = 0;
             playing = false;
-            addDataButton.textContent = "Play";
+            addDataButton.textContent = "\u25ba";
         } else {
             updateStep(step);
+            slider.value = step;
         }
 
         if (playing)
@@ -175,17 +201,17 @@ async function finetune_vis() {
     function playpause() {
         if (playing) {
             playing = false;
-            addDataButton.textContent = "Play";
+            addDataButton.textContent = "\u25ba";
             return;
         } {
             playing = true;
-            addDataButton.textContent = "Pause";
+            addDataButton.textContent = "\u23f8";
             next();
         }
     }
 
     const addDataButton = document.getElementById("finetune-vis-button");
     addDataButton.addEventListener("click", playpause);
-
+    
     updateStep(0);
 }

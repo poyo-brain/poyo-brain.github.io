@@ -17,12 +17,12 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="finetune-vis.css">
 
-    <script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-2.4.1.min.js"></script>
-    <script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-gl-2.4.1.min.js"></script>
-    <script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-widgets-2.4.1.min.js"></script>
-    <script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-tables-2.4.1.min.js"></script>
-    <script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-mathjax-2.4.1.min.js"></script>
-    <script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-api-2.4.1.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-3.2.2.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-gl-3.2.2.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-widgets-3.2.2.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-tables-3.2.2.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-mathjax-3.2.2.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-api-3.2.2.min.js"></script>    
     <script src="./mat4js.read.min.js"></script>
 
     <!-- <script type="module" src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r153/three.module.js"></script> -->
@@ -621,7 +621,16 @@
                     <div id="finetune-vis-vx-plot"></div>
                     <div id="finetune-vis-vy-plot"></div>
                 </div>
-                <button id="finetune-vis-button">Play</button>
+                <div>
+                    <!-- Slider container -->
+                        <div id="slider-container">
+                            <!-- <label for="epoch-slider">Epoch: </label>
+                            <span id="epoch-value">0</span> -->
+                            <button id="finetune-vis-button">►</button>
+                            <input type="range" id="epoch-slider" min="0" max="100" value="0" step="1">
+                        </div>
+
+                </div> 
             </div>
             <script src="finetune-vis.js"></script>
         </section>

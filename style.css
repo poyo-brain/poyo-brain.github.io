@@ -454,3 +454,20 @@ input:checked + .slider:before {
     box-sizing: border-box;  /* Ensure padding and border are included in the width */
     word-wrap: break-word;  /* Break the words as needed to fit the container width */
 }
+
+#finetune-vis-button {
+    width: 30px;
+    height: 30px;
+}
+
+/* Add some basic styling to your slider */
+#slider-container {
+    margin: 20px;
+    margin-left: 0px;
+}
+
+#epoch-slider {
+    width: 40%;
+    /* margin: 0 5px; */
+    margin: 8px;
+}
