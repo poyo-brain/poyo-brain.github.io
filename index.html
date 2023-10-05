@@ -601,15 +601,17 @@
 
             <p><b>2. Full Finetuning</b>: Train all the weights.</p>
 
-            <script src="finetune-vis.js"></script>
             <div id="finetune-vis-container">
                 <p id="finetune-vis-epoch">Epoch: </p>
                 <p id="finetune-vis-r2">R2: </p>
                 <div id="finetune-vis-emb"></div>
-                <div id="finetune-vis-vx-plot" style="display: inline-block;"></div>
-                <div id="finetune-vis-vy-plot" style="display: inline-block;"></div>
+                <div id="finetune-vis-plots">
+                    <div id="finetune-vis-vx-plot"></div>
+                    <div id="finetune-vis-vy-plot"></div>
+                </div>
                 <button id="finetune-vis-button">Play</button>
             </div>
+            <script src="finetune-vis.js"></script>
         </section>
 
         <section class="section">

@@ -13,7 +13,11 @@ function hslToHex(h, s, l) {
 
 class UnitEmbPlot {
     constructor(data, htmlId) {
+        this.container = document.getElementById(htmlId);
+
         this.plot = Bokeh.Plotting.figure({
+            height: parseInt(window.getComputedStyle(this.container).height.slice(0, -2)),
+            width: parseInt(window.getComputedStyle(this.container).width.slice(0, -2)),
             x_axis_label: "PC1",
             y_axis_label: "PC2",
             x_range: [-0.5, 0.7],
@@ -21,7 +25,7 @@ class UnitEmbPlot {
         });
         this.plot.toolbar.logo = null
         this.plot.toolbar_location = null
-        Bokeh.Plotting.show(this.plot, htmlId);
+        Bokeh.Plotting.show(this.plot, '#' + htmlId);
 
         this.updateData(data);
     }
@@ -70,14 +74,15 @@ class UnitEmbPlot {
 class HandVelPlot {
     constructor(data, idx, linecolor, htmlId) {
         // idx: 0 => Vx, 1 => Vy
+        this.container = document.getElementById(htmlId);
+
         this.plot = Bokeh.Plotting.figure({
-            height: 300,
-            width: 500,
-            x_axis_label: "time (s)"
+            height: parseInt(window.getComputedStyle(this.container).height.slice(0, -2)),
+            width: parseInt(window.getComputedStyle(this.container).width.slice(0, -2)),
         })
         this.plot.toolbar.logo = null;
         this.plot.toolbar_location = null;
-        Bokeh.Plotting.show(this.plot, htmlId);
+        Bokeh.Plotting.show(this.plot, '#' + htmlId);
 
         this.num_samples = 300; 
         // TODO: Remove this whole num_samples thing
@@ -131,14 +136,12 @@ async function finetune_vis() {
         .then(data => data.data)
 
     const plotHandVel = [
-        new HandVelPlot(data, 0, "#F00", "#finetune-vis-vx-plot"),
-        new HandVelPlot(data, 1, "#00F", "#finetune-vis-vy-plot")
+        new HandVelPlot(data, 0, "#F00", "finetune-vis-vx-plot"),
+        new HandVelPlot(data, 1, "#00F", "finetune-vis-vy-plot")
     ];
+    plotHandVel[1].plot.x_axis_label = "time (s)"
 
-    const plotEmb = new UnitEmbPlot(data, "#finetune-vis-emb");
-    plotEmb.plot.title = "Unit Embeddings";
-    plotEmb.plot.width = 300;
-    plotEmb.plot.height = 300;
+    const plotEmb = new UnitEmbPlot(data, "finetune-vis-emb");
 
     // Metrics display
     const r2Element = document.getElementById("finetune-vis-r2")

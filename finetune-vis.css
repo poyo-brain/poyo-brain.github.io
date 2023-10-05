@@ -1,0 +1,22 @@
+#finetune-vis-container {
+}
+
+#finetune-vis-emb {
+    display: inline-block;
+    height: 400px;
+    width: 300px;
+}
+
+#finetune-vis-plots {
+    display: inline-block;
+}
+
+#finetune-vis-vx-plot {
+    height: 200px;
+    width: 300px;
+}
+
+#finetune-vis-vy-plot {
+    height: 200px;
+    width: 300px;
+}
