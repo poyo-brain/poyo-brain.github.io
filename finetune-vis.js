@@ -182,7 +182,7 @@ async function finetune_vis() {
 
     // slider
     // Get slider and value elements
-    const slider = document.getElementById('epoch-slider');
+    const slider = document.getElementById('finetune-vis-slider');
     // const epochValue = document.getElementById('epoch-value');
 
     // Set max value of slider dynamically

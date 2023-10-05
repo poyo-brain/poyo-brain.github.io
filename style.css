@@ -461,12 +461,12 @@ input:checked + .slider:before {
 }
 
 /* Add some basic styling to your slider */
-#slider-container {
+#finetune-vis-slider-container {
     margin: 20px;
     margin-left: 0px;
 }
 
-#epoch-slider {
+#finetune-vis-slider {
     width: 40%;
     /* margin: 0 5px; */
     margin: 8px;

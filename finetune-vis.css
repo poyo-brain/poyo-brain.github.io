@@ -26,3 +26,20 @@
     height: 200px;
     width: 300px;
 }
+
+#finetune-vis-button {
+    width: 30px;
+    height: 30px;
+}
+
+/* Add some basic styling to your slider */
+#finetune-vis-slider-container {
+    margin: 20px;
+    margin-left: 0px;
+}
+
+#finetune-vis-slider {
+    width: 40%;
+    /* margin: 0 5px; */
+    margin: 8px;
+}
