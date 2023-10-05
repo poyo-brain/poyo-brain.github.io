@@ -52,7 +52,7 @@ class UnitEmbPlot {
 
         this.plot.circle({ field: "x" }, { field: "y" }, {
             source: this.source,
-            color: colors,
+            color: "pink",
             size: 10, 
             alpha: 0.7
         });
@@ -165,34 +165,30 @@ async function finetune_vis() {
 
     const plotEmb = new UnitEmbPlot(data, "finetune-vis-emb");
 
+
+    const num_steps = data.epochs.length;
+
     // Metrics display
     const r2Element = document.getElementById("finetune-vis-r2")
     const epochElement = document.getElementById("finetune-vis-epoch")
+
+    // Slider
+    const slider = document.getElementById('finetune-vis-slider');
+    slider.max = num_steps-1; // Assuming num_steps is defined
+    slider.addEventListener('input', (event) => {
+        step = parseInt(event.target.value);
+        updateStep(step);
+    });
+
     function updateStep(step) {
         plotEmb.updateStep(step);
         for (let i = 0; i < 2; i++)
             plotHandVel[i].updateStep(step);
 
+        slider.value = step;
         r2Element.textContent = "R2: " + data.r2[step].toFixed(2);
         epochElement.textContent = "Training Step: " + data.epochs[step];
     }
-
-    const num_steps = data.epochs.length;
-
-
-    // slider
-    // Get slider and value elements
-    const slider = document.getElementById('finetune-vis-slider');
-    // const epochValue = document.getElementById('epoch-value');
-
-    // Set max value of slider dynamically
-    slider.max = num_steps-1; // Assuming num_steps is defined
-
-    // Add an event listener to the slider
-    slider.addEventListener('input', (event) => {
-        step = parseInt(event.target.value);
-        updateStep(step);
-    });
 
     // play button
     let playing = false; // Not playing
@@ -202,9 +198,6 @@ async function finetune_vis() {
             step = 0;
             playpause();
             return;
-        } else {
-            slider.value = step;
-            updateStep(step);
         }
 
         updateStep(step);
