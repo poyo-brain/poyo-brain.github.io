@@ -45,7 +45,6 @@ class UnitEmbPlot {
         let min_x = Math.min(...this.data.unit_emb_x[0]);
         for (let i = 0; i < this.data.unit_emb_x[0].length; i++) {
             var hue = Math.floor(360 * (this.data.unit_emb_x[0][i] - min_x) / (max_x - min_x));
-            console.log(hue)
             colors.push(hslToHex(hue, 100, 50));
         }
 
@@ -101,8 +100,16 @@ class HandVelPlot {
         this.plot.line({ field: "x" }, { field: "y" }, {
             source: this.source_gt,
             line_width: 2,
+            legend_label: "Ground Truth",
             color: "#000"
         });
+
+        this.plot.legend.location = "bottom_left";
+        this.plot.legend.label_text_font_size = "8px";
+        this.plot.legend.background_fill_alpha = 0.75;
+        this.plot.legend.padding = 4;
+        this.plot.legend.spacing = -10;
+        this.plot.legend.margin = 0;
 
         this.source_pred = new Bokeh.ColumnDataSource({
             data: { 
@@ -112,6 +119,7 @@ class HandVelPlot {
         });
         this.plot.line({ field: "x" }, { field: "y" }, {
             source: this.source_pred,
+            legend_label: "Prediction",
             line_width: 2,
             color: this.linecolor
         });
