@@ -11,6 +11,65 @@ function hslToHex(h, s, l) {
   return `#${f(0)}${f(8)}${f(4)}`;
 }
 
+class UnitEmbPlot {
+    constructor(data, htmlId) {
+        this.plot = Bokeh.Plotting.figure({
+            title: "Unit Embeddings",
+            height: 500,
+            width: 500,
+            x_axis_label: "PC1",
+            y_axis_label: "PC2",
+            x_range: [-0.5, 0.7],
+            y_range: [-0.6, 0.7]
+        });
+        this.plot.toolbar.logo = null
+        this.plot.toolbar_location = null
+        Bokeh.Plotting.show(this.plot, htmlId);
+
+        this.updateData(data);
+    }
+
+    updateData(data) {
+        // Changes things for new data
+        this.data = data;
+        this.source = new Bokeh.ColumnDataSource({
+            data: {
+                x: this.data.unit_emb[0].map(x => x[0]),
+                y: this.data.unit_emb[0].map(x => x[1]),
+            }
+        });
+
+        let single_color = [];
+        let last_unit_emb_x = this.data.unit_emb.slice(-1)[0].map(x => x[0]);
+        let last_unit_emb_y = this.data.unit_emb.slice(-1)[0].map(x => x[1]);
+        let max_x = Math.max(...last_unit_emb_x);
+        let min_x = Math.min(...last_unit_emb_x);
+        let max_y = Math.max(...last_unit_emb_y);
+        let min_y = Math.min(...last_unit_emb_y);
+        for (let i = 0; i < this.data.unit_emb[0].length; i++) {
+            var hue = Math.floor(360 * last_unit_emb_x[i] / (max_x - min_x));
+            single_color.push(hslToHex(hue, 100, 50));
+        }
+
+        this.plot.circle({ field: "x" }, { field: "y" }, {
+            source: this.source,
+            size:10, color:single_color, alpha:0.7
+        });
+        console.log(min_x, max_x, min_y, max_y);
+
+        this.plot.x_range.start = min_x - 0.1;
+        this.plot.x_range.end = max_x + 0.1;
+        this.plot.y_range.start = min_y - 0.1;
+        this.plot.y_range.end = max_y + 0.1;
+    }
+
+    updateStep(step) {
+        this.source.data.x = this.data.unit_emb[step].map(x => x[0]);
+        this.source.data.y = this.data.unit_emb[step].map(x => x[1]);
+        this.source.change.emit();
+    }
+};
+
 async function finetune_vis() {
 
     // Load the data
@@ -35,42 +94,8 @@ async function finetune_vis() {
     }
     Bokeh.Plotting.show(plotHandVel[0], "#finetune-vis-hand-vx-plot");
     Bokeh.Plotting.show(plotHandVel[1], "#finetune-vis-hand-vy-plot");
-    // Unit embedding
-    const plotEmb = Bokeh.Plotting.figure({
-        title: "Unit Embeddings",
-        height: 500,
-        width: 500,
-        x_axis_label: "PC1",
-        y_axis_label: "PC2",
-        x_range: [-0.5, 0.7],
-        y_range: [-0.6, 0.7]
-    });
-    plotEmb.toolbar.logo = null
-    plotEmb.toolbar_location = null
-    Bokeh.Plotting.show(plotEmb, "#finetune-vis-emb");
 
-    const unit_source = new Bokeh.ColumnDataSource({
-        data: {
-            x: data.unit_emb[0].map(x => x[0]),
-            y: data.unit_emb[0].map(x => x[1]),
-        }
-    });
-
-    single_color = [];
-    let last_unit_emb = data.unit_emb.slice(-1)[0].map(x => x[0]);
-    let max_x = Math.max(...last_unit_emb);
-    let min_x = Math.min(...last_unit_emb);
-    console.log(last_unit_emb);
-    for (let i = 0; i < data.unit_emb[0].length; i++) {
-        var hue = Math.floor(360 * last_unit_emb[i] / (max_x - min_x));
-        single_color.push(hslToHex(hue, 100, 50));
-    }
-
-    plotEmb.circle({ field: "x" }, { field: "y" }, {
-        source: unit_source,
-        size:10, color:single_color, alpha:0.7
-    });
-
+    const plotEmb = new UnitEmbPlot(data, "#finetune-vis-emb");
 
     // Prepare data for plots
     const num_steps = data.gt.length;
@@ -118,9 +143,7 @@ async function finetune_vis() {
             source_pred[i].data.y = data.pred[step].map(x => x[i]).slice(1, num_samples);
             source_pred[i].change.emit();
         }
-        unit_source.data.x = data.unit_emb[step].map(x => x[0]);
-        unit_source.data.y = data.unit_emb[step].map(x => x[1]);
-        unit_source.change.emit();
+        plotEmb.updateStep(step);
 
         r2Element.textContent = "R2: " + data.r2[step].toFixed(2);
         epochElement.textContent = "Epoch: " + data.epochs[step];
