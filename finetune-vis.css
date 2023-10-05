@@ -4,10 +4,10 @@
 #finetune-vis-emb {
     display: inline-block;
     height: 400px;
-    width: 300px;
+    width: 400px;
 }
 
-#finetune-vis-plots {
+#finetune-vis-vel-plots {
     display: inline-block;
 }
 

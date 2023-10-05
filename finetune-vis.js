@@ -84,7 +84,7 @@ class HandVelPlot {
         this.plot.toolbar_location = null;
         Bokeh.Plotting.show(this.plot, '#' + htmlId);
 
-        this.num_samples = 300; 
+        this.num_samples =150; 
         // TODO: Remove this whole num_samples thing
         // The data should contain only the samples that are needed
         this.linecolor = linecolor;
@@ -130,7 +130,7 @@ class HandVelPlot {
 async function finetune_vis() {
 
     // Load the data
-    const data = await fetch("./assets/file_processed.mat")
+    const data = await fetch("./assets/finetune_data.mat")
         .then(response => response.arrayBuffer())
         .then(data => mat4js.read(data))
         .then(data => data.data)
