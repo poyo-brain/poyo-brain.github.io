@@ -14,9 +14,6 @@ function hslToHex(h, s, l) {
 class UnitEmbPlot {
     constructor(data, htmlId) {
         this.plot = Bokeh.Plotting.figure({
-            title: "Unit Embeddings",
-            height: 500,
-            width: 500,
             x_axis_label: "PC1",
             y_axis_label: "PC2",
             x_range: [-0.5, 0.7],
@@ -70,6 +67,61 @@ class UnitEmbPlot {
     }
 };
 
+class HandVelPlot {
+    constructor(data, idx, linecolor, htmlId) {
+        // idx: 0 => Vx, 1 => Vy
+        this.plot = Bokeh.Plotting.figure({
+            height: 300,
+            width: 500,
+            x_axis_label: "time (s)"
+        })
+        this.plot.toolbar.logo = null;
+        this.plot.toolbar_location = null;
+        Bokeh.Plotting.show(this.plot, htmlId);
+
+        this.num_samples = 300; 
+        // TODO: Remove this whole num_samples thing
+        // The data should contain only the samples that are needed
+        this.linecolor = linecolor;
+        this.idx = idx;
+        this.updateData(data);
+    }
+
+    updateData(data) {
+        this.data = data;
+        const vx_timestamps = this.data.timestamps[0].slice(1, this.num_samples);
+
+        this.source_gt = new Bokeh.ColumnDataSource({
+            data: { 
+                x: vx_timestamps, 
+                y: this.data.gt[0].map(x => x[this.idx]).slice(1, this.num_samples) 
+            }
+        });
+        this.plot.line({ field: "x" }, { field: "y" }, {
+            source: this.source_gt,
+            line_width: 2,
+            color: "#000"
+        });
+
+        this.source_pred = new Bokeh.ColumnDataSource({
+            data: { 
+                x: vx_timestamps, 
+                y: data.pred[0].map(x => x[this.idx]).slice(1, this.num_samples) 
+            }
+        });
+        this.plot.line({ field: "x" }, { field: "y" }, {
+            source: this.source_pred,
+            line_width: 2,
+            color: this.linecolor
+        });
+    }
+
+    updateStep(step) {
+        this.source_pred.data.y = this.data.pred[step].map(x => x[this.idx]).slice(1, this.num_samples);
+        this.source_pred.change.emit();
+    }
+}
+
 async function finetune_vis() {
 
     // Load the data
@@ -78,77 +130,29 @@ async function finetune_vis() {
         .then(data => mat4js.read(data))
         .then(data => data.data)
 
-    /* Make empty plots */
-    // VX
-    let plotHandVel = []
-    for (let i = 0; i < 2; i++) {
-        let plot = Bokeh.Plotting.figure({
-            title: i == 0 ? "Vx" : "Vy",
-            height: 300,
-            width: 500,
-            x_axis_label: "time (s)"
-        })
-        plot.toolbar.logo = null
-        plot.toolbar_location = null
-        plotHandVel.push(plot)
-    }
-    Bokeh.Plotting.show(plotHandVel[0], "#finetune-vis-hand-vx-plot");
-    Bokeh.Plotting.show(plotHandVel[1], "#finetune-vis-hand-vy-plot");
+    const plotHandVel = [
+        new HandVelPlot(data, 0, "#F00", "#finetune-vis-vx-plot"),
+        new HandVelPlot(data, 1, "#00F", "#finetune-vis-vy-plot")
+    ];
 
     const plotEmb = new UnitEmbPlot(data, "#finetune-vis-emb");
+    plotEmb.plot.title = "Unit Embeddings";
+    plotEmb.plot.width = 300;
+    plotEmb.plot.height = 300;
 
-    // Prepare data for plots
-    const num_steps = data.gt.length;
-    const num_samples = 300;
-
-    /* VX */
-    const vx_timestamps = data.timestamps[0].slice(1, num_samples);
-    // GT
-    let source_gt = [];
-    let source_pred = [];
-    for (let i = 0; i < 2; i++) {
-        let gt = new Bokeh.ColumnDataSource({
-            data: { 
-                x: vx_timestamps, 
-                y: data.gt[0].map(x => x[i]).slice(1, num_samples) 
-            }
-        });
-        plotHandVel[i].line({ field: "x" }, { field: "y" }, {
-            source: gt,
-            line_width: 2,
-            color: "#000"
-        });
-        source_gt.push(gt);
-
-        let pred = new Bokeh.ColumnDataSource({
-            data: { 
-                x: vx_timestamps, 
-                y: data.pred[0].map(x => x[i]).slice(1, num_samples) 
-            }
-        });
-        plotHandVel[i].line({ field: "x" }, { field: "y" }, {
-            source: pred,
-            line_width: 2,
-            color: i == 0 ? "#F00": "#00F"
-        });
-        source_pred.push(pred);
-    }
-    // Prediction
-
-
+    // Metrics display
     const r2Element = document.getElementById("finetune-vis-r2")
     const epochElement = document.getElementById("finetune-vis-epoch")
-    function update(step) {
-        for (let i = 0; i < 2; i++) {
-            source_pred[i].data.y = data.pred[step].map(x => x[i]).slice(1, num_samples);
-            source_pred[i].change.emit();
-        }
+    function updateStep(step) {
         plotEmb.updateStep(step);
+        for (let i = 0; i < 2; i++)
+            plotHandVel[i].updateStep(step);
 
         r2Element.textContent = "R2: " + data.r2[step].toFixed(2);
         epochElement.textContent = "Epoch: " + data.epochs[step];
     }
 
+    const num_steps = data.epochs.length;
     let playing = false; // Not playing
     let step = 0;
     function next() {
@@ -158,14 +162,14 @@ async function finetune_vis() {
             playing = false;
             addDataButton.textContent = "Play";
         } else {
-            update(step);
+            updateStep(step);
         }
 
         if (playing)
             setTimeout(next, 100);
     }
 
-    function play() {
+    function playpause() {
         if (playing) {
             playing = false;
             addDataButton.textContent = "Play";
@@ -178,7 +182,7 @@ async function finetune_vis() {
     }
 
     const addDataButton = document.getElementById("finetune-vis-button");
-    addDataButton.addEventListener("click", play);
+    addDataButton.addEventListener("click", playpause);
 
-    update(0);
+    updateStep(0);
 }
