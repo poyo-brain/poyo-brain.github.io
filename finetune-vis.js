@@ -25,6 +25,8 @@ class UnitEmbPlot {
         });
         this.plot.toolbar.logo = null
         this.plot.toolbar_location = null
+        this.plot.yaxis.axis_label_text_font_style = "normal";
+        this.plot.xaxis.axis_label_text_font_style = "normal";
         Bokeh.Plotting.show(this.plot, '#' + htmlId);
 
         this.updateData(data);
@@ -77,12 +79,12 @@ class HandVelPlot {
         this.plot = Bokeh.Plotting.figure({
             height: parseInt(window.getComputedStyle(this.container).height.slice(0, -2)),
             width: parseInt(window.getComputedStyle(this.container).width.slice(0, -2)),
-            x_axis_label: "time (s)",
-            // y_axis_label: idx === 0 ? "v_x" : "v_y",
             y_range: [-1, 1]
         })
         this.plot.toolbar.logo = null;
         this.plot.toolbar_location = null;
+        this.plot.yaxis.axis_label_text_font_style = "normal";
+        this.plot.xaxis.axis_label_text_font_style = "normal";
         Bokeh.Plotting.show(this.plot, '#' + htmlId);
 
         // Remove grid lines
@@ -143,6 +145,7 @@ class HandVelPlot {
     }
 }
 
+/* Main function for this script */
 async function finetune_vis() {
 
     // Load the data
@@ -151,13 +154,14 @@ async function finetune_vis() {
         .then(data => mat4js.read(data))
         .then(data => data.data)
 
-    console.log(data);
-
     const plotHandVel = [
         new HandVelPlot({gt: data.gt_x, pred: data.pred_x, timestamps: data.timestamps}, "#F00", "finetune-vis-vx-plot"),
         new HandVelPlot({gt: data.gt_y, pred: data.pred_y, timestamps: data.timestamps}, "#00F", "finetune-vis-vy-plot")
     ];
-    plotHandVel[1].plot.x_axis_label = "time (s)"
+    plotHandVel[0].plot.xaxis.axis_label = "time (s)";
+    plotHandVel[0].plot.yaxis.axis_label = "Vx";
+    plotHandVel[1].plot.xaxis.axis_label = "time (s)";
+    plotHandVel[1].plot.yaxis.axis_label = "Vy";
 
     const plotEmb = new UnitEmbPlot(data, "finetune-vis-emb");
 
@@ -182,13 +186,13 @@ async function finetune_vis() {
     // const epochValue = document.getElementById('epoch-value');
 
     // Set max value of slider dynamically
-    slider.max = num_steps; // Assuming num_steps is defined
+    slider.max = num_steps-1; // Assuming num_steps is defined
 
     // Add an event listener to the slider
     slider.addEventListener('input', (event) => {
-        updateStep(parseInt(event.target.value));
+        step = parseInt(event.target.value);
+        updateStep(step);
     });
-
 
     // play button
     let playing = false; // Not playing
@@ -196,11 +200,11 @@ async function finetune_vis() {
     function next() {
         if (step >= num_steps) {
             step = 0;
-            playing = false;
-            addDataButton.textContent = "\u25ba";
+            playpause();
+            return;
         } else {
-            updateStep(step);
             slider.value = step;
+            updateStep(step);
         }
 
         updateStep(step);
