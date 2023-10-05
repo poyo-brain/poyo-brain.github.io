@@ -1,14 +1,14 @@
 window.addEventListener('load', finetune_vis);
 
 function hslToHex(h, s, l) {
-  l /= 100;
-  const a = s * Math.min(l, 1 - l) / 100;
-  const f = n => {
-    const k = (n + h / 30) % 12;
-    const color = l - a * Math.max(Math.min(k - 3, 9 - k, 1), -1);
-    return Math.round(255 * color).toString(16).padStart(2, '0');   // convert to Hex and prefix "0" if needed
-  };
-  return `#${f(0)}${f(8)}${f(4)}`;
+    l /= 100;
+    const a = s * Math.min(l, 1 - l) / 100;
+    const f = n => {
+        const k = (n + h / 30) % 12;
+        const color = l - a * Math.max(Math.min(k - 3, 9 - k, 1), -1);
+        return Math.round(255 * color).toString(16).padStart(2, '0');   // convert to Hex and prefix "0" if needed
+    };
+    return `#${f(0)}${f(8)}${f(4)}`;
 }
 
 class UnitEmbPlot {
@@ -35,71 +35,67 @@ class UnitEmbPlot {
         this.data = data;
         this.source = new Bokeh.ColumnDataSource({
             data: {
-                x: this.data.unit_emb[0].map(x => x[0]),
-                y: this.data.unit_emb[0].map(x => x[1]),
+                x: this.data.unit_emb_x[0],
+                y: this.data.unit_emb_y[0],
             }
         });
 
-        let single_color = [];
-        let last_unit_emb_x = this.data.unit_emb.slice(-1)[0].map(x => x[0]);
-        let last_unit_emb_y = this.data.unit_emb.slice(-1)[0].map(x => x[1]);
-        let max_x = Math.max(...last_unit_emb_x);
-        let min_x = Math.min(...last_unit_emb_x);
-        let max_y = Math.max(...last_unit_emb_y);
-        let min_y = Math.min(...last_unit_emb_y);
-        for (let i = 0; i < this.data.unit_emb[0].length; i++) {
-            var hue = Math.floor(360 * last_unit_emb_x[i] / (max_x - min_x));
-            single_color.push(hslToHex(hue, 100, 50));
+        let colors = [];
+        let max_x = Math.max(...this.data.unit_emb_x[0]);
+        let min_x = Math.min(...this.data.unit_emb_x[0]);
+        for (let i = 0; i < this.data.unit_emb_x[0].length; i++) {
+            var hue = Math.floor(360 * (this.data.unit_emb_x[0][i] - min_x) / (max_x - min_x));
+            console.log(hue)
+            colors.push(hslToHex(hue, 100, 50));
         }
 
         this.plot.circle({ field: "x" }, { field: "y" }, {
             source: this.source,
-            size:10, color:single_color, alpha:0.7
+            color: colors,
+            size: 10, 
+            alpha: 0.7
         });
-        console.log(min_x, max_x, min_y, max_y);
 
-        this.plot.x_range.start = min_x - 0.1;
-        this.plot.x_range.end = max_x + 0.1;
-        this.plot.y_range.start = min_y - 0.1;
-        this.plot.y_range.end = max_y + 0.1;
+        let last_unit_emb_x = this.data.unit_emb_x.slice(-1)[0];
+        let last_unit_emb_y = this.data.unit_emb_y.slice(-1)[0];
+        this.plot.x_range.start = Math.min(...last_unit_emb_x) - 0.1;
+        this.plot.x_range.end = Math.max(...last_unit_emb_x) + 0.1;
+        this.plot.y_range.start = Math.min(...last_unit_emb_y) - 0.1;
+        this.plot.y_range.end = Math.max(...last_unit_emb_y) + 0.1;
     }
 
     updateStep(step) {
-        this.source.data.x = this.data.unit_emb[step].map(x => x[0]);
-        this.source.data.y = this.data.unit_emb[step].map(x => x[1]);
+        this.source.data.x = this.data.unit_emb_x[step];
+        this.source.data.y = this.data.unit_emb_y[step];
         this.source.change.emit();
     }
 };
 
 class HandVelPlot {
-    constructor(data, idx, linecolor, htmlId) {
-        // idx: 0 => Vx, 1 => Vy
+    constructor(data, linecolor, htmlId) {
         this.container = document.getElementById(htmlId);
 
         this.plot = Bokeh.Plotting.figure({
             height: parseInt(window.getComputedStyle(this.container).height.slice(0, -2)),
             width: parseInt(window.getComputedStyle(this.container).width.slice(0, -2)),
+            y_range: [-1, 1]
         })
         this.plot.toolbar.logo = null;
         this.plot.toolbar_location = null;
         Bokeh.Plotting.show(this.plot, '#' + htmlId);
 
-        this.num_samples =150; 
-        // TODO: Remove this whole num_samples thing
-        // The data should contain only the samples that are needed
         this.linecolor = linecolor;
-        this.idx = idx;
         this.updateData(data);
     }
 
     updateData(data) {
         this.data = data;
-        const vx_timestamps = this.data.timestamps[0].slice(1, this.num_samples);
+        const vx_timestamps = this.data.timestamps;
 
         this.source_gt = new Bokeh.ColumnDataSource({
             data: { 
                 x: vx_timestamps, 
-                y: this.data.gt[0].map(x => x[this.idx]).slice(1, this.num_samples) 
+                y: this.data.gt
             }
         });
         this.plot.line({ field: "x" }, { field: "y" }, {
@@ -111,7 +107,7 @@ class HandVelPlot {
         this.source_pred = new Bokeh.ColumnDataSource({
             data: { 
                 x: vx_timestamps, 
-                y: data.pred[0].map(x => x[this.idx]).slice(1, this.num_samples) 
+                y: this.data.pred[0]
             }
         });
         this.plot.line({ field: "x" }, { field: "y" }, {
@@ -119,10 +115,13 @@ class HandVelPlot {
             line_width: 2,
             color: this.linecolor
         });
+
+        this.plot.y_range.start = Math.min(...this.source_gt.data.y) - 0.1;
+        this.plot.y_range.end = Math.max(...this.source_gt.data.y) + 0.1;
     }
 
     updateStep(step) {
-        this.source_pred.data.y = this.data.pred[step].map(x => x[this.idx]).slice(1, this.num_samples);
+        this.source_pred.data.y = this.data.pred[step];
         this.source_pred.change.emit();
     }
 }
@@ -136,8 +135,8 @@ async function finetune_vis() {
         .then(data => data.data)
 
     const plotHandVel = [
-        new HandVelPlot(data, 0, "#F00", "finetune-vis-vx-plot"),
-        new HandVelPlot(data, 1, "#00F", "finetune-vis-vy-plot")
+        new HandVelPlot({gt: data.gt_x, pred: data.pred_x, timestamps: data.timestamps}, "#F00", "finetune-vis-vx-plot"),
+        new HandVelPlot({gt: data.gt_y, pred: data.pred_y, timestamps: data.timestamps}, "#00F", "finetune-vis-vy-plot")
     ];
     plotHandVel[1].plot.x_axis_label = "time (s)"
 
@@ -152,24 +151,26 @@ async function finetune_vis() {
             plotHandVel[i].updateStep(step);
 
         r2Element.textContent = "R2: " + data.r2[step].toFixed(2);
-        epochElement.textContent = "Epoch: " + data.epochs[step];
+        epochElement.textContent = "Training Step: " + data.epochs[step];
     }
 
     const num_steps = data.epochs.length;
-    let playing = false; // Not playing
+    let playing = false; 
     let step = 0;
     function next() {
-        step += 1;
         if (step >= num_steps) {
             step = 0;
             playing = false;
             addDataButton.textContent = "Play";
-        } else {
-            updateStep(step);
+            return;
         }
+
+        updateStep(step);
+        step += 1;
 
         if (playing)
             setTimeout(next, 100);
+
     }
 
     function playpause() {
