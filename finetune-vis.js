@@ -78,6 +78,89 @@ class UnitEmbPlot {
     }
 };
 
+class SessEmbPlot {
+    constructor(data, htmlId) {
+        this.container = document.getElementById(htmlId);
+
+        this.plot = Bokeh.Plotting.figure({
+            height: parseInt(window.getComputedStyle(this.container).height.slice(0, -2)),
+            width: parseInt(window.getComputedStyle(this.container).width.slice(0, -2)),
+            x_axis_label: "PC1",
+            y_axis_label: "PC2",
+            x_range: [-0.5, 0.7],
+            y_range: [-0.6, 0.7]
+        });
+        this.plot.toolbar.logo = null
+        this.plot.toolbar_location = null
+        this.plot.yaxis.axis_label_text_font_style = "normal";
+        this.plot.xaxis.axis_label_text_font_style = "normal";
+        this.plot.yaxis.minor_tick_line_color = null;
+        this.plot.yaxis.axis_label_standoff = 2;
+        this.plot.xaxis.minor_tick_line_color = null;
+        this.plot.xaxis.axis_label_standoff = 2;
+        this.plot.toolbar.active_drag = null;
+
+        Bokeh.Plotting.show(this.plot, '#' + htmlId);
+
+        this.updateData(data);
+    }
+
+    updateData(data) {
+        // Changes things for new data
+        this.data = data;
+        this.source_all = new Bokeh.ColumnDataSource({
+            data: {
+                x: this.data.all_sess_emb_x,
+                y: this.data.all_sess_emb_y,
+            }
+        });
+
+        let colors = [];
+        let max_x = Math.max(...this.data.unit_emb_x[0]);
+        let min_x = Math.min(...this.data.unit_emb_x[0]);
+        for (let i = 0; i < this.data.unit_emb_x[0].length; i++) {
+            var hue = Math.floor(360 * (this.data.unit_emb_x[0][i] - min_x) / (max_x - min_x));
+            colors.push(hslToHex(hue, 100, 50));
+        }
+
+        this.plot.circle({ field: "x" }, { field: "y" }, {
+            source: this.source_all,
+            color: "grey",
+            size: 10, 
+            alpha: 0.7
+        });
+
+
+        this.source = new Bokeh.ColumnDataSource({
+            data: {
+                x: [this.data.sess_emb_x[0]],
+                y: [this.data.sess_emb_y[0]],
+            }
+        });
+
+        this.plot.circle({ field: "x" }, { field: "y" }, {
+            source: this.source,
+            color: "red",
+            size: 10, 
+            alpha: 1.0
+        });
+
+
+        let last_unit_emb_x = this.data.all_sess_emb_x;
+        let last_unit_emb_y = this.data.all_sess_emb_y;
+        this.plot.x_range.start = Math.min(...last_unit_emb_x) - 0.1;
+        this.plot.x_range.end = Math.max(...last_unit_emb_x) + 0.1;
+        this.plot.y_range.start = Math.min(...last_unit_emb_y) - 0.1;
+        this.plot.y_range.end = Math.max(...last_unit_emb_y) + 0.1;
+    }
+
+    updateStep(step) {
+        this.source.data.x = [this.data.sess_emb_x[step]];
+        this.source.data.y = [this.data.sess_emb_y[step]];
+        this.source.change.emit();
+    }
+}
+
 class HandVelPlot {
     constructor(data, linecolor, htmlId) {
         this.container = document.getElementById(htmlId);
@@ -178,6 +261,7 @@ async function finetune_vis() {
     plotHandVel[1].plot.yaxis.axis_label = "Vy";
 
     const plotEmb = new UnitEmbPlot(data, "finetune-vis-emb");
+    const plotSess = new SessEmbPlot(data, "finetune-vis-session-emb");
 
 
     const num_steps = data.epochs.length;
@@ -195,6 +279,7 @@ async function finetune_vis() {
 
     function updateStep(step) {
         plotEmb.updateStep(step);
+        plotSess.updateStep(step);
         for (let i = 0; i < 2; i++)
             plotHandVel[i].updateStep(step);
 

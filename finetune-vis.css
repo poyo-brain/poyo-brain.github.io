@@ -12,9 +12,9 @@
     width: 400px;
 }
 
-#finetune-vis-model {
+#finetune-vis-session-emb {
     display: inline-block;
-    height: 400px;
+    height: 200px;
     width: 200px;
 }
 
