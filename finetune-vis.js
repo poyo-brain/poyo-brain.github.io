@@ -27,6 +27,12 @@ class UnitEmbPlot {
         this.plot.toolbar_location = null
         this.plot.yaxis.axis_label_text_font_style = "normal";
         this.plot.xaxis.axis_label_text_font_style = "normal";
+        this.plot.yaxis.minor_tick_line_color = null;
+        this.plot.yaxis.axis_label_standoff = 2;
+        this.plot.xaxis.minor_tick_line_color = null;
+        this.plot.xaxis.axis_label_standoff = 2;
+        this.plot.toolbar.active_drag = null;
+
         Bokeh.Plotting.show(this.plot, '#' + htmlId);
 
         this.updateData(data);
@@ -83,13 +89,21 @@ class HandVelPlot {
         })
         this.plot.toolbar.logo = null;
         this.plot.toolbar_location = null;
-        this.plot.yaxis.axis_label_text_font_style = "normal";
-        this.plot.xaxis.axis_label_text_font_style = "normal";
         Bokeh.Plotting.show(this.plot, '#' + htmlId);
 
         // Remove grid lines
         this.plot.xgrid.grid_line_color = null;
         this.plot.ygrid.grid_line_color = null;
+        this.plot.toolbar.active_drag = null;
+
+        // Clean up axis
+        this.plot.yaxis.axis_label_text_font_style = "normal";
+        this.plot.yaxis.minor_tick_line_color = null;
+        this.plot.yaxis.axis_label_standoff = 2;
+        this.plot.xaxis.axis_label_text_font_style = "normal";
+        this.plot.xaxis.minor_tick_line_color = null;
+        this.plot.xaxis.axis_label_standoff = 2;
+
 
         this.num_samples =150; 
         // TODO: Remove this whole num_samples thing
@@ -173,8 +187,7 @@ async function finetune_vis() {
     const epochElement = document.getElementById("finetune-vis-epoch")
 
     // Slider
-    const slider = document.getElementById('finetune-vis-slider');
-    slider.max = num_steps-1; // Assuming num_steps is defined
+    const slider = document.getElementById('finetune-vis-slider'); slider.max = num_steps-1; // Assuming num_steps is defined
     slider.addEventListener('input', (event) => {
         step = parseInt(event.target.value);
         updateStep(step);
@@ -186,8 +199,8 @@ async function finetune_vis() {
             plotHandVel[i].updateStep(step);
 
         slider.value = step;
-        r2Element.textContent = "R2: " + data.r2[step].toFixed(2);
-        epochElement.textContent = "Training Step: " + data.epochs[step];
+        r2Element.textContent = data.r2[step].toFixed(2);
+        epochElement.textContent = data.epochs[step];
     }
 
     // play button
@@ -211,11 +224,11 @@ async function finetune_vis() {
     function playpause() {
         if (playing) {
             playing = false;
-            addDataButton.textContent = "\u25ba";
+            addDataButton.innerHTML ='<i class="fa fa-play"></i>'
             return;
         } {
             playing = true;
-            addDataButton.textContent = "\u23f8";
+            addDataButton.innerHTML ='<i class="fa fa-pause"></i>'
             next();
         }
     }

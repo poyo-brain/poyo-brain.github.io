@@ -1,4 +1,9 @@
 #finetune-vis-container {
+    margin: 30px 0px 0px 0px;
+}
+#finetune-vis-diag-container {
+    display: flex;
+    justify-content: space-between;
 }
 
 #finetune-vis-emb {
@@ -27,19 +32,36 @@
     width: 300px;
 }
 
+/* Controls */
+#finetune-vis-controls-container {
+    margin: 0px 20px;
+    margin-left: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 #finetune-vis-button {
     width: 30px;
     height: 30px;
-}
-
-/* Add some basic styling to your slider */
-#finetune-vis-slider-container {
-    margin: 20px;
-    margin-left: 0px;
+    margin: 0px 5px;
+    background: #555;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    text-align: center;
 }
 
 #finetune-vis-slider {
-    width: 40%;
-    /* margin: 0 5px; */
-    margin: 8px;
+    margin: 0px 30px 0px 10px;
+}
+
+.finetune-vis-metric {
+    display: inline-block;
+    margin: 0px 10px;
+}
+
+.finetune-vis-metric p {
+    display: inline-block;
+    width: 40px;
 }
