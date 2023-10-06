@@ -11,6 +11,22 @@ function hslToHex(h, s, l) {
     return `#${f(0)}${f(8)}${f(4)}`;
 }
 
+const session_types = ['C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 
+    'C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 
+    'C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 
+    'C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 
+    'C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 
+    'C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 
+    'C', 'C', 'C', 'C', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 
+    'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 
+    'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 
+    'M', 'J', 'J', 'J', 'I', 'I', 'I', 'L', 'I', 'I', 'L', 
+    'I', 'I', 'L', 'I', 'I', 'I', 'I', 'L', 'I', 'I', 'I', 
+    'I', 'I', 'I', 'I', 'I', 'I', 'I', 'I', 'I', 'I', 'I', 
+    'I', 'I', 'L', 'I', 'I', 'I', 'I', 'L', 'I', 'L', 'I', 
+    'I', 'I', 'I', 'I', 'N', 'N', 'N', 'N', 'N', 'Je', 'Je', 
+    'Je', 'Je', 'F', 'F', 'F', 'F', 'F']
+
 class UnitEmbPlot {
     constructor(data, htmlId) {
         this.container = document.getElementById(htmlId);
@@ -27,6 +43,12 @@ class UnitEmbPlot {
         this.plot.toolbar_location = null
         this.plot.yaxis.axis_label_text_font_style = "normal";
         this.plot.xaxis.axis_label_text_font_style = "normal";
+        this.plot.yaxis.minor_tick_line_color = null;
+        this.plot.yaxis.axis_label_standoff = 2;
+        this.plot.xaxis.minor_tick_line_color = null;
+        this.plot.xaxis.axis_label_standoff = 2;
+        this.plot.toolbar.active_drag = null;
+
         Bokeh.Plotting.show(this.plot, '#' + htmlId);
 
         this.updateData(data);
@@ -72,6 +94,96 @@ class UnitEmbPlot {
     }
 };
 
+class SessEmbPlot {
+    constructor(data, htmlId) {
+        this.container = document.getElementById(htmlId);
+
+        this.plot = Bokeh.Plotting.figure({
+            height: parseInt(window.getComputedStyle(this.container).height.slice(0, -2)),
+            width: parseInt(window.getComputedStyle(this.container).width.slice(0, -2)),
+            x_axis_label: "PC1",
+            y_axis_label: "PC2",
+            x_range: [-0.5, 0.7],
+            y_range: [-0.6, 0.7]
+        });
+        this.plot.toolbar.logo = null
+        this.plot.toolbar_location = null
+        this.plot.yaxis.axis_label_text_font_style = "normal";
+        this.plot.xaxis.axis_label_text_font_style = "normal";
+        this.plot.yaxis.minor_tick_line_color = null;
+        this.plot.yaxis.axis_label_standoff = 2;
+        this.plot.xaxis.minor_tick_line_color = null;
+        this.plot.xaxis.axis_label_standoff = 2;
+        this.plot.toolbar.active_drag = null;
+
+        Bokeh.Plotting.show(this.plot, '#' + htmlId);
+
+        this.updateData(data);
+    }
+
+    updateData(data) {
+        // Changes things for new data
+        this.data = data;
+        this.source_all = new Bokeh.ColumnDataSource({
+            data: {
+                x: this.data.all_sess_emb_x,
+                y: this.data.all_sess_emb_y,
+                cat: session_types
+            }
+        });
+
+        let colors = [];
+        let max_x = Math.max(...this.data.unit_emb_x[0]);
+        let min_x = Math.min(...this.data.unit_emb_x[0]);
+        for (let i = 0; i < this.data.unit_emb_x[0].length; i++) {
+            var hue = Math.floor(360 * (this.data.unit_emb_x[0][i] - min_x) / (max_x - min_x));
+            colors.push(hslToHex(hue, 100, 50));
+        }
+
+        let palette = Bokeh.Palettes.d3.Category10.Category10_8;
+        let mapper = new Bokeh.CategoricalColorMapper({
+            factors: ['C', 'M', 'J', 'Je', 'N', 'I', 'L', 'F'],
+            palette: palette
+        });
+
+        this.plot.circle({ field: "x" }, { field: "y" }, {
+            source: this.source_all,
+            color: { field: "cat", transform: mapper },
+            size: 4, 
+            alpha: 0.8
+        });
+
+
+        this.source = new Bokeh.ColumnDataSource({
+            data: {
+                x: [this.data.sess_emb_x[0]],
+                y: [this.data.sess_emb_y[0]],
+            }
+        });
+
+        this.plot.circle({ field: "x" }, { field: "y" }, {
+            source: this.source,
+            color: "black",
+            size: 8, 
+            alpha: 1.0
+        });
+
+
+        let last_unit_emb_x = this.data.all_sess_emb_x;
+        let last_unit_emb_y = this.data.all_sess_emb_y;
+        this.plot.x_range.start = Math.min(...last_unit_emb_x) - 0.1;
+        this.plot.x_range.end = Math.max(...last_unit_emb_x) + 0.1;
+        this.plot.y_range.start = Math.min(...last_unit_emb_y) - 0.1;
+        this.plot.y_range.end = Math.max(...last_unit_emb_y) + 0.1;
+    }
+
+    updateStep(step) {
+        this.source.data.x = [this.data.sess_emb_x[step]];
+        this.source.data.y = [this.data.sess_emb_y[step]];
+        this.source.change.emit();
+    }
+}
+
 class HandVelPlot {
     constructor(data, linecolor, htmlId) {
         this.container = document.getElementById(htmlId);
@@ -83,13 +195,21 @@ class HandVelPlot {
         })
         this.plot.toolbar.logo = null;
         this.plot.toolbar_location = null;
-        this.plot.yaxis.axis_label_text_font_style = "normal";
-        this.plot.xaxis.axis_label_text_font_style = "normal";
         Bokeh.Plotting.show(this.plot, '#' + htmlId);
 
         // Remove grid lines
         this.plot.xgrid.grid_line_color = null;
         this.plot.ygrid.grid_line_color = null;
+        this.plot.toolbar.active_drag = null;
+
+        // Clean up axis
+        this.plot.yaxis.axis_label_text_font_style = "normal";
+        this.plot.yaxis.minor_tick_line_color = null;
+        this.plot.yaxis.axis_label_standoff = 2;
+        this.plot.xaxis.axis_label_text_font_style = "normal";
+        this.plot.xaxis.minor_tick_line_color = null;
+        this.plot.xaxis.axis_label_standoff = 2;
+
 
         this.num_samples =150; 
         // TODO: Remove this whole num_samples thing
@@ -164,6 +284,7 @@ async function finetune_vis() {
     plotHandVel[1].plot.yaxis.axis_label = "Vy";
 
     const plotEmb = new UnitEmbPlot(data, "finetune-vis-emb");
+    const plotSess = new SessEmbPlot(data, "finetune-vis-session-emb");
 
 
     const num_steps = data.epochs.length;
@@ -173,8 +294,7 @@ async function finetune_vis() {
     const epochElement = document.getElementById("finetune-vis-epoch")
 
     // Slider
-    const slider = document.getElementById('finetune-vis-slider');
-    slider.max = num_steps-1; // Assuming num_steps is defined
+    const slider = document.getElementById('finetune-vis-slider'); slider.max = num_steps-1; // Assuming num_steps is defined
     slider.addEventListener('input', (event) => {
         step = parseInt(event.target.value);
         updateStep(step);
@@ -182,12 +302,13 @@ async function finetune_vis() {
 
     function updateStep(step) {
         plotEmb.updateStep(step);
+        plotSess.updateStep(step);
         for (let i = 0; i < 2; i++)
             plotHandVel[i].updateStep(step);
 
         slider.value = step;
-        r2Element.textContent = "R2: " + data.r2[step].toFixed(2);
-        epochElement.textContent = "Training Step: " + data.epochs[step];
+        r2Element.textContent = data.r2[step].toFixed(2);
+        epochElement.textContent = data.epochs[step];
     }
 
     // play button
@@ -211,11 +332,11 @@ async function finetune_vis() {
     function playpause() {
         if (playing) {
             playing = false;
-            addDataButton.textContent = "\u25ba";
+            addDataButton.innerHTML ='<i class="fa fa-play"></i>'
             return;
         } {
             playing = true;
-            addDataButton.textContent = "\u23f8";
+            addDataButton.innerHTML ='<i class="fa fa-pause"></i>'
             next();
         }
     }

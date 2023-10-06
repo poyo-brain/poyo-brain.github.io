@@ -704,24 +704,28 @@
             <p><b>2. Full Finetuning</b>: Train all the weights.</p>
 
             <div id="finetune-vis-container">
-                <p id="finetune-vis-epoch">Epoch: </p>
-                <p id="finetune-vis-r2">R2: </p>
-                <div id="finetune-vis-emb"></div>
-                <div id="finetune-vis-model"></div>
-                <div id="finetune-vis-vel-plots">
-                    <div id="finetune-vis-vx-plot"></div>
-                    <div id="finetune-vis-vy-plot"></div>
+                <div id="finetune-vis-diag-container">
+                    <div id="finetune-vis-emb"></div>
+                    <div id="finetune-vis-session-emb"></div>
+                    <div id="finetune-vis-vel-plots">
+                        <div id="finetune-vis-vx-plot"></div>
+                        <div id="finetune-vis-vy-plot"></div>
+                    </div>
                 </div>
-                <div>
-                    <!-- Slider container -->
-                        <div id="finetune-vis-slider-container">
-                            <!-- <label for="epoch-slider">Epoch: </label>
-                            <span id="epoch-value">0</span> -->
-                            <button id="finetune-vis-button">►</button>
-                            <input type="range" id="finetune-vis-slider" min="0" max="100" value="0" step="1">
+                <div id="finetune-vis-controls-container">
+                    <button id="finetune-vis-button">
+                        <i class="fa fa-play"></i>
+                    </button>
+                    <input type="range" id="finetune-vis-slider" min="0" max="100" value="0" step="1">
+                    <div id="finetune-vis-metrics-container">
+                        <div class="finetune-vis-metric"><b>Finetuning Step:</b> 
+                            <p id="finetune-vis-epoch"></p>
                         </div>
-
-                </div> 
+                        <div class="finetune-vis-metric"><b>Accuracy (R<sup>2</sup>):</b>
+                            <p id="finetune-vis-r2"></p>
+                        </div>
+                    </div>
+                </div>
             </div>
             <script src="finetune-vis.js"></script>
         </section>
