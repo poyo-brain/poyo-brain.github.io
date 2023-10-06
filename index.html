@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons/css/academicons.min.css">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="finetune-vis.css">
+    <link rel="stylesheet" href="sample-vis.css">
 
     <script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-3.2.2.min.js"></script>
     <script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-gl-3.2.2.min.js"></script>
@@ -163,6 +164,85 @@
                 the internal dialogue within the brain.
             </p>
 
+
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th>Study</th>
+                        <th>Regions</th>
+                        <th># Indiv</th>
+                        <th># Sess</th>
+                        <th># Units</th>
+                        <th># In</th>
+                        <th># Out</th>
+                        <th>Tasks</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Perich et al. (19; 20; 21; 22)</td>
+                        <td>M1, PMd</td>
+                        <td>4</td>
+                        <td>117</td>
+                        <td>11,557</td>
+                        <td>143M</td>
+                        <td>20M</td>
+                        <td>CO, RT</td>
+                    </tr>
+                    <tr>
+                        <td>Churchland et al. (23)</td>
+                        <td>M1</td>
+                        <td>2</td>
+                        <td>9</td>
+                        <td>1,728</td>
+                        <td>706M</td>
+                        <td>87M</td>
+                        <td>CO</td>
+                    </tr>
+                    <tr>
+                        <td>Makin et al. (24)</td>
+                        <td>M1, S1</td>
+                        <td>2</td>
+                        <td>47</td>
+                        <td>14,899</td>
+                        <td>123M</td>
+                        <td>15M</td>
+                        <td>RT</td>
+                    </tr>
+                    <tr>
+                        <td>Flint et al. (25)</td>
+                        <td>M1</td>
+                        <td>1</td>
+                        <td>5</td>
+                        <td>957</td>
+                        <td>7.9M</td>
+                        <td>0.3M</td>
+                        <td>CO</td>
+                    </tr>
+                    <tr>
+                        <td>NLB-Maze (26)</td>
+                        <td>M1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>182</td>
+                        <td>3.6M</td>
+                        <td>6.8M</td>
+                        <td>Maze</td>
+                    </tr>
+                    <tr>
+                        <td>NLB-RTT (26)</td>
+                        <td>M1, S1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>130</td>
+                        <td>1.5M</td>
+                        <td>2.8M</td>
+                        <td>RT</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+
         </section>
 
         <section class="section" id="spiking">
@@ -170,7 +250,7 @@
                 <a href=""> </a>Spiking neural activity
             </h3>
 
-            <h3 class="subsection-title">
+            <!-- <h3 class="subsection-title">
                 <i class="fa-regular fa-circle fa-2xs"></i> Action Potentials
             </h3>
             <p>
@@ -185,7 +265,7 @@
                 <div class="caption">
                     <p> Spike train representation of a neuron's output signal. (Placeholder) </p>
                 </div>
-            </div>
+            </div> -->
 
             <h3 class="subsection-title">
                 <i class="fa-regular fa-circle fa-2xs"></i> EPhys Recording
@@ -197,13 +277,13 @@
             </p>
 
             <p> A device is implented in the brain, and will typically have multiple electrodes.
-                An electrode doesn't just pick up the activity of a single neuron. Instead, it detects the electrical
+                <!-- An electrode doesn't just pick up the activity of a single neuron. Instead, it detects the electrical
                 activity from
                 multiple neurons that are in proximity to the electrode tip.
-                <!-- each neuron has its own unique spiking
+                each neuron has its own unique spiking
                 pattern and amplitude based on its type, location, and distance from the electrode. When multiple
                 neurons fire action potentials, the electrode picks up a combination of these spikes, which can often
-                overlap in time. -->
+                overlap in time.
 
                 This situation is analogous to the "cocktail party problem" in auditory processing. The cocktail party
                 problem refers to the challenge of focusing on a single conversation in a noisy environment, such as a
@@ -213,16 +293,16 @@
 
                 To address this, researchers use spike sorting techniques. Spike sorting involves analyzing the recorded
                 signals to identify and group spikes that likely originated from the same neuron. This is done based on
-                features such as spike shape, amplitude, and timing.
+                features such as spike shape, amplitude, and timing. -->
             </p>
 
             <div class="figure">
-                <img src="assets/electrode.png" alt="spiketrain" width="500" height="300">
+                <img src="assets/electrode_shift.png" alt="spiketrain" height="500">
                 <div class="caption">
                     <p> An electrode can pick up on the electrical activity of neighboring neurons. (Placeholder) </p>
                 </div>
             </div>
-
+<!-- 
             <h3 class="subsection-title">
                 <i class="fa-regular fa-circle fa-2xs"></i> Spike Sorting vs. Threshold crossing
             </h3>
@@ -256,7 +336,7 @@
                     <i class="fa-regular fa-thumbs-down" style="color: #ff0505;"></i>
                     <p>Noisy and multi-units</p>
                 </div>
-            </div>
+            </div> -->
 
             <h3 class="subsection-title">
                 <i class="fa-regular fa-circle fa-2xs"></i> Challenges of working with spiking data
@@ -586,10 +666,20 @@
                 <!-- Add more options as needed -->
             </select>
             
-            <canvas class="webgl-decode-sample"></canvas>
+            <!-- <canvas class="webgl-decode-sample"></canvas>
             <button id="playButton">Play</button>
         
-            <script type="module" src="./decode_sample.js"></script>
+            <script type="module" src="./decode_sample.js"></script> -->
+
+            <div id="vis-container">
+                <div id="vis-spike-plot"></div>
+                <!-- <div id="vis-model"></div> -->
+                <div id="vis-vel-plots">
+                    <div id="vis-vx-plot"></div>
+                    <div id="vis-vy-plot"></div>
+                </div>
+            </div>
+            <script src="sample-vis.js"></script>
 
         </section>
 

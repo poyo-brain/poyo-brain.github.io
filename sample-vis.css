@@ -1,0 +1,50 @@
+#vis-container {
+}
+
+#vis-emb {
+    display: inline-block;
+    height: 400px;
+    width: 400px;
+}
+
+#vis-model {
+    display: inline-block;
+    height: 400px;
+    width: 200px;
+}
+
+#vis-vel-plots {
+    display: inline-block;
+}
+
+#vis-vx-plot {
+    height: 150px;
+    width: 500px;
+}
+
+#vis-vy-plot {
+    height: 170px;
+    width: 500px;
+}
+
+#vis-spike-plot {
+    height: 200px;
+    width: 500px;
+}
+
+#vis-button {
+    width: 30px;
+    height: 30px;
+}
+
+/* Add some basic styling to your slider */
+#vis-slider-container {
+    margin: 20px;
+    margin-left: 0px;
+}
+
+#vis-slider {
+    width: 40%;
+    /* margin: 0 5px; */
+    margin: 8px;
+}
