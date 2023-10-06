@@ -43,10 +43,12 @@ class UnitEmbPlot {
         this.plot.toolbar_location = null
         this.plot.yaxis.axis_label_text_font_style = "normal";
         this.plot.xaxis.axis_label_text_font_style = "normal";
+        this.plot.yaxis.major_label_text_font_size = "10px";
+        this.plot.xaxis.major_label_text_font_size = "10px";
         this.plot.yaxis.minor_tick_line_color = null;
         this.plot.yaxis.axis_label_standoff = 2;
         this.plot.xaxis.minor_tick_line_color = null;
-        this.plot.xaxis.axis_label_standoff = 2;
+        this.plot.xaxis.axis_label_standoff = 20;
         this.plot.toolbar.active_drag = null;
 
         Bokeh.Plotting.show(this.plot, '#' + htmlId);
@@ -81,10 +83,12 @@ class UnitEmbPlot {
 
         let last_unit_emb_x = this.data.unit_emb_x.slice(-1)[0];
         let last_unit_emb_y = this.data.unit_emb_y.slice(-1)[0];
-        this.plot.x_range.start = Math.min(...last_unit_emb_x) - 0.1;
-        this.plot.x_range.end = Math.max(...last_unit_emb_x) + 0.1;
-        this.plot.y_range.start = Math.min(...last_unit_emb_y) - 0.1;
-        this.plot.y_range.end = Math.max(...last_unit_emb_y) + 0.1;
+        let min = Math.min(Math.min(...last_unit_emb_x), Math.min(...last_unit_emb_y));
+        let max = Math.max(Math.max(...last_unit_emb_x), Math.max(...last_unit_emb_y));
+        this.plot.x_range.start = min - 0.1;
+        this.plot.x_range.end = max + 0.1;
+        this.plot.y_range.start = min - 0.1;
+        this.plot.y_range.end = max + 0.1;
     }
 
     updateStep(step) {
@@ -115,6 +119,9 @@ class SessEmbPlot {
         this.plot.xaxis.minor_tick_line_color = null;
         this.plot.xaxis.axis_label_standoff = 2;
         this.plot.toolbar.active_drag = null;
+
+        this.plot.xgrid.grid_line_color = null;
+        this.plot.ygrid.grid_line_color = null;
 
         Bokeh.Plotting.show(this.plot, '#' + htmlId);
 
@@ -150,7 +157,7 @@ class SessEmbPlot {
             source: this.source_all,
             color: { field: "cat", transform: mapper },
             size: 4, 
-            alpha: 0.8
+            alpha: 0.5
         });
 
 
@@ -161,12 +168,17 @@ class SessEmbPlot {
             }
         });
 
-        this.plot.circle({ field: "x" }, { field: "y" }, {
+        let r = this.plot.circle({ field: "x" }, { field: "y" }, {
             source: this.source,
             color: "black",
             size: 8, 
             alpha: 1.0
         });
+
+        let glyph = r.glyph;
+        glyph.line_color = "firebrick"
+        glyph.line_dash = [1, 1]
+        glyph.line_width = 2
 
 
         let last_unit_emb_x = this.data.all_sess_emb_x;
