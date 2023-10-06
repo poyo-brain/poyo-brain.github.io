@@ -11,6 +11,22 @@ function hslToHex(h, s, l) {
     return `#${f(0)}${f(8)}${f(4)}`;
 }
 
+const session_types = ['C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 
+    'C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 
+    'C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 
+    'C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 
+    'C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 
+    'C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 
+    'C', 'C', 'C', 'C', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 
+    'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 
+    'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 
+    'M', 'J', 'J', 'J', 'I', 'I', 'I', 'L', 'I', 'I', 'L', 
+    'I', 'I', 'L', 'I', 'I', 'I', 'I', 'L', 'I', 'I', 'I', 
+    'I', 'I', 'I', 'I', 'I', 'I', 'I', 'I', 'I', 'I', 'I', 
+    'I', 'I', 'L', 'I', 'I', 'I', 'I', 'L', 'I', 'L', 'I', 
+    'I', 'I', 'I', 'I', 'N', 'N', 'N', 'N', 'N', 'Je', 'Je', 
+    'Je', 'Je', 'F', 'F', 'F', 'F', 'F']
+
 class UnitEmbPlot {
     constructor(data, htmlId) {
         this.container = document.getElementById(htmlId);
@@ -112,6 +128,7 @@ class SessEmbPlot {
             data: {
                 x: this.data.all_sess_emb_x,
                 y: this.data.all_sess_emb_y,
+                cat: session_types
             }
         });
 
@@ -123,11 +140,17 @@ class SessEmbPlot {
             colors.push(hslToHex(hue, 100, 50));
         }
 
+        let palette = Bokeh.Palettes.d3.Category10.Category10_8;
+        let mapper = new Bokeh.CategoricalColorMapper({
+            factors: ['C', 'M', 'J', 'Je', 'N', 'I', 'L', 'F'],
+            palette: palette
+        });
+
         this.plot.circle({ field: "x" }, { field: "y" }, {
             source: this.source_all,
-            color: "grey",
-            size: 10, 
-            alpha: 0.7
+            color: { field: "cat", transform: mapper },
+            size: 4, 
+            alpha: 0.8
         });
 
 
@@ -140,8 +163,8 @@ class SessEmbPlot {
 
         this.plot.circle({ field: "x" }, { field: "y" }, {
             source: this.source,
-            color: "red",
-            size: 10, 
+            color: "black",
+            size: 8, 
             alpha: 1.0
         });
 
