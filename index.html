@@ -23,7 +23,7 @@
     <script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-widgets-3.2.2.min.js"></script>
     <script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-tables-3.2.2.min.js"></script>
     <script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-mathjax-3.2.2.min.js"></script>
-    <script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-api-3.2.2.min.js"></script>    
+    <script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-api-3.2.2.min.js"></script>
     <script src="./mat4js.read.min.js"></script>
 
     <!-- <script type="module" src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r153/three.module.js"></script> -->
@@ -89,10 +89,10 @@
         <ul>
             <li> Contents </li>
             <li><a href="#introduction">Introduction</a></li>
-            <li><a href="#context">Context</a></li>
-            <li><a href="#spiking">Spiking neural activity</a></li>
-            <li><a href="#heterogeneity">Data Heterogeneity</a></li>
-            <li><a href="#tokenization">Spike tokenization</a></li>
+            <li><a href="#datasets">Datasets</a></li>
+            <li><a href="#challenges">Challenges</a></li>
+            <!-- <li><a href="#heterogeneity">Data Heterogeneity</a></li> -->
+            <li><a href="#tokenization">Tokenization</a></li>
             <li><a href="#architecture">Architecture</a></li>
             <li><a href="#pretraining">Pretraining</a></li>
             <li><a href="#finetuning">Finetuning</a></li>
@@ -151,104 +151,178 @@
             </div> -->
         </section>
 
-        <section class="section" id="context">
+        <section class="section" id="datasets">
             <h3 class="section-title">
-                <a href=""> </a>Context
+                <a href="datasets"> </a>Datasets
             </h3>
             <!-- <h3 class="subsection-title">
                 <i class="fa-regular fa-circle fa-2xs"></i> Spiking neural activity
             </h3> -->
+            <!-- <p>
+                One of the key advantages of our approach is its ability to scale to handle large amounts of neural
+                data, including sessions from different numbers of neurons, across different tasks and recording setups,
+                and from different animals. Thus we set out to build a diverse dataset large enough to test our
+                approach.
+            </p> -->
             <p>
-                Neurons communicate asynchronously using electrical impulses called spikes. The timing and
-                frequency of spikes encode signals that convey information about the external world and coordinate
-                the internal dialogue within the brain.
+                We curated a multi-lab dataset with electrophysiological recordings from motor cortical
+                regions. In total, we aggregated 178 sessions worth of data,
+                with 29,453 units from the primary motor (M1), premotor (PMd), and primary somatosensory (S1)
+                regions in the cortex of 9 nonhuman primates.
             </p>
 
-
+            <div class="table">
             <table border="1">
                 <thead>
                     <tr>
                         <th>Study</th>
                         <th>Regions</th>
-                        <th># Indiv</th>
-                        <th># Sess</th>
-                        <th># Units</th>
-                        <th># In</th>
-                        <th># Out</th>
                         <th>Tasks</th>
+                        <th># Individuals</th>
+                        <th># Sessions</th>
+                        <th># Units</th>
+                        <th># Spikes</th>
+                        <th># Behavior Timepoints </th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>Perich et al. (19; 20; 21; 22)</td>
+                        <td>Perich et al.</td>
                         <td>M1, PMd</td>
+                        <td>Center-Out, Random Target</td>
                         <td>4</td>
                         <td>117</td>
                         <td>11,557</td>
                         <td>143M</td>
                         <td>20M</td>
-                        <td>CO, RT</td>
                     </tr>
                     <tr>
-                        <td>Churchland et al. (23)</td>
+                        <td>Churchland et al.</td>
                         <td>M1</td>
+                        <td>Center-Out</td>
                         <td>2</td>
                         <td>9</td>
                         <td>1,728</td>
                         <td>706M</td>
                         <td>87M</td>
-                        <td>CO</td>
                     </tr>
                     <tr>
-                        <td>Makin et al. (24)</td>
+                        <td>Makin et al.</td>
                         <td>M1, S1</td>
+                        <td>Random Target</td>
                         <td>2</td>
                         <td>47</td>
                         <td>14,899</td>
                         <td>123M</td>
                         <td>15M</td>
-                        <td>RT</td>
                     </tr>
                     <tr>
-                        <td>Flint et al. (25)</td>
+                        <td>Flint et al.</td>
                         <td>M1</td>
+                        <td>Center-Out</td>
                         <td>1</td>
                         <td>5</td>
                         <td>957</td>
                         <td>7.9M</td>
                         <td>0.3M</td>
-                        <td>CO</td>
                     </tr>
                     <tr>
-                        <td>NLB-Maze (26)</td>
+                        <td>NLB-Maze</td>
                         <td>M1</td>
+                        <td>Maze</td>
                         <td>1</td>
                         <td>1</td>
                         <td>182</td>
                         <td>3.6M</td>
                         <td>6.8M</td>
-                        <td>Maze</td>
                     </tr>
                     <tr>
-                        <td>NLB-RTT (26)</td>
+                        <td>NLB-RTT</td>
                         <td>M1, S1</td>
+                        <td>Random Target</td>
                         <td>1</td>
                         <td>1</td>
                         <td>130</td>
                         <td>1.5M</td>
                         <td>2.8M</td>
-                        <td>RT</td>
                     </tr>
                 </tbody>
             </table>
+            <div class="caption">
+                <p> <b>Table 1:</b> Datasets used in this work </p>
+            </div>
+            </div>
+
+            <!-- <p>We place this in the context of standard
+                analyses within a single lab or paper which typically involve 10’s of sessions and a few hundred
+                neurons.
+            </p> -->
+
+            <p>
+                All of these neural recordings were collected while the animals performed various motor tasks that vary in their inherent complexity:
+            </p>
+
+            <div class="grid-container">
+                <!-- Row 1 -->
+                <div class="grid-image">
+                    <img src="./assets/tasks-04.png" alt="Description for Image 1">
+                </div>
+                <div class="legend">
+                    <b>Center-Out task (CO)</b>: This task is relatively stereotyped, with
+                        the animal making a reach to one of eight fixed targets after receiving a go cue, and then
+                        returning to the
+                        center.
+                </div>
+                
+                <!-- Row 2 -->
+                <div class="grid-image">
+                    <img src="./assets/tasks-05.png" alt="Description for Image 2">
+                </div>
+                <div class="legend">
+                    <b>Random Target task (RT)</b>: The animal makes continuous and
+                        self-paced
+                        movements with new targets appearing in succession at random locations on the screen.
+                </div>
             
+                <!-- Row 3 -->
+                <div class="grid-image">
+                    <img src="./assets/tasks-06.png" alt="Description for Image 3">
+                </div>
+                <div class="legend">
+                    <b>Touchscreen Random Target task (RT)</b>: Instead of using a
+                        manipulandum like in the previous experiments, these new datasets use a touch screen.
+                </div>
+            
+                <!-- Row 4 -->
+                <div class="grid-image">
+                    <img src="./assets/tasks-07.png" alt="Description for Image 4">
+                </div>
+                <div class="legend-tagged">
+                    <div class="red-tag">
+                        Held-out for Testing
+                    </div>
+                    <p>
+                    <b>Maze task</b>: In this task,
+                        a monkey performing reaches with instructed delays to visually presented targets while avoiding
+                        the
+                        boundaries of a virtual maze.
+                    </p>
+                </div>
+            </div>
+
 
         </section>
 
-        <section class="section" id="spiking">
+        <section class="section" id="challenges">
             <h3 class="section-title">
-                <a href=""> </a>Spiking neural activity
+                <a href="challenges"> </a>Challenges
             </h3>
+
+            <!-- <p>
+                Neurons communicate asynchronously using electrical impulses called spikes. The timing and
+                frequency of spikes encode signals that convey information about the external world and coordinate
+                the internal dialogue within the brain.
+            </p> -->
 
             <!-- <h3 class="subsection-title">
                 <i class="fa-regular fa-circle fa-2xs"></i> Action Potentials
@@ -267,17 +341,12 @@
                 </div>
             </div> -->
 
-            <h3 class="subsection-title">
-                <i class="fa-regular fa-circle fa-2xs"></i> EPhys Recording
-            </h3>
-            <p>
-                We can record the spiking activity of a population of neurons by placing electrodes near the neurons,
-                and measuring the voltage changes that occur when a neuron fires. We commonly refer to these types of
-                recordings as extracellular electrophysiology recordings.
-            </p>
+            <!-- <h3 class="subsection-title">
+                EPhys Recording
+            </h3> -->
 
-            <p> A device is implented in the brain, and will typically have multiple electrodes.
-                <!-- An electrode doesn't just pick up the activity of a single neuron. Instead, it detects the electrical
+            <!-- <p> A device is implented in the brain, and will typically have multiple electrodes.
+               An electrode doesn't just pick up the activity of a single neuron. Instead, it detects the electrical
                 activity from
                 multiple neurons that are in proximity to the electrode tip.
                 each neuron has its own unique spiking
@@ -293,16 +362,10 @@
 
                 To address this, researchers use spike sorting techniques. Spike sorting involves analyzing the recorded
                 signals to identify and group spikes that likely originated from the same neuron. This is done based on
-                features such as spike shape, amplitude, and timing. -->
-            </p>
+                features such as spike shape, amplitude, and timing. 
+            </p> -->
 
-            <div class="figure">
-                <img src="assets/electrode_shift.png" alt="spiketrain" height="500">
-                <div class="caption">
-                    <p> An electrode can pick up on the electrical activity of neighboring neurons. (Placeholder) </p>
-                </div>
-            </div>
-<!-- 
+            <!-- 
             <h3 class="subsection-title">
                 <i class="fa-regular fa-circle fa-2xs"></i> Spike Sorting vs. Threshold crossing
             </h3>
@@ -339,13 +402,17 @@
             </div> -->
 
             <h3 class="subsection-title">
-                <i class="fa-regular fa-circle fa-2xs"></i> Challenges of working with spiking data
+                Variability of neural recordings across days and individuals
             </h3>
             <p>
-                Recording from the exact same neurons across multiple days using extracellular electrodes presents
-                several challenges. can shift the relative position of neurons with respect to
-                the electrode. This means that an electrode that was capturing the activity of a particular neuron one
-                day might be slightly off-target the next day.
+                Outside of knowing which region of the brain was implented, the identity of the neurons that are recorded
+                is unknown: we are dealing with unlabelled channels. This means that we don't know which neurons are
+                being recorded from, or how many we are able to record.
+            </p>
+            <p>
+                Even for the same individual, we don't know whether we're recording from the same neurons across multiple
+                days. An electrode that was capturing the activity of a particular neuron one day might be slightly 
+                off-target the next day. This is due to various factors:
                 <!-- <li> Physical Movement: The brain is a soft tissue, and even minor movements (e.g., due to breathing,
                 minor head adjustments, or tissue swelling) can shift the relative position of neurons with respect to
                 the electrode. This means that an electrode that was capturing the activity of a particular neuron one
@@ -375,7 +442,7 @@
                 recordings and to determine whether they are likely recording from the same or different neuronal
                 populations across sessions.</li> -->
             </p>
-
+<!-- 
             <div class="blocks-container">
                 <div class="block">
                     <i class="fa-solid fa-triangle-exclamation" style="color: #f6de2f;"></i>
@@ -405,16 +472,33 @@
                         material on the electrode
                         surface can alter the signal-to-noise ratio.</p>
                 </div>
+            </div> -->
+
+            <!-- <p>
+                The spiking activity of a population of neurons is recorded by placing electrodes near the neurons,
+                and measuring the voltage changes that occur when a neuron fires. 
+            </p> -->
+
+            <div class="figure">
+                <img src="assets/electrode_shift.png" alt="spiketrain" height="500">
+                <div class="caption">
+                    <p> An electrode can pick up on the electrical activity of neighboring neurons. </p>
+                </div>
             </div>
 
 
 
-        </section>
+        <!-- </section>
 
         <section class="section" id="heterogeneity">
             <h3 class="section-title">
                 <a href=""> </a>Heterogeneity across Datasets
+            </h3> -->
+
+            <h3 class="subsection-title">
+                Heterogeneity of behavior across datasets
             </h3>
+
             <p>
                 The datasets we curated for this project vary in many ways:
             </p>
@@ -665,7 +749,7 @@
                 <option value="./assets/sample_2.json">Data Source 2</option>
                 <!-- Add more options as needed -->
             </select>
-            
+
             <!-- <canvas class="webgl-decode-sample"></canvas>
             <button id="playButton">Play</button>
         
@@ -692,14 +776,14 @@
             <p>There are two ways to transfer POYO-1 on new datasets:
 
             <p><b>1. Unit Identification</b>: In order to transfer to a new neural
-            population with unseen neurons, we need a way to first assign them
-            a Unit Embedding. We leverage gradient descent to learn the
-            embeddings of new units, while keeping the rest of the network
-            weights fixed. Notably, the function that maps the neural
-            population activity to behavior is unchanged and is simply
-            transferred to the new dataset. In our experiments, we find that
-            this approach is surprisingly effective and allows us to rapidly
-            integrate new datasets into the same underlying model. </p>
+                population with unseen neurons, we need a way to first assign them
+                a Unit Embedding. We leverage gradient descent to learn the
+                embeddings of new units, while keeping the rest of the network
+                weights fixed. Notably, the function that maps the neural
+                population activity to behavior is unchanged and is simply
+                transferred to the new dataset. In our experiments, we find that
+                this approach is surprisingly effective and allows us to rapidly
+                integrate new datasets into the same underlying model. </p>
 
             <p><b>2. Full Finetuning</b>: Train all the weights.</p>
 
@@ -718,7 +802,7 @@
                     </button>
                     <input type="range" id="finetune-vis-slider" min="0" max="100" value="0" step="1">
                     <div id="finetune-vis-metrics-container">
-                        <div class="finetune-vis-metric"><b>Finetuning Step:</b> 
+                        <div class="finetune-vis-metric"><b>Finetuning Step:</b>
                             <p id="finetune-vis-epoch"></p>
                         </div>
                         <div class="finetune-vis-metric"><b>Test Accuracy (R<sup>2</sup>):</b>
