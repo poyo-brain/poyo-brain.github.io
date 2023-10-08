@@ -32,7 +32,9 @@ class QueryPlot {
         this.plot.xaxis.axis_label_standoff = 20;
         // this.plot.toolbar.active_drag = null;
         this.plot.xgrid.grid_line_color = null;
-        this.plot.ygrid.grid_line_color = null;
+        if (type == 0) {
+            this.plot.ygrid.grid_line_color = null;
+        }
         if (type == 0) {
             this.plot.yaxis.major_label_text_font_size = '0px'; // hides the tick labels
             this.plot.yaxis.major_tick_line_color = null; // hides the tick lines
