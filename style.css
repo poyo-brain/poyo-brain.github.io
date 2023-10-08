@@ -280,6 +280,7 @@ h2.page-title {
     margin-top: 40px;
     margin-left: auto;
     margin-right: auto;
+    margin-bottom: 40px;
     position: relative;
     width: 1020px;
     height: var(--arch-diag-height);

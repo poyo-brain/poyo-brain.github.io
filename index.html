@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="finetune-vis.css">
     <link rel="stylesheet" href="sample-vis.css">
+    <link rel="stylesheet" href="query-vis.css">
 
     <script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-3.2.2.min.js"></script>
     <script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-gl-3.2.2.min.js"></script>
@@ -172,85 +173,85 @@
             </p>
 
             <div class="table">
-            <table border="1">
-                <thead>
-                    <tr>
-                        <th>Study</th>
-                        <th>Regions</th>
-                        <th>Tasks</th>
-                        <th># Individuals</th>
-                        <th># Sessions</th>
-                        <th># Units</th>
-                        <th># Spikes</th>
-                        <th># Behavior Timepoints </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Perich et al.</td>
-                        <td>M1, PMd</td>
-                        <td>Center-Out, Random Target</td>
-                        <td>4</td>
-                        <td>117</td>
-                        <td>11,557</td>
-                        <td>143M</td>
-                        <td>20M</td>
-                    </tr>
-                    <tr>
-                        <td>Churchland et al.</td>
-                        <td>M1</td>
-                        <td>Center-Out</td>
-                        <td>2</td>
-                        <td>9</td>
-                        <td>1,728</td>
-                        <td>706M</td>
-                        <td>87M</td>
-                    </tr>
-                    <tr>
-                        <td>Makin et al.</td>
-                        <td>M1, S1</td>
-                        <td>Random Target</td>
-                        <td>2</td>
-                        <td>47</td>
-                        <td>14,899</td>
-                        <td>123M</td>
-                        <td>15M</td>
-                    </tr>
-                    <tr>
-                        <td>Flint et al.</td>
-                        <td>M1</td>
-                        <td>Center-Out</td>
-                        <td>1</td>
-                        <td>5</td>
-                        <td>957</td>
-                        <td>7.9M</td>
-                        <td>0.3M</td>
-                    </tr>
-                    <tr>
-                        <td>NLB-Maze</td>
-                        <td>M1</td>
-                        <td>Maze</td>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>182</td>
-                        <td>3.6M</td>
-                        <td>6.8M</td>
-                    </tr>
-                    <tr>
-                        <td>NLB-RTT</td>
-                        <td>M1, S1</td>
-                        <td>Random Target</td>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>130</td>
-                        <td>1.5M</td>
-                        <td>2.8M</td>
-                    </tr>
-                </tbody>
-            </table>
-            <div class="caption">
-                <p> <b>Table 1:</b> Datasets used in this work </p>
-            </div>
+                <table border="1">
+                    <thead>
+                        <tr>
+                            <th>Study</th>
+                            <th>Regions</th>
+                            <th>Tasks</th>
+                            <th># Individuals</th>
+                            <th># Sessions</th>
+                            <th># Units</th>
+                            <th># Spikes</th>
+                            <th># Behavior Timepoints </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Perich et al.</td>
+                            <td>M1, PMd</td>
+                            <td>Center-Out, Random Target</td>
+                            <td>4</td>
+                            <td>117</td>
+                            <td>11,557</td>
+                            <td>143M</td>
+                            <td>20M</td>
+                        </tr>
+                        <tr>
+                            <td>Churchland et al.</td>
+                            <td>M1</td>
+                            <td>Center-Out</td>
+                            <td>2</td>
+                            <td>9</td>
+                            <td>1,728</td>
+                            <td>706M</td>
+                            <td>87M</td>
+                        </tr>
+                        <tr>
+                            <td>Makin et al.</td>
+                            <td>M1, S1</td>
+                            <td>Random Target</td>
+                            <td>2</td>
+                            <td>47</td>
+                            <td>14,899</td>
+                            <td>123M</td>
+                            <td>15M</td>
+                        </tr>
+                        <tr>
+                            <td>Flint et al.</td>
+                            <td>M1</td>
+                            <td>Center-Out</td>
+                            <td>1</td>
+                            <td>5</td>
+                            <td>957</td>
+                            <td>7.9M</td>
+                            <td>0.3M</td>
+                        </tr>
+                        <tr>
+                            <td>NLB-Maze</td>
+                            <td>M1</td>
+                            <td>Maze</td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>182</td>
+                            <td>3.6M</td>
+                            <td>6.8M</td>
+                        </tr>
+                        <tr>
+                            <td>NLB-RTT</td>
+                            <td>M1, S1</td>
+                            <td>Random Target</td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>130</td>
+                            <td>1.5M</td>
+                            <td>2.8M</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="caption">
+                    <p> <b>Table 1:</b> Datasets used in this work </p>
+                </div>
             </div>
 
             <!-- <p>We place this in the context of standard
@@ -259,7 +260,8 @@
             </p> -->
 
             <p>
-                All of these neural recordings were collected while the animals performed various motor tasks that vary in their inherent complexity:
+                All of these neural recordings were collected while the animals performed various motor tasks that vary
+                in their inherent complexity:
             </p>
 
             <div class="grid-container">
@@ -269,30 +271,30 @@
                 </div>
                 <div class="legend">
                     <b>Center-Out task (CO)</b>: This task is relatively stereotyped, with
-                        the animal making a reach to one of eight fixed targets after receiving a go cue, and then
-                        returning to the
-                        center.
+                    the animal making a reach to one of eight fixed targets after receiving a go cue, and then
+                    returning to the
+                    center.
                 </div>
-                
+
                 <!-- Row 2 -->
                 <div class="grid-image">
                     <img src="./assets/tasks-05.png" alt="Description for Image 2">
                 </div>
                 <div class="legend">
                     <b>Random Target task (RT)</b>: The animal makes continuous and
-                        self-paced
-                        movements with new targets appearing in succession at random locations on the screen.
+                    self-paced
+                    movements with new targets appearing in succession at random locations on the screen.
                 </div>
-            
+
                 <!-- Row 3 -->
                 <div class="grid-image">
                     <img src="./assets/tasks-06.png" alt="Description for Image 3">
                 </div>
                 <div class="legend">
                     <b>Touchscreen Random Target task (RT)</b>: Instead of using a
-                        manipulandum like in the previous experiments, these new datasets use a touch screen.
+                    manipulandum like in the previous experiments, these new datasets use a touch screen.
                 </div>
-            
+
                 <!-- Row 4 -->
                 <div class="grid-image">
                     <img src="./assets/tasks-07.png" alt="Description for Image 4">
@@ -302,7 +304,7 @@
                         Held-out for Testing
                     </div>
                     <p>
-                    <b>Maze task</b>: In this task,
+                        <b>Maze task</b>: In this task,
                         a monkey performing reaches with instructed delays to visually presented targets while avoiding
                         the
                         boundaries of a virtual maze.
@@ -405,13 +407,15 @@
                 Variability of neural recordings across days and individuals
             </h3>
             <p>
-                Outside of knowing which region of the brain was implented, the identity of the neurons that are recorded
+                Outside of knowing which region of the brain was implented, the identity of the neurons that are
+                recorded
                 is unknown: we are dealing with unlabelled channels. This means that we don't know which neurons are
                 being recorded from, or how many we are able to record.
             </p>
             <p>
-                Even for the same individual, we don't know whether we're recording from the same neurons across multiple
-                days. An electrode that was capturing the activity of a particular neuron one day might be slightly 
+                Even for the same individual, we don't know whether we're recording from the same neurons across
+                multiple
+                days. An electrode that was capturing the activity of a particular neuron one day might be slightly
                 off-target the next day. This is due to various factors:
                 <!-- <li> Physical Movement: The brain is a soft tissue, and even minor movements (e.g., due to breathing,
                 minor head adjustments, or tissue swelling) can shift the relative position of neurons with respect to
@@ -442,7 +446,7 @@
                 recordings and to determine whether they are likely recording from the same or different neuronal
                 populations across sessions.</li> -->
             </p>
-<!-- 
+            <!-- 
             <div class="blocks-container">
                 <div class="block">
                     <i class="fa-solid fa-triangle-exclamation" style="color: #f6de2f;"></i>
@@ -488,7 +492,7 @@
 
 
 
-        <!-- </section>
+            <!-- </section>
 
         <section class="section" id="heterogeneity">
             <h3 class="section-title">
@@ -736,6 +740,33 @@
                     </div>
                 </div>
             </div>
+
+
+            <p>
+                The output of the latent encoder is the latent sequence of size N , while the desired output can be any
+                arbitrary sequence of length P . Let us consider the task of hand velocity decoding for example, in the
+                context window [0, T], the length of the output sequence will depend on the sampling frequency. Since
+                we aspire to train on datasets sourced from various labs, the sampling rate can differ significantly. We
+                thus need a flexible mechanism for predicting outputs of varying lengths and querying from the neural
+                activity at specific points in time.
+            </p>
+
+            <div id="query-vis-container-1">
+                <div class="square" id="animatedSquare"></div>
+                <div id="left-container">
+                    <div id="query-vis-1"></div>
+                    <div id="decoder">
+                        <img src="assets/Decoder.svg" style="height:250px">
+                    </div>
+                </div>
+                <div id="output-container">
+                    <div id="output-vis-1"></div>
+                    <div id="output-vis-2"></div>
+                </div>
+            </div>
+
+            <script src="query-vis.js"></script>
+        </section>
 
         </section>
 
