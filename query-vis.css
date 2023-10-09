@@ -19,7 +19,7 @@
 
 #decoder {
     display: block;
-    margin-top: 10px;
+    margin-top: 15px;
 }
 
 #output-container {
@@ -40,7 +40,7 @@
         transform: translateY(40px);
     }
     100% {
-        transform: translateY(40px) translateX(90px);
+        transform: translateY(40px) translateX(80px);
     }
 }
 

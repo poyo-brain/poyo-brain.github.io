@@ -1,0 +1,36 @@
+#spike-vis-container-1 {
+    display: flex;
+    justify-content: center;
+    align-items: bottom; /* can also be 'top' or 'bottom' */
+    /* margin: 20px 0px 0px 0px; */
+}
+
+
+#left-container {
+    display: inline-block;
+}
+
+#spike-vis-1 {
+    display: block;
+    height: 110px;
+    width: 400px;
+    /* margin-left: 200px; */
+    margin-top: 92px;
+}
+
+#encoder {
+    display: block;
+    margin-top: 15px;
+}
+
+#token-container {
+    display: inline-block;
+    margin-top: 140px;
+}
+
+#token-vis-1 {
+    display: block;  /* to stack them vertically */
+    height: 60px;
+    width: 400px;
+    margin-top: 5px;
+}

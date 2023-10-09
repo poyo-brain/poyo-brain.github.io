@@ -18,6 +18,8 @@
     <link rel="stylesheet" href="finetune-vis.css">
     <link rel="stylesheet" href="sample-vis.css">
     <link rel="stylesheet" href="query-vis.css">
+    <link rel="stylesheet" href="spike-vis.css">
+
 
     <script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-3.2.2.min.js"></script>
     <script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-gl-3.2.2.min.js"></script>
@@ -93,7 +95,7 @@
             <li><a href="#datasets">Datasets</a></li>
             <li><a href="#challenges">Challenges</a></li>
             <!-- <li><a href="#heterogeneity">Data Heterogeneity</a></li> -->
-            <li><a href="#tokenization">Tokenization</a></li>
+            <!-- <li><a href="#tokenization">Tokenization</a></li> -->
             <li><a href="#architecture">Architecture</a></li>
             <li><a href="#pretraining">Pretraining</a></li>
             <li><a href="#finetuning">Finetuning</a></li>
@@ -416,7 +418,7 @@
                 Even for the same individual, we don't know whether we're recording from the same neurons across
                 multiple
                 days. An electrode that was capturing the activity of a particular neuron one day might be slightly
-                off-target the next day. This is due to various factors:
+                off-target the next day. This is due to factors like electrode drift.
                 <!-- <li> Physical Movement: The brain is a soft tissue, and even minor movements (e.g., due to breathing,
                 minor head adjustments, or tissue swelling) can shift the relative position of neurons with respect to
                 the electrode. This means that an electrode that was capturing the activity of a particular neuron one
@@ -484,9 +486,12 @@
             </p> -->
 
             <div class="figure">
-                <img src="assets/electrode_shift.png" alt="spiketrain" height="500">
+                <img src="assets/electrode_shift.png" alt="Electrode shift">
                 <div class="caption">
-                    <p> An electrode can pick up on the electrical activity of neighboring neurons. </p>
+                    <p>  Over time, the electrode can shift within the tissue, typically
+                        due to the natural healing of the tissue around the implanted electrode 
+                        and minor movements (e.g., due to breathing,
+                        minor head adjustments).</p>
                 </div>
             </div>
 
@@ -504,9 +509,6 @@
             </h3>
 
             <p>
-                The datasets we curated for this project vary in many ways:
-            </p>
-            <p>
                 <i class="fa-solid fa-arrow-right"></i> <b> Multiple behavioral tasks</b>: The datasets were collected
                 from multiple labs, using different
                 equipment, and with different
@@ -523,10 +525,8 @@
                     </label>
                     <span class="switch-text">3D</span>
                     <canvas id="webgl1" class="webgl"></canvas>
-                    <div class="canvas-caption"><b>Center-Out task (CO)</b>: This task is relatively stereotyped, with
-                        the animal making a reach to one of eight fixed targets after receiving a go cue, and then
-                        returning to the
-                        center.</div>
+                    <div class="canvas-caption"><b>Center-Out task (CO)</b>: This task is relatively stereotyped, 
+                        consisting of only 8 configurations, with pre-movement periods.</div>
                 </div>
 
                 <div class="canvas-container">
@@ -536,9 +536,7 @@
                     </label>
                     <span class="switch-text">3D</span>
                     <canvas id="webgl2" class="webgl"></canvas>
-                    <div class="canvas-caption"><b>Random Target task (RT)</b>: The animal makes continuous and
-                        self-paced
-                        movements with new targets appearing in succession at random locations on the screen.</div>
+                    <div class="canvas-caption"><b>Random Target task (RT)</b>: Manipulandum.</div>
                 </div>
 
                 <div class="canvas-container">
@@ -584,7 +582,7 @@
             </p>
         </section>
 
-        <section class="section" id="tokenization">
+        <!-- <section class="section" id="tokenization">
             <h3 class="section-title">
                 <a href=""> </a>Spike Tokenization
             </h3>
@@ -647,7 +645,7 @@
                 specific unit have the same embedding xi, and only differ in their timing.
             </p>
 
-        </section>
+        </section> -->
 
 
         <section class="section" id="architecture">
@@ -742,6 +740,53 @@
             </div>
 
 
+            <h3 class="subsection-title">
+                Querying the spiking data
+            </h3>
+            <p>
+                The output of the latent encoder is the latent sequence of size N , while the desired output can be any
+                arbitrary sequence of length P . Let us consider the task of hand velocity decoding for example, in the
+                context window [0, T], the length of the output sequence will depend on the sampling frequency. Since
+                we aspire to train on datasets sourced from various labs, the sampling rate can differ significantly. We
+                thus need a flexible mechanism for predicting outputs of varying lengths and querying from the neural
+                activity at specific points in time.
+            </p>
+
+            <div id="spike-vis-container-1">
+                <div id="left-container">
+                    <div id="spike-vis-1"></div>
+                    <img src="assets/tokenization_arrow.svg" style="width: 280px; padding-left: 150px; padding-top: 10px;">
+                    <div id="token-vis-1"></div>
+                </div>
+                <!-- <div id="token-container">
+                    
+                </div> -->
+                <div id="encoder">
+                    <img src="assets/encoder.svg" style="height:360px">
+                </div>
+            </div>
+            <script src="spike-vis.js"></script>
+
+
+            <h3 class="subsection-title">
+                Self-Attention in the latent space
+            </h3>
+            <p>
+                The output of the latent encoder is the latent sequence of size N , while the desired output can be any
+                arbitrary sequence of length P . Let us consider the task of hand velocity decoding for example, in the
+                context window [0, T], the length of the output sequence will depend on the sampling frequency. Since
+                we aspire to train on datasets sourced from various labs, the sampling rate can differ significantly. We
+                thus need a flexible mechanism for predicting outputs of varying lengths and querying from the neural
+                activity at specific points in time.
+            </p>
+
+            <div style="margin: auto; text-align: center; padding-top: 1em; padding-bottom: 1em;">
+                <img src="assets/selfattn.svg" style="height:125px;">
+            </div>
+
+            <h3 class="subsection-title">
+                Querying the latent space
+            </h3>
             <p>
                 The output of the latent encoder is the latent sequence of size N , while the desired output can be any
                 arbitrary sequence of length P . Let us consider the task of hand velocity decoding for example, in the
@@ -764,7 +809,6 @@
                     <div id="output-vis-2"></div>
                 </div>
             </div>
-
             <script src="query-vis.js"></script>
         </section>
 
