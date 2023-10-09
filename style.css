@@ -74,6 +74,7 @@ iframe {
     margin: auto;
     padding-top: 2rem;
     padding-bottom: 0.1rem;
+    text-align: justify;
 }
 
 .page-title {
@@ -478,9 +479,9 @@ input:checked + .slider:before {
 
 /* Table Styles */
 table {
-    width: 100%;
+    width: 95%;
+    margin: 8px auto;
     border-collapse: collapse;
-    margin: 8px 0;
     font-size: 14px;
     text-align: left;
     margin-top: 22px;
