@@ -190,7 +190,7 @@ class QueryPlot {
 async function query_vis() {
 
     // Load the data
-    const data = await fetch("./assets/finetune_data.mat")
+    const data = await fetch("./assets/finetune-vis-data/T_RT_08202013.mat")
         .then(response => response.arrayBuffer())
         .then(data => mat4js.read(data))
         .then(data => data.data)

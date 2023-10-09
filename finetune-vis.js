@@ -42,6 +42,7 @@ class UnitEmbPlot {
 
     updateData(data) {
         // Changes things for new data
+        this.plot.renderers = []; // Remove old plot
         this.data = data;
         this.source = new Bokeh.ColumnDataSource({
             data: {
@@ -116,6 +117,7 @@ class SessEmbPlot {
 
     updateData(data) {
         // Changes things for new data
+        this.plot.renderers = []; // Remove old plot
         this.data = data;
         this.source_all = new Bokeh.ColumnDataSource({
             data: {
@@ -213,14 +215,12 @@ class HandVelPlot {
         this.plot.xaxis.axis_label_standoff = 2;
 
 
-        this.num_samples =150; 
-        // TODO: Remove this whole num_samples thing
-        // The data should contain only the samples that are needed
         this.linecolor = linecolor;
         this.updateData(data);
     }
 
     updateData(data) {
+        this.plot.renderers = []; // Remove old plot
         this.data = data;
         const vx_timestamps = this.data.timestamps;
 
@@ -271,15 +271,13 @@ class HandVelPlot {
 async function finetune_vis() {
 
     // Load the data
-    const data = await fetch("./assets/finetune_data.mat")
+    var data = await fetch("./assets/finetune-vis-data/T_RT_08202013.mat")
         .then(response => response.arrayBuffer())
         .then(data => mat4js.read(data))
         .then(data => data.data)
 
     const sess_md = await fetch("./assets/sess_md.json")
-    .then(response => response.json())
-
-    console.log(sess_md)
+        .then(response => response.json())
 
     const plotHandVel = [
         new HandVelPlot({gt: data.gt_x, pred: data.pred_x, timestamps: data.timestamps}, "#F00", "finetune-vis-vx-plot"),
@@ -294,18 +292,35 @@ async function finetune_vis() {
     const plotSess = new SessEmbPlot(data, sess_md, "finetune-vis-session-emb");
 
 
-    const num_steps = data.epochs.length;
+    var num_steps = data.epochs.length;
 
     // Metrics display
     const r2Element = document.getElementById("finetune-vis-r2")
     const epochElement = document.getElementById("finetune-vis-epoch")
 
     // Slider
-    const slider = document.getElementById('finetune-vis-slider'); slider.max = num_steps-1; // Assuming num_steps is defined
+    const slider = document.getElementById('finetune-vis-slider'); 
+    slider.max = num_steps-1; // Assuming num_steps is defined
     slider.addEventListener('input', (event) => {
         step = parseInt(event.target.value);
         updateStep(step);
     });
+
+    async function updateData(filename) {
+        data = await fetch("./assets/finetune-vis-data/" + filename)
+            .then(response => response.arrayBuffer())
+            .then(data => mat4js.read(data))
+            .then(data => data.data)
+
+        plotEmb.updateData(data);
+        plotSess.updateData(data);
+        plotHandVel[0].updateData({gt: data.gt_x, pred: data.pred_x, timestamps: data.timestamps});
+        plotHandVel[1].updateData({gt: data.gt_y, pred: data.pred_y, timestamps: data.timestamps});
+
+        num_steps = data.epochs.length;
+        slider.max = num_steps-1;
+    }
+
 
     function updateStep(step) {
         plotEmb.updateStep(step);
@@ -352,5 +367,18 @@ async function finetune_vis() {
     addDataButton.addEventListener("click", playpause);
     
     updateStep(0);
+
+    // Data selector
+    const dataSelector = document.getElementById("finetune-vis-data-selector");
+    dataSelector.addEventListener("change", (event) => {
+        // Reset playing
+        if (playing)
+            playpause();
+        step = 0;
+
+        // Update data
+        updateData(event.target.value);
+        updateStep(0);
+    });
 }
 
