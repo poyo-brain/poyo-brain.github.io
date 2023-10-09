@@ -38,7 +38,9 @@ function setupCanvas(canvasId, dataFilePath, color) {
 
     // Load the particle positions from data.json
     fetch(dataFilePath) // replace '/path/to/data.json' with the actual path to your JSON file
-        .then(response => response.json())
+        .then(response => response.arrayBuffer())
+        .then(data => mat4js.read(data))
+        .then(data => data.data)
         .then(data => {
             particlePositions = data;
             lastTime = particlePositions.cursor_t[particlePositions.cursor_t.length - 1];
@@ -372,7 +374,7 @@ function setupCanvas(canvasId, dataFilePath, color) {
 
 }
 
-setupCanvas('webgl1', './assets/trajectory_co.json', '#88ebff');
-setupCanvas('webgl2', './assets/trajectory_rt.json', '#4cff00');
-setupCanvas('webgl3', './assets/trajectory_touch_rt.json', '#9000ff');
-setupCanvas('webgl4', './assets/trajectory_maze.json', '#ff2f00');
+setupCanvas('webgl1', './assets/trajectory_co.mat', '#88ebff');
+setupCanvas('webgl2', './assets/trajectory_rt.mat', '#4cff00');
+setupCanvas('webgl3', './assets/trajectory_touch_rt.mat', '#9000ff');
+setupCanvas('webgl4', './assets/trajectory_maze.mat', '#ff2f00');
