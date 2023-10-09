@@ -11,6 +11,7 @@ function hslToHex(h, s, l) {
     return `#${f(0)}${f(8)}${f(4)}`;
 }
 
+
 const session_types = ['C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 
     'C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 
     'C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 
@@ -99,7 +100,7 @@ class UnitEmbPlot {
 };
 
 class SessEmbPlot {
-    constructor(data, htmlId) {
+    constructor(data, sess_md, htmlId) {
         this.container = document.getElementById(htmlId);
 
         this.plot = Bokeh.Plotting.figure({
@@ -108,7 +109,8 @@ class SessEmbPlot {
             x_axis_label: "PC1",
             y_axis_label: "PC2",
             x_range: [-0.5, 0.7],
-            y_range: [-0.6, 0.7]
+            y_range: [-0.6, 0.7],
+            tools: "hover"
         });
         this.plot.toolbar.logo = null
         this.plot.toolbar_location = null
@@ -125,6 +127,7 @@ class SessEmbPlot {
 
         Bokeh.Plotting.show(this.plot, '#' + htmlId);
 
+        this.sess_md = sess_md;
         this.updateData(data);
     }
 
@@ -135,7 +138,8 @@ class SessEmbPlot {
             data: {
                 x: this.data.all_sess_emb_x,
                 y: this.data.all_sess_emb_y,
-                cat: session_types
+                cat: this.sess_md.types,
+                names: this.sess_md.names
             }
         });
 
@@ -156,7 +160,7 @@ class SessEmbPlot {
         this.plot.circle({ field: "x" }, { field: "y" }, {
             source: this.source_all,
             color: { field: "cat", transform: mapper },
-            size: 4, 
+            size: 6, 
             alpha: 0.5
         });
 
@@ -165,22 +169,25 @@ class SessEmbPlot {
             data: {
                 x: [this.data.sess_emb_x[0]],
                 y: [this.data.sess_emb_y[0]],
+                names: ["Current Session"]
             }
         });
 
-        let r = this.plot.circle({ field: "x" }, { field: "y" }, {
+        const hover = this.plot.toolbar.select_one(Bokeh.HoverTool)
+        hover.tooltips = (source, info) => {
+            const div = document.createElement("div")
+            div.innerHTML = source.data.names[info.index]
+            return div
+        }
+
+        this.plot.circle({ field: "x" }, { field: "y" }, {
             source: this.source,
             color: "black",
             size: 8, 
             alpha: 1.0
         });
 
-        let glyph = r.glyph;
-        glyph.line_color = "firebrick"
-        glyph.line_dash = [1, 1]
-        glyph.line_width = 2
-
-
+        // Axis ranges
         let last_unit_emb_x = this.data.all_sess_emb_x;
         let last_unit_emb_y = this.data.all_sess_emb_y;
         this.plot.x_range.start = Math.min(...last_unit_emb_x) - 0.1;
@@ -286,6 +293,11 @@ async function finetune_vis() {
         .then(data => mat4js.read(data))
         .then(data => data.data)
 
+    const sess_md = await fetch("./assets/sess_md.json")
+    .then(response => response.json())
+
+    console.log(sess_md)
+
     const plotHandVel = [
         new HandVelPlot({gt: data.gt_x, pred: data.pred_x, timestamps: data.timestamps}, "#F00", "finetune-vis-vx-plot"),
         new HandVelPlot({gt: data.gt_y, pred: data.pred_y, timestamps: data.timestamps}, "#00F", "finetune-vis-vy-plot")
@@ -296,7 +308,7 @@ async function finetune_vis() {
     plotHandVel[1].plot.yaxis.axis_label = "Vy";
 
     const plotEmb = new UnitEmbPlot(data, "finetune-vis-emb");
-    const plotSess = new SessEmbPlot(data, "finetune-vis-session-emb");
+    const plotSess = new SessEmbPlot(data, sess_md, "finetune-vis-session-emb");
 
 
     const num_steps = data.epochs.length;
@@ -358,3 +370,4 @@ async function finetune_vis() {
     
     updateStep(0);
 }
+
