@@ -1,44 +1,71 @@
+#finetune-methods-container{
+    margin-left: 2em;
+    text-indent: -1em;
+    text-align: justify;
+}
+
 #finetune-vis-container {
     margin: 30px 0px 0px 0px;
 }
+
 #finetune-vis-diag-container {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+:root {
+    --finetune-vis-shift: 52px;
+}
+
+#finetune-vis-emb-container {
+    display: inline-block;
+    position: relative;
+    left: var(--finetune-vis-shift);
 }
 
 #finetune-vis-emb {
-    display: inline-block;
-    height: 400px;
-    width: 400px;
+    height: 280px;
+    width: 300px;
 }
 
 #finetune-vis-session-emb {
-    display: inline-block;
-    height: 200px;
+    height: 190px;
     width: 200px;
+    position: relative;
+    right: 4px;
 }
+
+
+#finetune-vis-img {
+    position: relative;
+    right: var(--finetune-vis-shift);
+}
+
 
 #finetune-vis-vel-plots {
     display: inline-block;
+    position: relative;
+    right: var(--finetune-vis-shift);
 }
 
 #finetune-vis-vx-plot {
-    height: 200px;
+    height: 160px;
     width: 300px;
 }
 
 #finetune-vis-vy-plot {
-    height: 200px;
+    height: 160px;
     width: 300px;
 }
 
 /* Controls */
 #finetune-vis-controls-container {
-    margin: 0px 20px;
-    margin-left: 0px;
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-bottom: 30px;
 }
 
 #finetune-vis-button {
@@ -63,5 +90,5 @@
 
 .finetune-vis-metric p {
     display: inline-block;
-    width: 40px;
+    width: 25px;
 }

@@ -11,23 +11,6 @@ function hslToHex(h, s, l) {
     return `#${f(0)}${f(8)}${f(4)}`;
 }
 
-
-const session_types = ['C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 
-    'C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 
-    'C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 
-    'C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 
-    'C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 
-    'C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 
-    'C', 'C', 'C', 'C', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 
-    'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 
-    'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 'M', 
-    'M', 'J', 'J', 'J', 'I', 'I', 'I', 'L', 'I', 'I', 'L', 
-    'I', 'I', 'L', 'I', 'I', 'I', 'I', 'L', 'I', 'I', 'I', 
-    'I', 'I', 'I', 'I', 'I', 'I', 'I', 'I', 'I', 'I', 'I', 
-    'I', 'I', 'L', 'I', 'I', 'I', 'I', 'L', 'I', 'L', 'I', 
-    'I', 'I', 'I', 'I', 'N', 'N', 'N', 'N', 'N', 'Je', 'Je', 
-    'Je', 'Je', 'F', 'F', 'F', 'F', 'F']
-
 class UnitEmbPlot {
     constructor(data, htmlId) {
         this.container = document.getElementById(htmlId);
@@ -47,9 +30,9 @@ class UnitEmbPlot {
         this.plot.yaxis.major_label_text_font_size = "10px";
         this.plot.xaxis.major_label_text_font_size = "10px";
         this.plot.yaxis.minor_tick_line_color = null;
-        this.plot.yaxis.axis_label_standoff = 2;
+        this.plot.yaxis.axis_label_standoff = 0;
         this.plot.xaxis.minor_tick_line_color = null;
-        this.plot.xaxis.axis_label_standoff = 20;
+        this.plot.xaxis.axis_label_standoff = 2;
         this.plot.toolbar.active_drag = null;
 
         Bokeh.Plotting.show(this.plot, '#' + htmlId);
