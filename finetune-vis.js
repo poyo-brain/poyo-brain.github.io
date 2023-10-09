@@ -165,12 +165,16 @@ class SessEmbPlot {
             return div
         }
 
-        this.plot.circle({ field: "x" }, { field: "y" }, {
+        var r = this.plot.circle({ field: "x" }, { field: "y" }, {
             source: this.source,
-            color: "black",
-            size: 8, 
+            color: "#F0F6B7",
+            size: 10, 
             alpha: 1.0
         });
+
+        var glyph = r.glyph
+        glyph.line_color = "black"
+        glyph.line_width = 2;
 
         // Axis ranges
         let last_unit_emb_x = this.data.all_sess_emb_x;

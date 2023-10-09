@@ -864,14 +864,18 @@
                     weights fixed. Notably, the function that maps the neural
                     population activity to behavior is unchanged and is simply
                     transferred to the new dataset. In our experiments, we find that
-                    this approach is surprisingly effective and allows us to rapidly
-                    integrate new datasets into the same underlying model. </p>
+                    this approach is <a href="#finetune-results">surprisingly effective</a> 
+                    and allows us to rapidly integrate new datasets into the
+                    same underlying model. </p>
 
-                <p><b>2. Full Finetuning</b>: Train all the weights.</p>
+                <p><b>2. Full Finetuning</b>: Start with POYO-1, and finetune all the weights.</p>
             </div>
             <br/>
 
 
+            <h3 class="subsection-title">
+                Unit Identification in Action
+            </h3>
             Choose session: 
             <select id="finetune-vis-data-selector">
                 <option
@@ -911,7 +915,9 @@
             <script src="finetune-vis.js"></script>
 
 
-            <h3 class="subsection-title" style="margin-bottom: -10px;">Results</h3>
+            <h3 class="subsection-title" style="margin-bottom: -10px;" id="finetune-results">
+                <a href=""> </a>Results
+            </h3>
             <div class="table">
                 <table border="1">
                     <thead>
@@ -963,7 +969,7 @@
                         <td>0.6850</td>
                     </tr>
                     <tr>
-                        <td>POYO-MP + Unit id</td>
+                        <td>POYO-MP + Unit identification</td>
                         <td>0.9675 ± 0.0079</td>
                         <td>0.9012 ± 0.0271</td>
                         <td>0.7759 ± 0.0471</td>
@@ -979,7 +985,7 @@
                         <td>0.7318</td>
                     </tr>
                     <tr>
-                        <td>POYO-1 + Unit id</td>
+                        <td>POYO-1 + Unit identification</td>
                         <td>0.9677 ± 0.0096</td>
                         <td>0.9028 ± 0.0248</td>
                         <td>0.7788 ± 0.0548</td>
@@ -995,6 +1001,15 @@
                         <td>0.7378</td>
                     </tr>
                 </table>
+                <div class="caption">
+                    <p> <b>Table 2:</b> <i>Behavioral decoding results
+                    for 16 sessions of neural recordings from four nonhuman
+                    primates.</i> All the baselines and the single-session model
+                    are trained from scratch, while POYO-MP and POYO-1 are
+                    pretrained. The standard deviation is reported over the
+                    sessions.
+                    </p>
+                </div>
             </div>
 
         </section>
