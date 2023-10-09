@@ -46,6 +46,8 @@ body {
     top: 0;
     height: calc(100vh - 20px); /* Adjust based on the height of your title section */
     overflow-y: auto; /* Allow vertical scrolling within the sidebar, if needed */
+    font-size: 1.1rem;
+
 }
 
 .title-section {
@@ -60,7 +62,6 @@ body {
     /* Removes any default margin */
     padding-bottom: 1em;
     /* Adds some padding to give space below the title section */
-
 }
 
 iframe {

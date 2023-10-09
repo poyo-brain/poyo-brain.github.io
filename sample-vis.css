@@ -1,4 +1,8 @@
 #vis-container {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: bottom; /* can also be 'top' or 'bottom' */
 }
 
 #vis-emb {
@@ -18,17 +22,17 @@
 }
 
 #vis-vx-plot {
-    height: 150px;
+    height: 120px;
     width: 500px;
 }
 
 #vis-vy-plot {
-    height: 170px;
+    height: 140px;
     width: 500px;
 }
 
 #vis-spike-plot {
-    height: 200px;
+    height: 240px;
     width: 500px;
 }
 
