@@ -87,11 +87,11 @@
         <ul>
             <li> Contents </li>
             <li><a href="#abstract">Abstract</a></li>
-            <li><a href="#datasets">Datasets</a></li>
-            <li><a href="#challenges">Challenges</a></li>
+            <li><a href="#datasets">Datasets & Challenges</a></li>
             <!-- <li><a href="#heterogeneity">Data Heterogeneity</a></li> -->
             <!-- <li><a href="#tokenization">Tokenization</a></li> -->
-            <li><a href="#method">Method</a></li>
+            <li><a href="#tokenization">Tokenization Scheme</a></li>
+            <li><a href="#architecture">Model Architecture</a></li>
             <li><a href="#pretraining">Pretraining</a></li>
             <li><a href="#finetuning">Finetuning</a></li>
             <!-- Add more sections as needed -->
@@ -307,7 +307,7 @@
                         <img src="./assets/tasks-07.png" alt="Description for Image 4">
                         <canvas id="webgl4"></canvas>
                     </div>
-                    <div class="task-expl-text-tagged">
+                    <div class="task-expl-text">
                         <div class="red-tag">
                             Held-out for Testing
                         </div>
@@ -323,98 +323,11 @@
                 <script type="module" src="./script.js"></script>
             </div>
 
-
-        </section>
-
-        <section class="section" id="challenges">
-            <h3 class="section-title">
-                <a href="challenges"> </a>Challenges
-            </h3>
-
-            <!-- <p>
-                Neurons communicate asynchronously using electrical impulses called spikes. The timing and
-                frequency of spikes encode signals that convey information about the external world and coordinate
-                the internal dialogue within the brain.
-            </p> -->
-
-            <!-- <h3 class="subsection-title">
-                <i class="fa-regular fa-circle fa-2xs"></i> Action Potentials
-            </h3>
-            <p>
-                Neural spikes, also known as action potentials, are brief electrical signals that travel along the axon
-                of a neuron. They are the primary means by which information is transmitted within the nervous system.
-                When a neuron receives sufficient input from other neurons, it generates a spike, which can then
-                influence downstream neurons.
-            </p>
-
-            <div class="figure">
-                <img src="assets/neuron_firing.gif" alt="spiketrain" width="500" height="300">
-                <div class="caption">
-                    <p> Spike train representation of a neuron's output signal. (Placeholder) </p>
-                </div>
-            </div> -->
-
-            <!-- <h3 class="subsection-title">
-                EPhys Recording
-            </h3> -->
-
-            <!-- <p> A device is implented in the brain, and will typically have multiple electrodes.
-               An electrode doesn't just pick up the activity of a single neuron. Instead, it detects the electrical
-                activity from
-                multiple neurons that are in proximity to the electrode tip.
-                each neuron has its own unique spiking
-                pattern and amplitude based on its type, location, and distance from the electrode. When multiple
-                neurons fire action potentials, the electrode picks up a combination of these spikes, which can often
-                overlap in time.
-
-                This situation is analogous to the "cocktail party problem" in auditory processing. The cocktail party
-                problem refers to the challenge of focusing on a single conversation in a noisy environment, such as a
-                party, where multiple people are talking at the same time. Similarly, in neural recordings, the
-                challenge is to distinguish and isolate the spiking activity of an individual neuron from the "noise" of
-                other nearby neurons.
-
-                To address this, researchers use spike sorting techniques. Spike sorting involves analyzing the recorded
-                signals to identify and group spikes that likely originated from the same neuron. This is done based on
-                features such as spike shape, amplitude, and timing. 
-            </p> -->
-
-            <!-- 
             <h3 class="subsection-title">
-                <i class="fa-regular fa-circle fa-2xs"></i> Spike Sorting vs. Threshold crossing
+                Challenges
             </h3>
 
-            <p>
-                This produces a spike train, which is a sequence of discrete events that represent the times at which
-                each neuron fired.
-            </p>
-
-            <div class="blocks-container">
-                <div class="block-header">
-                    <p>Spike-sorting </p>
-                </div>
-                <div class="block-header">
-                    <p>Threshold Crossings </p>
-                </div>
-                <div class="block">
-                    <i class="fa-regular fa-thumbs-up" style="color: #02d453;"></i>
-                    <p>Isolates individual neurons, biophyisically realistic units </p>
-                </div>
-
-                <div class="block">
-                    <i class="fa-regular fa-thumbs-up" style="color: #02d453;"></i>
-                    <p>Easy, real-time processing</p>
-                </div>
-                <div class="block">
-                    <i class="fa-regular fa-thumbs-down" style="color: #ff0505;"></i>
-                    <p>Complex algorithms for spike sorting that only work offline</p>
-                </div>
-                <div class="block">
-                    <i class="fa-regular fa-thumbs-down" style="color: #ff0505;"></i>
-                    <p>Noisy and multi-units</p>
-                </div>
-            </div> -->
-
-            <h3 class="subsection-title">
+            <h3 class="subsubsection-title">
                 Variability of neural recordings across days and individuals
             </h3>
             <p>
@@ -513,7 +426,7 @@
                 <a href=""> </a>Heterogeneity across Datasets
             </h3> -->
 
-            <h3 class="subsection-title">
+            <h3 class="subsubsection-title">
                 Heterogeneity of behavior across datasets
             </h3>
 
@@ -540,7 +453,6 @@
                 these behaviors were recorded varies
                 from lab to lab (100Hz to 1kHz).
             </p>
-        </section>
 
         <!-- <section class="section" id="tokenization">
             <h3 class="section-title">
@@ -608,9 +520,12 @@
         </section> -->
 
 
-        <section class="section" id="method">
+        </section>
+
+
+        <section class="section" id="tokenization">
             <h3 class="section-title">
-                <a href=""> </a> Tokenization
+                <a href=""> </a> Tokenization Scheme
             </h3>
 
             <h3 class="subsection-title">
