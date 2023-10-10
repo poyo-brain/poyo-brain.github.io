@@ -59,12 +59,18 @@ class UnitEmbPlot {
             colors.push(hslToHex(hue, 100, 50));
         }
 
-        this.plot.circle({ field: "x" }, { field: "y" }, {
+        var r = this.plot.circle({ field: "x" }, { field: "y" }, {
             source: this.source,
-            color: "pink",
+            color: "#C6F1F6",
             size: 10, 
             alpha: 0.7
         });
+
+        var glyph = r.glyph
+        glyph.line_color = "black"
+        glyph.line_width = 2;
+        glyph.line_alpha = 0.5;
+
 
         let last_unit_emb_x = this.data.unit_emb_x.slice(-1)[0];
         let last_unit_emb_y = this.data.unit_emb_y.slice(-1)[0];
