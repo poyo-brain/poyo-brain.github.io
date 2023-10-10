@@ -76,7 +76,11 @@ function setupCanvas(canvasId, dataFilePath, color) {
             vColor = color;
             vZ = position.z;
             vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
-            gl_PointSize = 3.0; 
+            if (vZ - uZThreshold < 0.01) {
+                gl_PointSize = 4.0; 
+            } else {
+                gl_PointSize = 3.0; 
+            }
             gl_Position = projectionMatrix * mvPosition;
         }
     `,
@@ -90,8 +94,12 @@ function setupCanvas(canvasId, dataFilePath, color) {
             float zmax = 4.0;
             if (vZ < uZThreshold) discard;
             if (vZ > uZThreshold + zmax) discard;
-            float alpha = 1.0 - ((vZ - uZThreshold) / zmax);
-            gl_FragColor = vec4(uColor * vColor * (0.6 + (1.0 - alpha)), alpha);
+            if (vZ - uZThreshold < 0.01) {
+                gl_FragColor = vec4(uColor * vColor * 0.6, 1.0);
+            } else {
+                float alpha = 1.0 - ((vZ - uZThreshold) / zmax);
+                gl_FragColor = vec4(uColor * vColor / (0.01 + alpha), alpha);
+            }
         } 
     `
     });
@@ -286,8 +294,7 @@ function setupCanvas(canvasId, dataFilePath, color) {
     // Moving camera
     let animationStartTime = null;
     const animationDuration = 4000;  // 4 seconds in milliseconds
-    console.log(camera.position)
-    let targetPosition = new THREE.Vector3(-2, 2, -4);
+    let targetPosition = new THREE.Vector3(-4, 3, -4);
 
     let targetLeft = -3 * sizes.width / sizes.height;
     let targetRight = 3 * sizes.width / sizes.height;
@@ -376,8 +383,8 @@ function setupCanvas(canvasId, dataFilePath, color) {
 
 
 window.addEventListener('load', () => {
-    setupCanvas('webgl1', './assets/trajectory_co.mat', '#88ebff');
-    setupCanvas('webgl2', './assets/trajectory_rt.mat', '#4cff00');
-    setupCanvas('webgl3', './assets/trajectory_touch_rt.mat', '#9000ff');
-    setupCanvas('webgl4', './assets/trajectory_maze.mat', '#ff2f00');
+    setupCanvas('webgl1', './assets/trajectory_co.mat', '#A494E5');
+    setupCanvas('webgl2', './assets/trajectory_rt.mat', '#6CB6DF');
+    setupCanvas('webgl3', './assets/trajectory_touch_rt.mat', '#89E4C4');
+    setupCanvas('webgl4', './assets/trajectory_maze.mat', '#F09071');
 });
