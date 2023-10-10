@@ -654,11 +654,11 @@
 
         <section class="section" id="method">
             <h3 class="section-title">
-                <a href=""> </a> Method
+                <a href=""> </a> Tokenization
             </h3>
 
             <h3 class="subsection-title">
-                Querying the spiking data
+                Spike Tokens
             </h3>
             <p>
                 The output of the latent encoder is the latent sequence of size N , while the desired output can be any
@@ -687,23 +687,7 @@
 
 
             <h3 class="subsection-title">
-                Self-Attention in the latent space
-            </h3>
-            <p>
-                The output of the latent encoder is the latent sequence of size N , while the desired output can be any
-                arbitrary sequence of length P . Let us consider the task of hand velocity decoding for example, in the
-                context window [0, T], the length of the output sequence will depend on the sampling frequency. Since
-                we aspire to train on datasets sourced from various labs, the sampling rate can differ significantly. We
-                thus need a flexible mechanism for predicting outputs of varying lengths and querying from the neural
-                activity at specific points in time.
-            </p>
-
-            <div style="margin: auto; text-align: center; padding-top: 1em; padding-bottom: 1em;">
-                <img src="assets/selfattn.svg" style="height:125px;">
-            </div>
-
-            <h3 class="subsection-title">
-                Querying the latent space
+                Behavior Query Tokens
             </h3>
             <p>
                 The output of the latent encoder is the latent sequence of size N , while the desired output can be any
@@ -728,7 +712,13 @@
                 </div>
             </div>
             <script src="query-vis.js"></script>
+        </section>
 
+
+        <section class="section" id="architecture">
+            <h3 class="section-title">
+                <a href=""> </a> Model Architecture
+            </h3>
 
             <p>
                 With our tokenization techniques, the problem of Neural Decoding
