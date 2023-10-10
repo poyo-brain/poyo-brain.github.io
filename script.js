@@ -64,6 +64,7 @@ function setupCanvas(canvasId, dataFilePath, color) {
         blending: THREE.NormalBlending,
         vertexColors: true,
         vertexShader: `
+        uniform float uZThreshold;
         attribute float size;
         varying vec3 vColor;
         varying float vZ;
@@ -71,7 +72,7 @@ function setupCanvas(canvasId, dataFilePath, color) {
             vColor = color;
             vZ = position.z;
             vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
-            gl_PointSize = 3.0; //size ; //* (300.0 / -mvPosition.z);
+            gl_PointSize = 3.0; 
             gl_Position = projectionMatrix * mvPosition;
         }
     `,
@@ -82,10 +83,11 @@ function setupCanvas(canvasId, dataFilePath, color) {
         varying vec3 vColor;
         varying float vZ;
         void main() {
+            float zmax = 4.0;
             if (vZ < uZThreshold) discard;
-            // gl_FragColor = vec4(uColor * vColor, 1.0) * texture2D(uTexture, gl_PointCoord).a;
-            vec4 textureAlpha = texture2D(uTexture, gl_PointCoord);
-            gl_FragColor = vec4(uColor * vColor * (0.6 + (vZ-uZThreshold)/10.) , textureAlpha.a);
+            if (vZ > uZThreshold + zmax) discard;
+            float alpha = 1.0 - ((vZ - uZThreshold) / zmax);
+            gl_FragColor = vec4(uColor * vColor * (0.6 + (1.0 - alpha)), alpha);
         } 
     `
     });
@@ -283,10 +285,7 @@ function setupCanvas(canvasId, dataFilePath, color) {
      * Animate
      */
     const clock = new THREE.Clock()
-    
-
-    let currentZThreshold = -5;  // Starting threshold. Adjust this value as needed.
-    const speed = 0.001;
+    const speed = 0.002;
 
     // Moving camera
     let animationStartTime = null;
@@ -331,7 +330,7 @@ function setupCanvas(canvasId, dataFilePath, color) {
         // Increase the threshold
         // console.log(particles.position.z);
         if (particles.position.z < 15) {
-            particlesMaterial.uniforms.uZThreshold.value -= speed;  // Adjust the 0.01 value to control the speed of revealing
+            particlesMaterial.uniforms.uZThreshold.value -= speed;
             particles.position.z += speed;
         }
         // Move the camera
