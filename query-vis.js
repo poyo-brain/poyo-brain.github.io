@@ -195,7 +195,6 @@ async function query_vis() {
         .then(data => mat4js.read(data))
         .then(data => data.data)
 
-    console.log(data);
 
     const plotQuery = new QueryPlot(data, "query-vis-1", 0);
     const plotOutput = new QueryPlot(data, "output-vis-1", 1, 'x');
