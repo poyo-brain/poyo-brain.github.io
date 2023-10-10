@@ -333,6 +333,10 @@ function setupCanvas(canvasId, dataFilePath, color) {
             particlesMaterial.uniforms.uZThreshold.value -= speed;
             particles.position.z += speed;
         }
+        else {
+            particlesMaterial.uniforms.uZThreshold.value = 0;
+            particles.position.z = 0;
+        }
         // Move the camera
         if (!animationStartTime && elapsedTime > 4) {
             animationStartTime = elapsedTime;
