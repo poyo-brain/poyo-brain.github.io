@@ -33,6 +33,7 @@ class SampleHandVelPlot {
         this.plot.toolbar_location = null;
         this.plot.yaxis.axis_label_text_font_style = "normal";
         this.plot.xaxis.axis_label_text_font_style = "normal";
+        this.plot.toolbar.active_drag = null;
         Bokeh.Plotting.show(this.plot, '#' + htmlId);
 
         // Remove grid lines
@@ -116,6 +117,7 @@ class SpikePlot {
         this.plot.toolbar_location = null;
         this.plot.yaxis.axis_label_text_font_style = "normal";
         this.plot.xaxis.axis_label_text_font_style = "normal";
+        this.plot.toolbar.active_drag = null;
         Bokeh.Plotting.show(this.plot, '#' + htmlId);
 
         // Remove grid lines
