@@ -368,14 +368,14 @@ h2.page-title {
 
 .canvas-container {
     position: relative;
-    width: 300px; /* Adjust based on your canvas width */
+    width: 220px; /* Adjust based on your canvas width */
     display: inline-block;  /* Adjust as needed */
 }
 
 .canvas-wrapper {
     display: flex;          /* Enable flex layout */
-    align-items: flex-start; /* Align items to the start (top) */
-    flex-wrap: wrap;        /* Allow the items to wrap to the next line if they run out of space */
+    align-items: flex-start;
+    justify-content: space-evenly;
     gap: 20px;              /* Optional: spacing between canvas containers */
     margin-top: 20px;
     margin-bottom: 30px;
@@ -383,7 +383,7 @@ h2.page-title {
 
 .switch {
     position: absolute;
-    top: 10px;
+    top: 00px;
     left: 20px;
     z-index: 1;
     display: flex; 
@@ -437,7 +437,7 @@ input:checked + .slider:before {
 
 .switch-text {
     position: absolute;
-    top: -6px;
+    top: -16px;
     left: 26px;
     z-index: 1;
     display: flex; 

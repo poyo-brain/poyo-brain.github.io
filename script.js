@@ -224,8 +224,8 @@ function setupCanvas(canvasId, dataFilePath, color) {
      * Sizes
      */
     const sizes = {
-        width: 300, // canvas.clientWidth,
-        height: 300, //canvas.clientHeight
+        width: 220, // canvas.clientWidth,
+        height: 220, //canvas.clientHeight
     }
 
     // window.addEventListener('resize', () =>
