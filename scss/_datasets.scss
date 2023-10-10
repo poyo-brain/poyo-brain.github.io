@@ -1,0 +1,36 @@
+.task-expl-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+
+    .task-expl-one-container {
+        width: 45%;
+        display: inline-block;
+        margin: 20px 0px;
+
+        .task-expl-diagram-container {
+            display: flex;
+            justify-content: space-evenly;
+
+            img {
+                display: inline-flex;
+                object-fit: contain;
+                width: 38%;
+            }
+
+            canvas {
+                width: 45%;
+            }
+        }
+
+        .task-expl-text {
+            margin-top: 30px;
+            align-self: auto; 
+        }
+
+        .task-expl-text-tagged {
+            margin-top: -10px;
+            align-self: auto; /* vertically center the text with the image */
+        }
+    }
+}

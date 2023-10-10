@@ -502,35 +502,6 @@ table tr:hover {
     background-color: #f5f5f5;
 }
 
-/* For even rows */
-/* table tr:nth-child(even) {
-    background-color: #f8f8f8;
-} */
-
-.grid-container {
-    display: grid;
-    grid-template-columns: repeat(4, auto); /* defines 4 columns of automatic width */
-    gap: 10px; /* adjust for spacing between rows and columns */
-    width: 100%; /* adjust as needed */
-    margin: 0 auto; /* centering the grid */
-    margin-top: 20px;
-}
-
-
-.legend {
-    margin-top: 30px;
-    align-self: auto; /* vertically center the text with the image */
-}
-
-.legend-tagged {
-    margin-top: -10px;
-    align-self: auto; /* vertically center the text with the image */
-}
-
-.grid-image {
-    max-width: 100%;
-}
-
 .red-tag {
     display: inline-block; /* to have the tag size adjust based on content */
     border: 2px solid red;

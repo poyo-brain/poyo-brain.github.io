@@ -17,9 +17,13 @@ THREE.ColorManagement.enabled = false
 
 function setupCanvas(canvasId, dataFilePath, color) {
     // Canvas
-    // const canvas = document.querySelector('canvas.webgl')
-    const canvas = document.querySelector(`#${canvasId}`)
-    console.log(canvas)
+    const canvas = document.getElementById(canvasId)
+
+    const sizes = {
+        width: canvas.clientWidth,
+        height: canvas.clientWidth
+    }
+
     // Scene
     const scene = new THREE.Scene()
     scene.background = new THREE.Color(0xFFFFFF);  // Set the background color to white
@@ -222,14 +226,6 @@ function setupCanvas(canvasId, dataFilePath, color) {
     });
 
 
-    /**
-     * Sizes
-     */
-    const sizes = {
-        width: 220, // canvas.clientWidth,
-        height: 220, //canvas.clientHeight
-    }
-
     // window.addEventListener('resize', () =>
     // {
     //     // Update sizes
@@ -298,9 +294,9 @@ function setupCanvas(canvasId, dataFilePath, color) {
     let targetTop = 3;
     let targetBottom = -3;
 
+    /*
+    // Logic for 3D/2D toggle button
     const toggleSwitch = document.querySelector(`.switch[data-canvas-id="${canvasId}"] .toggle-input`);
-
-    // const button = document.querySelector(`.toggle-button[data-canvas-id="${canvasId}"]`);
     let is3D = true;  // Start in 2D mode
 
     toggleSwitch.addEventListener('change', () => {
@@ -322,6 +318,7 @@ function setupCanvas(canvasId, dataFilePath, color) {
         console.log(targetPosition);
         // camera.lookAt(0, 0, 0);  // Adjust as needed based on your scene
     });
+    */
 
     const tick = () => {
 
@@ -377,7 +374,10 @@ function setupCanvas(canvasId, dataFilePath, color) {
 
 }
 
-setupCanvas('webgl1', './assets/trajectory_co.mat', '#88ebff');
-setupCanvas('webgl2', './assets/trajectory_rt.mat', '#4cff00');
-setupCanvas('webgl3', './assets/trajectory_touch_rt.mat', '#9000ff');
-setupCanvas('webgl4', './assets/trajectory_maze.mat', '#ff2f00');
+
+window.addEventListener('load', () => {
+    setupCanvas('webgl1', './assets/trajectory_co.mat', '#88ebff');
+    setupCanvas('webgl2', './assets/trajectory_rt.mat', '#4cff00');
+    setupCanvas('webgl3', './assets/trajectory_touch_rt.mat', '#9000ff');
+    setupCanvas('webgl4', './assets/trajectory_maze.mat', '#ff2f00');
+});

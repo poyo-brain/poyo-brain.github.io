@@ -16,7 +16,6 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons/css/academicons.min.css">
     <link rel="stylesheet" href="build/style.css">
 
-
     <script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-3.2.2.min.js"></script>
     <script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-gl-3.2.2.min.js"></script>
     <script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-widgets-3.2.2.min.js"></script>
@@ -262,52 +261,66 @@
                 in their inherent complexity:
             </p>
 
-            <div class="grid-container">
+            <div class="task-expl-container">
                 <!-- Row 1 -->
-                <div class="grid-image">
-                    <img src="./assets/tasks-04.png" alt="Description for Image 1">
-                </div>
-                <div class="legend">
-                    <b>Center-Out task (CO)</b>: This task is relatively stereotyped, with
-                    the animal making a reach to one of eight fixed targets after receiving a go cue, and then
-                    returning to the
-                    center.
+                <div class="task-expl-one-container">
+                    <div class="task-expl-diagram-container">
+                        <img src="./assets/tasks-04.png" alt="Description for Image 1">
+                        <canvas id="webgl1"></canvas>
+                    </div>
+                    <div class="task-expl-text">
+                        <b>Center-Out task (CO)</b>: This task is relatively stereotyped, with
+                        the animal making a reach to one of eight fixed targets after receiving a go cue, and then
+                        returning to the
+                        center.
+                    </div>
                 </div>
 
                 <!-- Row 2 -->
-                <div class="grid-image">
-                    <img src="./assets/tasks-05.png" alt="Description for Image 2">
-                </div>
-                <div class="legend">
-                    <b>Random Target task (RT)</b>: The animal makes continuous and
-                    self-paced
-                    movements with new targets appearing in succession at random locations on the screen.
+                <div class="task-expl-one-container">
+                    <div class="task-expl-diagram-container">
+                        <img src="./assets/tasks-05.png" alt="Description for Image 2">
+                        <canvas id="webgl2"></canvas>
+                    </div>
+                    <div class="task-expl-text">
+                        <b>Random Target task (RT)</b>: The animal makes continuous and
+                        self-paced
+                        movements with new targets appearing in succession at random locations on the screen.
+                    </div>
                 </div>
 
                 <!-- Row 3 -->
-                <div class="grid-image">
-                    <img src="./assets/tasks-06.png" alt="Description for Image 3">
-                </div>
-                <div class="legend">
-                    <b>Touchscreen Random Target task (RT)</b>: Instead of using a
-                    manipulandum like in the previous experiments, these new datasets use a touch screen.
+                <div class="task-expl-one-container">
+                    <div class="task-expl-diagram-container">
+                        <img src="./assets/tasks-06.png" alt="Description for Image 3">
+                        <canvas id="webgl3"></canvas>
+                    </div>
+                    <div class="task-expl-text">
+                        <b>Touchscreen Random Target task (RT)</b>: Instead of using a
+                        manipulandum like in the previous experiments, these new datasets use a touch screen.
+                    </div>
                 </div>
 
                 <!-- Row 4 -->
-                <div class="grid-image">
-                    <img src="./assets/tasks-07.png" alt="Description for Image 4">
-                </div>
-                <div class="legend-tagged">
-                    <div class="red-tag">
-                        Held-out for Testing
+                <div class="task-expl-one-container">
+                    <div class="task-expl-diagram-container">
+                        <img src="./assets/tasks-07.png" alt="Description for Image 4">
+                        <canvas id="webgl4"></canvas>
                     </div>
-                    <p>
-                        <b>Maze task</b>: In this task,
-                        a monkey performing reaches with instructed delays to visually presented targets while avoiding
-                        the
-                        boundaries of a virtual maze.
-                    </p>
+                    <div class="task-expl-text-tagged">
+                        <div class="red-tag">
+                            Held-out for Testing
+                        </div>
+                        <p>
+                            <b>Maze task</b>: In this task,
+                            a monkey performing reaches with instructed delays to visually presented targets while avoiding
+                            the
+                            boundaries of a virtual maze.
+                        </p>
+                    </div>
                 </div>
+
+                <script type="module" src="./script.js"></script>
             </div>
 
 
@@ -514,60 +527,7 @@
                 motor tasks that vary in their inherent complexity.
             </p>
 
-            <div class="canvas-wrapper">
-
-                <div class="canvas-container">
-                    <label class="switch" data-canvas-id="webgl1">
-                        <input type="checkbox" class="toggle-input" checked>
-                        <span class="slider round"></span>
-                    </label>
-                    <span class="switch-text">3D</span>
-                    <canvas id="webgl1" class="webgl"></canvas>
-                    <div class="canvas-caption"><b>Center-Out task (CO)</b>:
-                        This task consists of
-                        8 configurations, with pre-movement periods.</div>
-                </div>
-
-                <div class="canvas-container">
-                    <label class="switch" data-canvas-id="webgl2">
-                        <input type="checkbox" class="toggle-input" checked>
-                        <span class="slider round"></span>
-                    </label>
-                    <span class="switch-text">3D</span>
-                    <canvas id="webgl2" class="webgl"></canvas>
-                    <div class="canvas-caption"><b>Random Target task (RT)</b>: Manipulandum.</div>
-                </div>
-
-                <div class="canvas-container">
-                    <label class="switch" data-canvas-id="webgl3">
-                        <input type="checkbox" class="toggle-input" checked>
-                        <span class="slider round"></span>
-                    </label>
-                    <span class="switch-text">3D</span>
-                    <canvas id="webgl3" class="webgl"></canvas>
-                    <div class="canvas-caption"><b>Touchscreen RT</b>: Random
-                        target task on a touchscreen instead of a manipulandum like
-                        in other experiments.
-                    </div>
-                </div>
-
-                <div class="canvas-container">
-                    <label class="switch" data-canvas-id="webgl4">
-                        <input type="checkbox" class="toggle-input" checked>
-                        <span class="slider round"></span>
-                    </label>
-                    <span class="switch-text">3D</span>
-                    <canvas id="webgl4" class="webgl"></canvas>
-                    <div class="canvas-caption"><b>Maze task</b>: The monkey
-                        performs reaches to visually
-                        presented targets while avoiding the
-                        boundaries of a virtual maze.
-                    </div>
-                </div>
-
-            </div>
             <!-- <canvas class="webgl"></canvas> -->
-            <script type="module" src="./script.js"></script>
 
             <!-- <p>
                 <i class="fa-solid fa-arrow-right"></i> <b>Variability of controllers</b>: While some animals perform
