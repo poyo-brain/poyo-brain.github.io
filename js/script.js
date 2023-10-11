@@ -3,11 +3,19 @@ import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.153.0/build/three.m
 
 // import * as THREE from './libs/three.module.js';
 
-import { FontLoader } from './FontLoader.js';
-import { TextGeometry } from './TextGeometry.js';
-import { OrbitControls } from './OrbitControls.js';
+import { FontLoader } from './js/FontLoader.js';
+import { TextGeometry } from './js/TextGeometry.js';
+import { OrbitControls } from './js/OrbitControls.js';
+
 
 THREE.ColorManagement.enabled = false
+
+window.addEventListener('load', () => {
+    setupCanvas('webgl1', './assets/trajectory_co.mat', '#A494E5');
+    setupCanvas('webgl2', './assets/trajectory_rt.mat', '#6CB6DF');
+    setupCanvas('webgl3', './assets/trajectory_touch_rt.mat', '#89E4C4');
+    setupCanvas('webgl4', './assets/trajectory_maze.mat', '#F09071');
+});
 
 /**
  * Base
@@ -382,9 +390,3 @@ function setupCanvas(canvasId, dataFilePath, color) {
 }
 
 
-window.addEventListener('load', () => {
-    setupCanvas('webgl1', './assets/trajectory_co.mat', '#A494E5');
-    setupCanvas('webgl2', './assets/trajectory_rt.mat', '#6CB6DF');
-    setupCanvas('webgl3', './assets/trajectory_touch_rt.mat', '#89E4C4');
-    setupCanvas('webgl4', './assets/trajectory_maze.mat', '#F09071');
-});

@@ -22,7 +22,12 @@
     <script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-tables-3.2.2.min.js"></script>
     <script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-mathjax-3.2.2.min.js"></script>
     <script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-api-3.2.2.min.js"></script>
-    <script src="./mat4js.read.min.js"></script>
+    <script src="./js/mat4js.read.min.js"></script>
+    <script type="module" src="./js/script.js"></script>
+    <script src="./js/spike-vis.js"></script>
+    <script src="./js/query-vis.js"></script>
+    <script src="./js/sample-vis.js"></script>
+    <script src="./js/finetune-vis.js"></script>
 
     <!-- <script type="module" src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r153/three.module.js"></script> -->
 
@@ -45,7 +50,6 @@
 </head>
 
 <body>
-    <!-- <script src="./two.min.js"></script> -->
     <section class="section title-section">
         <div>
             <h1 class="page-title">
@@ -320,7 +324,6 @@
                     </div>
                 </div>
 
-                <script type="module" src="./script.js"></script>
             </div>
 
             <h3 class="subsection-title">
@@ -571,8 +574,6 @@
 
             </div>
 
-            <script src="spike-vis.js"></script>
-            <script src="query-vis.js"></script>
         </section>
 
 
@@ -696,7 +697,6 @@
                     <div id="vis-vy-plot"></div>
                 </div>
             </div>
-            <script src="sample-vis.js"></script>
 
         </section>
 
@@ -765,7 +765,6 @@
                     </div>
                 </div>
             </div>
-            <script src="finetune-vis.js"></script>
 
 
             <h3 class="subsection-title" style="margin-bottom: -10px;" id="finetune-results">
