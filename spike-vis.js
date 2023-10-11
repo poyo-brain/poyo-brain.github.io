@@ -273,8 +273,8 @@ class TokenPlot {
 
 /* Main function for this script */
 async function spike_vis() {
-    const plotQuery = new SpikeInputPlot("spike-vis-1", 0);
-    const plotOutput = new TokenPlot("token-vis-1");
+    const plotQuery = new SpikeInputPlot("token-vis-spikes", 0);
+    const plotOutput = new TokenPlot("token-vis-spike-embs");
     // const plotOutputvy = new QueryPlot(data, "output-vis-2", 1, 'y');
 
     plotQuery.plot.on_event('tap', (event) => {

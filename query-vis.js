@@ -138,14 +138,14 @@ class QueryPlot {
         const rect = queryVisElement.getBoundingClientRect();
 
         // Position the square exactly below 'query-vis-1'
-        square.style.top = (rect.bottom + window.scrollY) + 'px'; // scrollY ensures it works even if the page is scrolled
-        square.style.left = rect.right - 120 + 'px';
+        square.style.top = (rect.top + window.scrollY) + 'px'; // scrollY ensures it works even if the page is scrolled
+        square.style.left = rect.right - rect.width/2 + 'px';
 
         square.style.display = 'block';
         // square.style.backgroundColor = 'gray';
     
         // Animation - move down then right
-        square.style.animation = 'moveDownThenRight 1s forwards';
+        square.style.animation = 'moveUpThenRight 1s forwards';
         square.addEventListener('animationend', () => {
             // Change to a random color once the animation is complete
             // square.style.backgroundColor = this.getRandomColor();
@@ -197,8 +197,8 @@ async function query_vis() {
 
 
     const plotQuery = new QueryPlot(data, "query-vis-1", 0);
-    const plotOutput = new QueryPlot(data, "output-vis-1", 1, 'x');
-    const plotOutputvy = new QueryPlot(data, "output-vis-2", 1, 'y');
+    const plotOutput = new QueryPlot(data, "token-vis-vx", 1, 'x');
+    const plotOutputvy = new QueryPlot(data, "token-vis-vy", 1, 'y');
 
     plotQuery.plot.on_event('tap', (event) => {
         console.log("tap")

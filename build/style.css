@@ -74,6 +74,11 @@ iframe {
   text-align: justify;
 }
 
+.subsection {
+  max-width: 99%;
+  margin-left: auto;
+}
+
 .page-title {
   text-align: center;
   font-size: 2rem;
@@ -732,47 +737,76 @@ table tr:hover {
   margin-top: 5px;
 }
 
-#query-vis-container-1 {
+#token-vis-container {
   display: flex;
   justify-content: center;
-  align-items: bottom; /* can also be 'top' or 'bottom' */
-  margin: 20px 0px 0px 0px;
+  margin-bottom: 20px;
 }
 
-#left-container {
-  display: inline-block;
+/* Left */
+#token-vis-spike-container {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  position: relative;
+  width: 380px;
+  left: 50px;
 }
-
-#query-vis-1 {
+#token-vis-spike-container #token-vis-spikes {
+  position: relative;
+  height: 110px;
+  width: 430px;
+  left: -30px;
+}
+#token-vis-spike-container img {
+  object-fit: contain;
+  height: 70px;
+}
+#token-vis-spike-container #token-vis-spike-embs {
   display: block;
+  height: 60px;
+}
+
+/* Middle */
+#token-vis-middle {
+  display: flex;
+  flex-direction: column-reverse;
+  align-content: center;
+  justify-content: center;
+  position: relative;
+  top: 60px;
+}
+#token-vis-middle #token-vis-model-img {
+  position: relative;
+  right: 18px;
+  margin: 0px;
+  width: 350px;
+}
+#token-vis-middle #query-vis-1 {
+  margin-top: -20px;
   height: 110px;
   width: 400px;
-  margin-left: 200px;
 }
 
-#decoder {
-  display: block;
-  margin-top: 15px;
+/* Right */
+#token-vis-vel-plots {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 290px;
+  top: 50px;
+  right: 60px;
 }
-
-#output-container {
-  display: inline-block;
-  margin-top: 140px;
-}
-
-#output-vis-1, #output-vis-2 {
-  display: block; /* to stack them vertically */
+#token-vis-vel-plots #token-vis-vx, #token-vis-vel-plots #token-vis-vy {
   height: 120px;
-  width: 400px;
-  margin-top: 10px;
 }
 
-@keyframes moveDownThenRight {
+@keyframes moveUpThenRight {
   50% {
-    transform: translateY(40px);
+    transform: translateY(-170px);
   }
   100% {
-    transform: translateY(40px) translateX(80px);
+    transform: translateY(-170px) translateX(120px);
   }
 }
 .square {

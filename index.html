@@ -151,7 +151,7 @@
 
         <section class="section" id="datasets">
             <h3 class="section-title">
-                <a href="datasets"> </a>Datasets
+                <a href="datasets"> </a>Datasets & Challenges
             </h3>
             <!-- <h3 class="subsection-title">
                 <i class="fa-regular fa-circle fa-2xs"></i> Spiking neural activity
@@ -326,7 +326,7 @@
             <h3 class="subsection-title">
                 Challenges
             </h3>
-
+            <section class="subsection">
             <h3 class="subsubsection-title">
                 Variability of neural recordings across days and individuals
             </h3>
@@ -519,7 +519,7 @@
 
         </section> -->
 
-
+        </section>
         </section>
 
 
@@ -540,22 +540,6 @@
                 activity at specific points in time.
             </p>
 
-            <div id="spike-vis-container-1">
-                <div id="left-container">
-                    <div id="spike-vis-1"></div>
-                    <img src="assets/tokenization_arrow.svg"
-                        style="width: 280px; padding-left: 150px; padding-top: 10px;">
-                    <div id="token-vis-1"></div>
-                </div>
-                <!-- <div id="token-container">
-                    
-                </div> -->
-                <div id="encoder">
-                    <img src="assets/encoder.svg" style="height:360px">
-                </div>
-            </div>
-            <script src="spike-vis.js"></script>
-
 
             <h3 class="subsection-title">
                 Behavior Query Tokens
@@ -569,19 +553,25 @@
                 activity at specific points in time.
             </p>
 
-            <div id="query-vis-container-1">
-                <div class="square" id="animatedSquare"></div>
-                <div id="left-container">
+            <div id="token-vis-container">
+                <div id="token-vis-spike-container">
+                    <div id="token-vis-spikes"></div>
+                    <img src="assets/spike-connector.svg"/>
+                    <div id="token-vis-spike-embs"></div>
+                </div>
+                <div id="token-vis-middle">
                     <div id="query-vis-1"></div>
-                    <div id="decoder">
-                        <img src="assets/Decoder.svg" style="height:250px">
-                    </div>
+                    <img id="token-vis-model-img" src="assets/tokenization-blackbox.svg" alt="model-blackbox">
                 </div>
-                <div id="output-container">
-                    <div id="output-vis-1"></div>
-                    <div id="output-vis-2"></div>
+                <div id="token-vis-vel-plots">
+                    <div id="token-vis-vx"></div>
+                    <div id="token-vis-vy"></div>
                 </div>
+                <div class="square" id="animatedSquare"></div>
+
             </div>
+
+            <script src="spike-vis.js"></script>
             <script src="query-vis.js"></script>
         </section>
 

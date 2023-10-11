@@ -1,0 +1,90 @@
+#token-vis-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+$top-adjustment: 60px;
+
+/* Left */
+#token-vis-spike-container {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    position: relative;
+    width: 380px;
+    left: 50px;
+
+    #token-vis-spikes {
+        position: relative;
+        height: 110px;
+        width: 430px;
+        left: -30px;
+    }
+
+    img {
+        object-fit: contain;
+        height: 70px;
+    }
+
+    #token-vis-spike-embs {
+        display: block;
+        height: 60px;
+    }
+}
+
+/* Middle */
+#token-vis-middle {
+    display: flex;
+    flex-direction: column-reverse;
+    align-content: center;
+    justify-content: center;
+    position: relative;
+    top: $top-adjustment;
+
+    #token-vis-model-img {
+        position: relative;
+        right: 18px;
+        margin: 0px;
+        width: 350px;
+    }
+
+    #query-vis-1 {
+        margin-top: -20px;
+        height: 110px;
+        width: 400px;
+    }
+}
+
+/* Right */
+#token-vis-vel-plots {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 290px;
+    top: $top-adjustment - 10px;
+    right: 60px;
+
+    #token-vis-vx, #token-vis-vy {
+        height: 120px;
+    }
+}
+
+
+@keyframes moveUpThenRight {
+    50% {
+        transform: translateY(-170px)
+    }
+    100% {
+        transform: translateY(-170px) translateX(120px);
+    }
+}
+
+.square {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background-color: white;
+    border: 1px solid black;
+    display: none;
+}
