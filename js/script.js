@@ -3,9 +3,9 @@ import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.153.0/build/three.m
 
 // import * as THREE from './libs/three.module.js';
 
-import { FontLoader } from './js/FontLoader.js';
-import { TextGeometry } from './js/TextGeometry.js';
-import { OrbitControls } from './js/OrbitControls.js';
+import { FontLoader } from './FontLoader.js';
+import { TextGeometry } from './TextGeometry.js';
+import { OrbitControls } from './OrbitControls.js';
 
 
 THREE.ColorManagement.enabled = false
