@@ -75,7 +75,7 @@ iframe {
 }
 
 .subsection {
-  max-width: 99%;
+  max-width: 100%;
   margin-left: auto;
 }
 
@@ -162,7 +162,7 @@ h2.page-title {
 
 .subsubsection-title {
   padding-top: 0.4em;
-  font-size: 1.1rem;
+  font-size: 1.05rem;
   font-weight: 600;
   padding-bottom: 0.2em;
 }
@@ -540,7 +540,7 @@ table tr:hover {
 
 .red-tag {
   position: absolute;
-  transform: translateY(-130%);
+  transform: translateY(-120%);
   display: inline-block; /* to have the tag size adjust based on content */
   border: 2px solid red;
   padding: 3px 8px; /* padding to give some space around the text */
@@ -751,6 +751,8 @@ table tr:hover {
   position: relative;
   width: 380px;
   left: 50px;
+  margin-top: 50px;
+  margin-bottom: 130px;
 }
 #token-vis-spike-container #token-vis-spikes {
   position: relative;

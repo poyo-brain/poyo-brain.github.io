@@ -69,10 +69,10 @@
             <a href="">Blake Richards</a><sup>2</sup>
             <a href="">Matthew Perich</a><sup>2</sup>
             <a href="">Guillaume Lajoie</a><sup>2</sup>
-            <a href="https://dyerlab.gatech.edu/">Eva L. Dyer</a><sup>1,3</sup>
+            <a href="https://dyerlab.gatech.edu/">Eva L. Dyer</a><sup>1</sup>
         </div>
         <div class="affiliations">
-            <sup>1</sup> Georgia Institute of Technology, <sup>2</sup> MILA, <sup>3</sup> Emory University
+            <sup>1</sup> Georgia Institute of Technology, <sup>2</sup> MILA
         </div>
         <div class="links">
             <a href="">
@@ -94,8 +94,8 @@
             <li><a href="#datasets">Datasets & Challenges</a></li>
             <!-- <li><a href="#heterogeneity">Data Heterogeneity</a></li> -->
             <!-- <li><a href="#tokenization">Tokenization</a></li> -->
-            <li><a href="#tokenization">Tokenization Scheme</a></li>
-            <li><a href="#architecture">Model Architecture</a></li>
+            <li><a href="#tokenization">Tokenization</a></li>
+            <li><a href="#architecture">Architecture</a></li>
             <li><a href="#pretraining">Pretraining</a></li>
             <li><a href="#finetuning">Finetuning</a></li>
             <!-- Add more sections as needed -->
@@ -300,8 +300,8 @@
                         <canvas id="webgl3"></canvas>
                     </div>
                     <div class="task-expl-text">
-                        <b>Touchscreen Random Target task (RT)</b>: Instead of using a
-                        manipulandum like in the previous experiments, these new datasets use a touch screen.
+                        <b>Touchscreen Random Target task (RT)</b>: The animal makes reaches to targets arranged in an
+                        8x8 grid without pre-movement delays.
                     </div>
                 </div>
 
@@ -317,7 +317,8 @@
                         </div>
                         <p>
                             <b>Maze task</b>: In this task,
-                            a monkey performing reaches with instructed delays to visually presented targets while avoiding
+                            a monkey performing reaches with instructed delays to visually presented targets while
+                            avoiding
                             the
                             boundaries of a virtual maze.
                         </p>
@@ -326,25 +327,26 @@
 
             </div>
 
-            <h3 class="subsection-title">
+            <h3 class="subsection-title" style="margin-bottom: 0.5rem;">
                 Challenges
             </h3>
             <section class="subsection">
-            <h3 class="subsubsection-title">
-                Variability of neural recordings across days and individuals
-            </h3>
-            <p>
-                Outside of knowing which region of the brain was implented, the identity of the neurons that are
-                recorded
-                is unknown: we are dealing with unlabelled channels. This means that we don't know which neurons are
-                being recorded from, or how many we are able to record.
-            </p>
-            <p>
-                Even for the same individual, we don't know whether we're recording from the same neurons across
-                multiple
-                days. An electrode that was capturing the activity of a particular neuron one day might be slightly
-                off-target the next day. This is due to factors like electrode drift.
-                <!-- <li> Physical Movement: The brain is a soft tissue, and even minor movements (e.g., due to breathing,
+                <!-- <h3 class="subsubsection-title">
+                    Variability of neural recordings across days and individuals
+                </h3> -->
+                <p>
+                    <i class="fa-solid fa-arrow-right"></i> <b class="subsubsection-title">Variability of neural
+                        recordings across days and individuals</b>: Outside of knowing which region of the brain was
+                    implanted, the identity of the neurons that are
+                    recorded is unknown: we are dealing with unlabelled channels. This means that we don't know which
+                    neurons are
+                    being recorded from, or how many we are able to record.
+                    <!-- <p>
+                    Even for the same individual, we don't know whether we're recording from the same neurons across
+                    multiple
+                    days. An electrode that was capturing the activity of a particular neuron one day might be slightly
+                    off-target the next day. This is due to factors like electrode drift. -->
+                    <!-- <li> Physical Movement: The brain is a soft tissue, and even minor movements (e.g., due to breathing,
                 minor head adjustments, or tissue swelling) can shift the relative position of neurons with respect to
                 the electrode. This means that an electrode that was capturing the activity of a particular neuron one
                 day might be slightly off-target the next day.</li>
@@ -372,8 +374,7 @@
                 Researchers often use statistical methods and other techniques to assess the stability of their
                 recordings and to determine whether they are likely recording from the same or different neuronal
                 populations across sessions.</li> -->
-            </p>
-            <!-- 
+                    <!-- 
             <div class="blocks-container">
                 <div class="block">
                     <i class="fa-solid fa-triangle-exclamation" style="color: #f6de2f;"></i>
@@ -405,11 +406,11 @@
                 </div>
             </div> -->
 
-            <!-- <p>
+                    <!-- <p>
                 The spiking activity of a population of neurons is recorded by placing electrodes near the neurons,
                 and measuring the voltage changes that occur when a neuron fires. 
             </p> -->
-            <!-- 
+                    <!-- 
             <div class="figure">
                 <img src="assets/electrode_shift.png" alt="Electrode shift">
                 <div class="caption">
@@ -422,42 +423,43 @@
 
 
 
-            <!-- </section>
+                    <!-- </section>
 
         <section class="section" id="heterogeneity">
             <h3 class="section-title">
                 <a href=""> </a>Heterogeneity across Datasets
             </h3> -->
+                </p>
+                <p>
+                    <i class="fa-solid fa-arrow-right"></i> <b class="subsubsection-title">Variablity in data
+                        processing</b>: Different
+                    algorithms are used to process the electrophysiological recordings. Some datasets are spike-sorted,
+                    others are threshold-crossed. The quality and type of units will thus vary.
+                </p>
 
-            <h3 class="subsubsection-title">
-                Heterogeneity of behavior across datasets
-            </h3>
+                <p>
+                    <i class="fa-solid fa-arrow-right"></i> <b class="subsubsection-title">Heterogeneity of behavior
+                        across datasets</b>:
+                    The datasets were collected from multiple labs, using different equipment, and with different
+                    experimental protocols. The studied motor tasks vary in their inherent complexity.
+                </p>
+                <!-- <canvas class="webgl"></canvas> -->
 
-            <p>
-                <!-- <i class="fa-solid fa-arrow-right"></i>  -->
-                <!-- <b> Multiple behavioral tasks</b>:  -->
-                The datasets were collected
-                from multiple labs, using different
-                equipment, and with different
-                experimental protocols. All of these neural recordings were collected while the animals performed
-                motor tasks that vary in their inherent complexity.
-            </p>
-
-            <!-- <canvas class="webgl"></canvas> -->
-
-            <!-- <p>
+                <!-- <p>
                 <i class="fa-solid fa-arrow-right"></i> <b>Variability of controllers</b>: While some animals perform
                 the tasks using a manipulandum, others
                 use a touch screen.
             </p> -->
 
-            <p>
-                <i class="fa-solid fa-arrow-right"></i> <b>Variablity in sampling rate</b>: The sampling rate at which
-                these behaviors were recorded varies
-                from lab to lab (100Hz to 1kHz).
-            </p>
+                <p>
+                    <i class="fa-solid fa-arrow-right"></i> <b class="subsubsection-title">Variablity in sampling
+                        rate</b>: The sampling rate at
+                    which
+                    these behaviors were recorded varies
+                    from lab to lab (100Hz to 1kHz).
+                </p>
 
-        <!-- <section class="section" id="tokenization">
+                <!-- <section class="section" id="tokenization">
             <h3 class="section-title">
                 <a href=""> </a>Spike Tokenization
             </h3>
@@ -522,44 +524,57 @@
 
         </section> -->
 
-        </section>
+            </section>
         </section>
 
 
         <section class="section" id="tokenization">
             <h3 class="section-title">
-                <a href=""> </a> Tokenization Scheme
+                <a href=""> </a> Tokenization
             </h3>
 
             <h3 class="subsection-title">
-                Spike Tokens
+                Spike Tokenization
             </h3>
             <p>
-                The output of the latent encoder is the latent sequence of size N , while the desired output can be any
-                arbitrary sequence of length P . Let us consider the task of hand velocity decoding for example, in the
-                context window [0, T], the length of the output sequence will depend on the sampling frequency. Since
-                we aspire to train on datasets sourced from various labs, the sampling rate can differ significantly. We
-                thus need a flexible mechanism for predicting outputs of varying lengths and querying from the neural
-                activity at specific points in time.
+                We propose a novel approach for tokenizing neural population activity where each spike is represented as
+                a token. Each token contains information about the timing of a spike and the unique identity of its unit
+                (the neuron it belongs to). As such, we represent our input as a set of tokens of arbitrary length.
             </p>
+
+            <div style="color: #808080;">
+                <img src="assets/bk-tap.png" style="width: 30px;">
+                Try adding new spikes to one of the three units, by tapping on the <b>Spikes</b> plot below, and see how
+                new tokens are added.
+            </div>
 
 
             <h3 class="subsection-title">
                 Behavior Query Tokens
             </h3>
             <p>
-                The output of the latent encoder is the latent sequence of size N , while the desired output can be any
-                arbitrary sequence of length P . Let us consider the task of hand velocity decoding for example, in the
-                context window [0, T], the length of the output sequence will depend on the sampling frequency. Since
-                we aspire to train on datasets sourced from various labs, the sampling rate can differ significantly. We
-                thus need a flexible mechanism for predicting outputs of varying lengths and querying from the neural
-                activity at specific points in time.
+                The length of the hand velocity sequence will depend on the sampling frequency, which differs
+                significantly across datasets. We propose a flexible mechanism for predicting outputs of varying
+                lengths by querying our model one point at a time.
             </p>
+            <p>
+                To account for variability in experimental conditions, we add a session-level embedding to every ouput
+                query.
+                The output query token is thus defined by its timestamp, and its corresponding learnable session
+                embedding.
+            </p>
+
+            <!-- Align elements to the center-->
+            <div style="color: #808080;">
+                <img src="assets/bk-tap.png" style="width: 30px;">
+                Try querying the model at new timestamps, by tapping on the <b>Query Timestamps</b> plot below, and see
+                how the model responds.
+            </div>
 
             <div id="token-vis-container">
                 <div id="token-vis-spike-container">
                     <div id="token-vis-spikes"></div>
-                    <img src="assets/spike-connector.svg"/>
+                    <img src="assets/spike-connector.svg" />
                     <div id="token-vis-spike-embs"></div>
                 </div>
                 <div id="token-vis-middle">
@@ -579,7 +594,7 @@
 
         <section class="section" id="architecture">
             <h3 class="section-title">
-                <a href=""> </a> Model Architecture
+                <a href=""> </a> Architecture
             </h3>
 
             <p>
@@ -590,10 +605,10 @@
             <p>
                 Our approach utilizes the Transformer architecture, recognized for
                 its excellence in handling sequence-to-sequence transformations.
-                Given the potentially large number of spikes in a single
-                experimental trial, we've adopted DeepMind's PerceiverIO
+                Given the difference in number of tokens between input and output and
+                the potentially large number of spikes, we've adopted the PerceiverIO
                 architecture <a href="https://www.deepmind.com/open-source/perceiver-io">
-                    [Jeagle et al.]</a> instead of the standard transformer
+                    [Jaegle et al.]</a> instead of the standard transformer
                 <a href="https://arxiv.org/abs/1706.03762">[Vaswani et al.]</a>.
                 To inject token timestamps into the attention
                 blocks, we use Rotary Position Embeddings
@@ -675,8 +690,13 @@
 
         <section class="section" id="pretraining">
             <h3 class="section-title">
-                <a href=""> </a>Pretraining
+                <a href=""> </a>Training Results
             </h3>
+            <p>
+            In addition to showing that our proposed model outperforms other approaches on hand velocity decoding when trained on single-session datasets,
+             we show that training a single model on all datasets jointly leads to improved performance across the board. 
+            </p>
+
             Sample from
             <select id="data-source">
                 <option value="./assets/sample_1.json">Monkey C - 2015/03/11 - Center-Out Task</option>
@@ -698,45 +718,55 @@
                 </div>
             </div>
 
+            <p>
+                As shown in Figure 1, we find that the performance of the model increases with model size, and 
+                with the amount of data, and this despite the heterogeneity of the datasets.
+            </p>
+            <div class="figure">
+                <img src="assets/scaling.png" alt="Scaling curves">
+                <div class="caption">
+                    <p>Figure 1: Scaling curves </p>
+                </div>
+            </div>
+
+
         </section>
 
 
         <section class="section" id="finetuning">
             <h3 class="section-title">
-                <a href=""> </a>Finetuning
+                <a href=""> </a>Finetuning Results
             </h3>
 
             <h3 class="subsection-title">Method</h3>
-            <p>There are two ways to transfer POYO-1 on new datasets:</p>
+            <p>We can leverage our pretrained large model, POYO-1, for transfer on new datasets. We can use two different approaches:</p>
 
             <div id="finetune-methods-container">
                 <p><b>1. Unit Identification</b>: In order to transfer to a new neural
-                    population with unseen neurons, we need a way to first assign them
+                    population with previously unseen neurons, we need a way to first assign them
                     a Unit Embedding. We leverage gradient descent to learn the
                     embeddings of new units, while keeping the rest of the network
                     weights fixed. Notably, the function that maps the neural
                     population activity to behavior is unchanged and is simply
                     transferred to the new dataset. In our experiments, we find that
-                    this approach is <a href="#finetune-results">surprisingly effective</a> 
+                    this approach is <a href="#finetune-results">surprisingly effective</a>
                     and allows us to rapidly integrate new datasets into the
                     same underlying model. </p>
 
                 <p><b>2. Full Finetuning</b>: Start with POYO-1, and finetune all the weights.</p>
             </div>
-            <br/>
+            <br />
 
 
             <h3 class="subsection-title">
                 Unit Identification in Action
             </h3>
-            Choose session: 
+            Choose session:
             <select id="finetune-vis-data-selector">
-                <option
-                value="T_RT_08202013.mat">Monkey T -
-                2013/08/20 - Random Target Task</option>
-                <option
-                value="C_CO_20161013.mat">Monkey C -
-                2016/10/13 - Center Out Task</option>
+                <option value="T_RT_08202013.mat">Monkey T -
+                    2013/08/20 - Random Target Task</option>
+                <option value="C_CO_20161013.mat">Monkey C -
+                    2016/10/13 - Center Out Task</option>
             </select>
             <div id="finetune-vis-container">
                 <div id="finetune-vis-diag-container">
@@ -794,7 +824,7 @@
                         <td>0.8041 ± 0.0232</td>
                         <td>0.6967 ± 0.1011</td>
                         <td>0.8887</td>
-                        <td>-</td>
+                        <td>0.5951</td>
                     </tr>
                     <tr>
                         <td>MLP</td>
@@ -804,14 +834,14 @@
                         <td>0.8794</td>
                         <td>0.6953</td>
                     </tr>
-                    <tr>
+                    <!-- <tr>
                         <td>AutoLFADS + Linear</td>
                         <td>-</td>
                         <td>-</td>
                         <td>-</td>
                         <td>0.9062</td>
                         <td>0.5931</td>
-                    </tr>
+                    </tr> -->
                     <tr>
                         <td>POYO-[Single-session] (from scratch)</td>
                         <td>0.9682 ± 0.0111</td>
@@ -855,11 +885,11 @@
                 </table>
                 <div class="caption">
                     <p> <b>Table 2:</b> <i>Behavioral decoding results
-                    for 16 sessions of neural recordings from four nonhuman
-                    primates.</i> All the baselines and the single-session model
-                    are trained from scratch, while POYO-MP and POYO-1 are
-                    pretrained. The standard deviation is reported over the
-                    sessions.
+                            for 16 sessions of neural recordings from four nonhuman
+                            primates.</i> All the baselines and the single-session model
+                        are trained from scratch, while POYO-MP and POYO-1 are
+                        pretrained. The standard deviation is reported over the
+                        sessions.
                     </p>
                 </div>
             </div>
