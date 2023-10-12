@@ -118,6 +118,7 @@ h2.page-title {
     text-align: center;
     margin: auto;
     max-width: 50em;
+    padding-bottom: 0.4em;
 }
 
 .authors a {
@@ -131,8 +132,17 @@ h2.page-title {
     text-align: center;
     max-width: 50em;
     margin: auto;
-    font-size: 15px;
-    padding-top: 0.1em;
+    font-size: 18px;
+    padding-top: 0.2em;
+}
+
+.affiliation-logo {
+    display: inline-block;
+    // width: 20px; /* adjust as per logo size */
+    height: 30px; /* adjust as per logo size */
+    margin-right: 2px; /* space between logo and affiliation text */
+    vertical-align: bottom;
+    background-size: cover;
 }
 
 .links {
