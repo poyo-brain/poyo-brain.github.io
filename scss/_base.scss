@@ -154,10 +154,46 @@ h2.page-title {
     display: inline-block;
     font-weight: bold;
     padding: 0px 20px 0px 20px;
+    position: relative; /* Needed to position tooltip */
 }
 
 .links i {
     font-size: 20px;
+}
+
+/* Gray out the links and add a not-allowed cursor */
+.links a.coming-soon {
+    color: gray;
+    cursor: not-allowed;
+}
+
+/* Gray out the icons separately as color property doesn’t affect them */
+.links a.coming-soon i {
+    color: gray;
+}
+
+/* Add a simple tooltip to display "Coming Soon" text */
+.links .coming-soon .tooltip-text {
+    visibility: hidden;
+    width: 120px;
+    background-color: gray;
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%; /* Position it above the link */
+    left: 50%;
+    margin-left: -60px; /* Center the tooltip */
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+/* Show tooltip text on hover */
+.links .coming-soon:hover .tooltip-text {
+    visibility: visible;
+    opacity: 1;
 }
 
 
