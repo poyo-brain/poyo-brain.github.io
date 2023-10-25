@@ -1,7 +1,7 @@
 @charset "UTF-8";
 body {
   display: grid;
-  grid-template-columns: 1fr 15%;
+  grid-template-columns: 1fr 230px;
   /* Main content takes up most of the space, sidebar takes 15% */
   grid-template-rows: auto 1fr;
   /* Title section takes as much space as it needs, the rest is for main content and sidebar */
@@ -20,7 +20,11 @@ body {
   /* Main content is in the second row */
 }
 
-@media (min-width: 1450px) {
+@media (min-width: 1560px) {
+  .main-content {
+    position: relative;
+    left: 125px;
+  }
   .sidebar {
     position: -webkit-sticky;
     /* For Safari */
@@ -49,9 +53,12 @@ body {
     font-size: 1.1rem;
   }
 }
-@media (max-width: 1450px) {
+@media (max-width: 1560px) {
   .sidebar {
     display: none;
+  }
+  .main-content {
+    left: 0px;
   }
   body {
     display: block;

@@ -1,6 +1,9 @@
+$sidebar-width: 230px;
+$switchover-width: 1560px;
+
 body {
     display: grid;
-    grid-template-columns: 1fr 15%;
+    grid-template-columns: 1fr $sidebar-width;
     /* Main content takes up most of the space, sidebar takes 15% */
     grid-template-rows: auto 1fr;
     /* Title section takes as much space as it needs, the rest is for main content and sidebar */
@@ -20,7 +23,12 @@ body {
     /* Main content is in the second row */
 }
 
-@media (min-width: 1450px) {
+
+@media (min-width: $switchover-width) {
+    .main-content {
+        position: relative;
+        left: $sidebar-width*0.5 + 10px;
+    }
     .sidebar {
         position: -webkit-sticky;
         /* For Safari */
@@ -50,9 +58,13 @@ body {
     }
 }
 
-@media (max-width: 1450px) {
+@media (max-width: $switchover-width) {
     .sidebar {
         display: none;
+    }
+
+    .main-content {
+        left: 0px;
     }
 
     body {
