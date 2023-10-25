@@ -7,10 +7,10 @@ body {
 
 /* Main content container */
 .main-content {
-  width: 1024px;
+  width: 1064px;
   margin: 0 auto;
   flex-grow: 1;
-  padding: 0;
+  padding: 0 20px;
   order: 1;
   grid-column: 1;
   /* Main content is in the first column */
