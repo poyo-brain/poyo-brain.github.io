@@ -1,21 +1,18 @@
-$sidebar-width: 230px;
-$switchover-width: 1560px;
+$sidebar-width: 220px;
+$switchover-width: 2*$sidebar-width + 40px + 1024px;
 
 body {
     display: grid;
     grid-template-columns: 1fr $sidebar-width;
-    /* Main content takes up most of the space, sidebar takes 15% */
     grid-template-rows: auto 1fr;
-    /* Title section takes as much space as it needs, the rest is for main content and sidebar */
-    grid-gap: 20px;
-    /* Adds some spacing between the grid cells */
-
 }
 
 /* Main content container */
 .main-content {
+    width: 1024px;
+    margin: 0 auto;
     flex-grow: 1;
-    padding: 0 2em;
+    padding: 0;
     order: 1;
     grid-column: 1;
     /* Main content is in the first column */
@@ -27,7 +24,7 @@ body {
 @media (min-width: $switchover-width) {
     .main-content {
         position: relative;
-        left: $sidebar-width*0.5 + 10px;
+        left: $sidebar-width*0.5;
     }
     .sidebar {
         position: -webkit-sticky;
@@ -37,7 +34,6 @@ body {
         height: 100vh;
         overflow-y: auto;
         padding: 1em;
-        border-right: 1px solid #e0e0e0;
         flex-shrink: 0;
         order: 2;
         grid-column: 2;
@@ -94,8 +90,8 @@ iframe {
 .section {
     max-width: 70em;
     margin: auto;
-    padding-top: 2rem;
-    padding-bottom: 0.1rem;
+    padding: 2rem 0 0.1rem 0;
+    // padding-bottom: 0.1rem;
     text-align: justify;
 }
 
