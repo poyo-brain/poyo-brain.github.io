@@ -138,8 +138,8 @@ class QueryPlot {
         const rect = queryVisElement.getBoundingClientRect();
 
         // Position the square exactly below 'query-vis-1'
-        square.style.top = (rect.top + window.scrollY) + 'px'; // scrollY ensures it works even if the page is scrolled
-        square.style.left = rect.right - rect.width/2 + 'px';
+        square.style.top = (rect.top + window.scrollY - 340) + 'px'; // scrollY ensures it works even if the page is scrolled
+        square.style.left = rect.right - rect.width/2  - 230 + 'px';
 
         square.style.display = 'block';
         // square.style.backgroundColor = 'gray';
