@@ -132,17 +132,15 @@ class QueryPlot {
     
     animateSquare() {
         const square = document.getElementById('animatedSquare');
-        const queryVisElement = document.getElementById('query-vis-1');
 
+        // const queryVisElement = document.getElementById('query-vis-1');
         // Get the bounding rectangle of the 'query-vis-1' element
-        const rect = queryVisElement.getBoundingClientRect();
-
+        // const rect = queryVisElement.getBoundingClientRect();
         // Position the square exactly below 'query-vis-1'
-        square.style.top = (rect.top + window.scrollY - 340) + 'px'; // scrollY ensures it works even if the page is scrolled
-        square.style.left = rect.right - rect.width/2  - 230 + 'px';
+        // square.style.top = (rect.top + window.scrollY) + 'px'; // scrollY ensures it works even if the page is scrolled
+        // square.style.left = rect.right - rect.width/2 + 'px';
 
         square.style.display = 'block';
-        // square.style.backgroundColor = 'gray';
     
         // Animation - move down then right
         square.style.animation = 'moveUpThenRight 1s forwards';

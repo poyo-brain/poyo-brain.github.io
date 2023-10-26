@@ -24,6 +24,8 @@ body {
 
 
 @media (min-width: $switchover-width) {
+    // With sidebar
+
     .main-content {
         position: relative;
         left: $sidebar-width*0.5;
@@ -57,6 +59,8 @@ body {
 }
 
 @media (max-width: $switchover-width) {
+    // Without sidebar
+
     .sidebar {
         display: none;
     }

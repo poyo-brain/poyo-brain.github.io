@@ -1,7 +1,7 @@
 #token-vis-container {
     display: flex;
     justify-content: center;
-    margin-bottom: 20px;
+    height: 520px;
 }
 
 $top-adjustment: 60px;
@@ -51,10 +51,26 @@ $top-adjustment: 60px;
         width: 350px;
     }
 
+    $query-vis-height: 110px;
+    $query-vis-width: 400px;
+
     #query-vis-1 {
         margin-top: -20px;
-        height: 110px;
-        width: 400px;
+        height: $query-vis-height;
+        width: $query-vis-width;
+    }
+
+    .square {
+        $sq-size: 30px;
+        z-index: 1000;
+        position: absolute;
+        left: calc($query-vis-width / 2);
+        bottom: $query-vis-height + $sq-size;
+        width: $sq-size;
+        height: $sq-size;
+        background-color: white;
+        border: 1px solid black;
+        display: none;
     }
 }
 
@@ -82,11 +98,3 @@ $top-adjustment: 60px;
     }
 }
 
-.square {
-    position: absolute;
-    width: 30px;
-    height: 30px;
-    background-color: white;
-    border: 1px solid black;
-    display: none;
-}

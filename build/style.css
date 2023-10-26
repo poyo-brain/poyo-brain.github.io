@@ -808,7 +808,7 @@ table tr:hover {
 #token-vis-container {
   display: flex;
   justify-content: center;
-  margin-bottom: 20px;
+  height: 520px;
 }
 
 /* Left */
@@ -857,6 +857,17 @@ table tr:hover {
   height: 110px;
   width: 400px;
 }
+#token-vis-middle .square {
+  z-index: 1000;
+  position: absolute;
+  left: 200px;
+  bottom: 140px;
+  width: 30px;
+  height: 30px;
+  background-color: white;
+  border: 1px solid black;
+  display: none;
+}
 
 /* Right */
 #token-vis-vel-plots {
@@ -878,14 +889,6 @@ table tr:hover {
   100% {
     transform: translateY(-170px) translateX(120px);
   }
-}
-.square {
-  position: absolute;
-  width: 30px;
-  height: 30px;
-  background-color: white;
-  border: 1px solid black;
-  display: none;
 }
 
 /*# sourceMappingURL=style.css.map */
