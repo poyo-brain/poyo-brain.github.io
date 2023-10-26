@@ -7,6 +7,7 @@
         width: 45%;
         display: inline-block;
         margin: 20px 0px;
+        position: relative;
 
         .task-expl-diagram-container {
             display: flex;
@@ -26,6 +27,14 @@
         .task-expl-text {
             margin-top: 30px;
             align-self: auto; 
+        }
+
+        .top-right-icon {
+            position: absolute; /* Position the icon absolutely within the div */
+            top: 10px;          /* Offset from the top */
+            right: 10px;        /* Offset from the right */
+            font-size: 24px;    /* Adjust the size of the icon as needed */
+            z-index: 10;        /* Ensure the icon is above other elements */
         }
     }
 }
